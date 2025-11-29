@@ -2,6 +2,7 @@
 #include <string.h>
 int main()
 //注意这里的不输出末尾逗号的小技巧
+//同样可以利用标记法，来处理空格问题
 {
 	char arr[1000];
 	int mark=1;
