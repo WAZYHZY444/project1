@@ -15,12 +15,12 @@ int main()
 	for(int i=0;i<n;i++){
 		if(arr[i]==num){
 			printf("%d\n",i+1);
-			mark=0;
+			mark=1;
 			break;
 		}
 	}
 	if(!mark){
-		return -1;
+		printf("-1\n");	
 	}
 	return 0;
 }
