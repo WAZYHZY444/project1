@@ -22,3 +22,37 @@ int main()
 	}
 	return 0;
 }
+
+/*
+#include <stdio.h>
+int main()
+{
+	int arr[7][2];
+	for(int i=0;i<7;i++){
+		for(int j=0;j<2;j++){
+			scanf("%d",&arr[i][j]);
+		}
+	}
+	int brr[7];
+	for(int i=0;i<7;i++){
+		brr[i]=arr[i][0]+arr[i][1];
+	}
+	int max=brr[0];
+	for(int i=0;i<7;i++){
+		if(brr[i]>max){
+			max=brr[i];
+		}
+	}
+	if(max<=8){
+		printf("0\n");
+	}else{
+		for(int i=0;i<7;i++){
+			if(brr[i]==max){
+				printf("%d\n",i+1);
+				break;
+			}
+		}
+	}
+	return 0;
+}
+*/
