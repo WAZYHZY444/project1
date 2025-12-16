@@ -5,6 +5,7 @@ int main()
 	int (*p)[4];
 	p=a;
 	printf("%p %d\n",&p[4][2]-&a[4][2],&p[4][2]-&a[4][2]);
+	printf("%p\n",-4);
 	return 0;
 }
 //a->int(*)[5]
