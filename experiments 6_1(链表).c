@@ -53,8 +53,8 @@ int main()
 	p->next=NULL;//用尾插法，新插入的节点始终是尾节点，尾节点的指针域始终为NULL
 //r指针指向尾节点
 	r->next=p;
-	//r=p;
-	r=r->next;
+	r=p;
+	//r=r->next;
 	}
 	scanf("%d",&num); //可以不重新定义一个变量
 	r=head; //r指向的是p访问当前节点的前驱节点
