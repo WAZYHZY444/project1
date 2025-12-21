@@ -1,0 +1,43 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+#include "LinkList.h"
+void test()
+{
+	//初始化链表
+	struct LinkNode* header = Init_LinkList();
+	//打印链表
+	Foreach_LinkList(header);
+	//插入数据
+	InsertByValue_LinkList(header, 300, 666);
+	//打印链表
+	printf("\n---------------------------\n");
+	Foreach_LinkList(header);
+	//清空链表
+	Clear_LinkList(header);
+	//打印链表
+
+	InsertByValue_LinkList(header, 1000, 111);
+	InsertByValue_LinkList(header, 1000, 211);
+	InsertByValue_LinkList(header, 1000, 311);
+	InsertByValue_LinkList(header, 1000, 411);
+	printf("\n---------------------------\n");
+	Foreach_LinkList(header);
+
+	//删除数据
+	DeleteByValue_LinkList(header, 211);
+	printf("\n---------------------------\n");
+	Foreach_LinkList(header);
+	DeleteByValue_LinkList(header, 111);
+	printf("\n---------------------------\n");
+	Foreach_LinkList(header);
+	//销毁链表
+	Destroy_LinkList(header);
+
+
+}
+int main()
+{
+	test();
+	return 0;
+}
