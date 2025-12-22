@@ -3,7 +3,10 @@
 #include <stdio.h>
 #include <assert.h>
 #include <stdlib.h>
+#include <errno.h>
 
+#define DEFAULT_SIZE 3  //默认的初始容量
+#define INC_SIZE 2      //每次增加的容量
 #define MAX 100
 #define MAX_NAME 20
 #define MAX_SEX 5
@@ -22,14 +25,29 @@ typedef struct PeoInfo
 } PeoInfo;
 
 //通讯录
+
+//静态版本
+/*
 typedef struct Contact
 {
 	PeoInfo data[MAX]; //存放人的信息
 	int count;         //记录当前通讯录中人的个数
-} Contact;
+} Contact
+*/
+
+//动态版本
+typedef struct Contact
+{
+    PeoInfo* data;
+    int count;
+	int capacity;  //当前通讯录的容量
+} Contact; 
 
 //初始化通讯录
 void InitContact(Contact* pc);
+
+//销毁通讯录
+void DestroyContact(Contact* pc);
 
 //增加联系人到通讯录
 void AddContact(Contact* pc);

@@ -53,7 +53,7 @@ int main()
 				SortContact(&con);
 				break;
 			case EXIT:
-				printf("exit\n");
+				DestroyContact(&con);
 				break;
 				default:
 					printf("选择错误\n");
@@ -62,3 +62,6 @@ int main()
 	}while (input != 0);
 	return 0;
 }
+//动态版本的通讯录：
+//1.通讯录默认能够存放3个人的信息
+//2.当通讯录存满时，每次增加2个人的空间 
