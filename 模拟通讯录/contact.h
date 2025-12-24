@@ -66,3 +66,9 @@ void ModifyContact(Contact* pc);
 
 //排序联系人
 void SortContact(Contact* pc);
+
+//保存联系人到文件
+void SaveContact(const Contact* pc);
+
+//加载文件中的联系人到通讯录
+void LoadContact(Contact* pc);
