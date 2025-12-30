@@ -29,7 +29,7 @@ void bubble_sort(int arr[],int sz)
 int cmp_int(const void* e1,const void* e2)
 {
 	return (*(int*)e1-*(int*)e2);       //把数组排成升序
-	//return (*(int*)e2-*(int*)e1);     //把数组排成升序
+	//return (*(int*)e2-*(int*)e1);     //把数组排成降序
 }
 
 void test1()
