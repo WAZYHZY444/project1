@@ -1,17 +1,21 @@
 #include <stdio.h>
+#include <stdbool.h>
 //判断是否为闰年
-int isLeapYear(int year){
-	if(year%4==0&&year%100!=0||year%400==0){
-		return 366;
-	}else{
-		return 365;
-	}
+//int isLeapYear(int year){
+//	if(year%4==0&&year%100!=0||year%400==0){
+//		return 366;
+//	}else{
+//		return 365;
+//	}
+//}
+bool isLeapYear(int year){
+	return (year%4==0&&year%100!=0||year%400==0);
 }
 
 //计算某年某月的天数
 int DayMonth(int year,int month){
 	int days[]={31,28,31,30,31,30,31,31,30,31,30,31};
-	if(month==2&&isLeapYear(year)){
+	if(month==2&&isLeapYear(year)){  //如果使用被注释的代码，isLeapYear(year)返回值是366或365，始终为非假，则始终返回29天
 		return 29;
 	}
 	return days[month-1];
@@ -22,7 +26,11 @@ int DayYear(int year,int month){
 	int total_days=0;
 	 // 计算1900年到year-1年的总天数
 	for(int i=1900;i<year;i++){
-		total_days+=isLeapYear(i);	
+		if(isLeapYear(i)){
+			total_days+=366;
+		}else{
+			total_days+=365;
+		}	
 	}
 	// 计算year年1月到month-1月的总天数
 	for(int j=1;j<month;j++){
