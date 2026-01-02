@@ -5,7 +5,7 @@ double f(int a,int b,int c,double x)               //把方程表达式进行函
 	return a*x*x*x-b*exp(-c*x);
 }
 
-double test(int a,int b,int c,double left,double right){
+double test1(int a,int b,int c,double left,double right){
 	double mid=(left+right)/2;
 	double f_mid=f(a,b,c,mid);                      //注意变量的定义不能有括号！
 	if(fabs(left-right)<1e-6||fabs(f_mid)<1e-6){    //递归终止条件
@@ -18,11 +18,25 @@ double test(int a,int b,int c,double left,double right){
 	}
 }
 
+double test2(int a,int b,int c,double left,double right){
+	double mid=(left+right)/2;
+	double f_mid=f(a,b,c,mid);                      //注意变量的定义不能有括号！
+	if(fabs(left-right)<1e-6||fabs(f_mid)<1e-6){    //递归终止条件
+		return mid;
+	}
+	if(f_mid<0){
+		left=mid;
+	}else{
+		right=mid;
+	}
+	return test2(left,right);
+}
+
 int main()
 {
 	int a,b,c;
 	scanf("%d %d %d",&a,&b,&c);
-	double result=test(a,b,c,0.0,1000.0);        //参数列表里可以是变量，也可以是常量
+	double result=test1(a,b,c,0.0,1000.0);        //参数列表里可以是变量，也可以是常量
 	printf("%.3f",result);
 	return 0;
 }
