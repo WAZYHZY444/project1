@@ -94,9 +94,7 @@ int main()
 			//删除节点
 			r->next=p->next;
 			LinkNode* temp=p;
-			free(temp);
-//free(pCurrent),之后又将 pCurrent = pPrev->next;
-//导致释放的是已更新的指针，可能会访问未初始化或已释放的内存,所以需要创建一个临时指针temp来保存p
+			free(p);
 			//p移动到下一个节点
 			p=r->next;
 		}else{
