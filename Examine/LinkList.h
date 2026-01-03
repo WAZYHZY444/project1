@@ -15,8 +15,11 @@ typedef struct Event
 	struct Event* next;
 } Event;
 
-//创建新节点
-Event* EventNode(void);
+extern Event* head;   //链表头指针
+extern int eventCount;
+
+//初始化链表
+void InitLinkList(void);
 
 //检查日期的格式是否正确
 bool exzamineDate(int date);
@@ -24,8 +27,32 @@ bool exzamineDate(int date);
 //检查时间的格式是否正确
 bool exzamineTime(int time);
 
-//将格式化的日期转换为字符串
-void stringDate(int date, char* buffer);
+//qsort比较函数
+int compareEvents(const void* a, const void* b);
 
-//将格式化的时间转换为字符串
-void stringTime(int time, char* buffer);
+//移除fgets末尾的换行符
+void RemoveLine(char* str);
+
+//按照标题查找事件
+Event* FindEvent(const char* title);
+
+//添加事件
+void AddEvent(void);
+
+//显示事件
+void DisplayEvent(void);
+
+//更新事件（相当于修改）
+void UpdateEvent(void);
+
+//删除事件
+void DeleteEvent(void);
+
+//按标题搜索并显示单个事件
+void SearchEvent(void);
+
+//链表排序
+void SortEvent(void);
+
+//销毁链表
+void DestroyLinkList(void);

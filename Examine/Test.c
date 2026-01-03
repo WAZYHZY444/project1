@@ -4,12 +4,13 @@
 
 enum Option
 {
-	EXIT,
-	ADD,
-	DEL,
-	UPDATE,
-	SHOW,
-	SORT
+	EXIT = 0,
+	ADD = 1,
+	DEL = 2,
+	SEARCH = 3,
+	UPDATE = 4,
+	SHOW = 5,
+	SORT = 6
 };
 
 void menu()
@@ -22,40 +23,58 @@ void menu()
 	printf("************************************************\n");
 }
 
-void test()
+//清空 stdin 中剩余的字符直到遇到换行或 EOF
+void ClearInput(void)
 {
-	//初始化链表
-
+	int ch = getchar();
+	while (ch != '\n' && ch != EOF) {
+		ch = getchar();
+	}
 }
+
 int main()
 {
+	//初始化链表
+	InitLinkList();
+
 	int input = 0;
 	do
 	{
 		menu();
 		printf("请选择：>");
 		scanf("%d", &input);
+		/*在菜单用 scanf("%d", &input) 读取数字后，回车符仍留在 stdin。
+		  随后 AddEvent 里第一个 fgets 会读到这个残留的换行，从而读取到空字符串，导致提示“标题不能为空”*/
+		ClearInput();
+
 		switch (input)
 		{
-			case ADD:
-				break;
-			case DEL:
-				break;
-			case UPDATE:
-				break;
-			case SHOW:
-				break;
-			case SORT:
-				break;
-			case EXIT:
-				break;
-			default:
-				printf("选择错误\n");
-				break;
+		case ADD:
+			AddEvent();
+			break;
+		case DEL:
+			DeleteEvent();
+			break;
+		case SEARCH:
+			SearchEvent();
+			break;
+		case UPDATE:
+			UpdateEvent();
+			break;
+		case SHOW:
+			DisplayEvent();
+			break;
+		case SORT:
+			SortEvent();
+			break;
+		case EXIT:
+			break;
+		default:
+			printf("选择错误\n");
+			break;
 		}
 	} while (input != 0);
 
-	test();
-
+	DestroyLinkList();
 	return 0;
 }
