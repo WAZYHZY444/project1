@@ -2,15 +2,16 @@
 
 #include "LinkList.h"
 
+//Ã¶¾Ù
 enum Option
 {
-	EXIT = 0,
-	ADD = 1,
-	DEL = 2,
-	SEARCH = 3,
-	UPDATE = 4,
-	SHOW = 5,
-	SORT = 6
+	EXIT,
+	ADD,
+	DEL,
+	SEARCH,
+	UPDATE,
+	SHOW,
+	SORT
 };
 
 void menu()

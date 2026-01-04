@@ -80,7 +80,7 @@ bool exzamineTime(int time)
 }
 
 
-//按照标题查找事件
+//按照标题查找事件（为了避免出现重复标题的事件）
 Event* FindEvent(const char* title)
 {
 	if (head == NULL) return NULL;
@@ -102,10 +102,11 @@ void AddEvent(void)
 		InitLinkList();
 	}
 	Event* newEvent = (Event*)malloc(sizeof(Event));
-	if (newEvent == NULL) {
+	if (newEvent == NULL) {      //内存分配失败
 		printf("%s\n", strerror(errno));
 		return;
 	}
+	//初始化新节点
 	newEvent->next = NULL;
 	newEvent->title[0] = '\0';
 	newEvent->description[0] = '\0';
@@ -133,6 +134,9 @@ void AddEvent(void)
 	//输入日期
 	printf("请输入日期（格式 YYYYMMDD）：");
 	if (scanf("%d", &newEvent->date) != 1) {
+		/*返回1：成功从输入中解析出一个整数并赋给 newEvent->date，
+		  返回0：输入存在但不符合整数格式（例如 abc\n、只是回车 \n），非数字字符会留在输入缓冲区
+		  返回EOF：非数字字符会留在输入缓冲区*/
 		printf("输入错误！\n");
 		getchar();
 		free(newEvent);
@@ -157,10 +161,11 @@ void AddEvent(void)
 	}
 
 	//插入链表（尾插法）
-	if (tail == NULL) { // 保险检查
+	if (tail == NULL) {
 		InitLinkList();
 	}
 	newEvent->next = NULL;
+	//尾节点指向新节点
 	tail->next = newEvent;
 	tail = newEvent;
 	eventCount++;
@@ -172,7 +177,7 @@ void AddEvent(void)
 //显示事件
 void DisplayEvent(void)
 {
-	if (head == NULL || head->next == NULL) {
+	if (head == NULL || head->next == NULL) {   //第一个head表示头节点，第二个head表示头指针
 		printf("没有日程安排！\n");   //没有创建链表或无实际事件
 		return;
 	}
@@ -237,12 +242,12 @@ void UpdateEvent(void)
 	char Newdescription[200];
 	fgets(Newdescription, sizeof(Newdescription), stdin);
 	RemoveLine(Newdescription);
-	strncpy(p->description, Newdescription, sizeof(p->description) - 1);
+	strncpy(p->description, Newdescription, sizeof(p->description) - 1);  //用strcnpy比strcpy更安全，但需要手动添加'\0'
 	p->description[sizeof(p->description) - 1] = '\0';
 
 	//重新排序
 	SortEvent();
-	printf("时间更新成功！\n");
+	printf("事件更新成功！\n");
 }
 
 //删除事件
@@ -343,8 +348,9 @@ void SortEvent(void)
 	qsort(ARR, actualCount, sizeof(Event*), compareEvents);
 
 	//重建链表
+	/*①关注头节点②构建节点之间的联系③关注尾节点④释放空间*/
 	head->next = ARR[0];
-	for (int i = 0; i < actualCount - 1; i++) {   //防止数组越界访问
+	for (int i = 0; i < actualCount - 1; i++) {
 		ARR[i]->next = ARR[i + 1];
 	}
 	ARR[actualCount - 1]->next = NULL;  //尾节点的指针域为NULL
