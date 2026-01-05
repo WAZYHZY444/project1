@@ -212,8 +212,35 @@ int main()
 }
 */
 
-
-
+#include <stdio.h>
+#include <string.h>
+int main()
+{
+	char arr[50];
+	scanf("%s",arr);
+	int len=strlen(arr);
+	int dest[26]={0};
+	for(int i=0;i<len;i++){
+		int j=arr[i]-'a';
+		dest[j]++;
+	}
+	int max=dest[0];
+	for(int j=0;j<26;j++){
+		if(dest[j]>max){
+			max=dest[j];   //找出现的最大次数
+		}
+	}
+	for(int j=0;j<26;j++){
+		if(dest[j]==max){  //找最先出现最大次数所对应的字母
+			printf("%c\n",j+'a');
+			break;
+		}
+	}
+	return 0;
+}
+//认识：花括号会创建一个新的作用域，在花括号里面定义的变量，除了花括号变量销毁，注意，不仅仅是函数，也可以是循环，
+//所以在循环里面使用的变量需要在循环外面声明，并初始化，否则会返回初始值
+//初始化变量
 
 
 
