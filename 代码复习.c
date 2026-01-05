@@ -243,23 +243,43 @@ int main()
 //认识：花括号会创建一个新的作用域，在花括号里面定义的变量，除了花括号变量销毁，注意，不仅仅是函数，也可以是循环，
 //所以在循环里面使用的变量需要在循环外面声明，并初始化，否则会返回初始值
 //初始化变量
+
 */
 
+/*
+//越界访问数组
 #include <stdio.h>
 int main()
 {
 	int arr[2][2]={{1,2},{3,4}};
 	for(int i=0;i<=2;i++){
-		for(int j=0;j<=2;j++){      //越界访问数组
+		for(int j=0;j<=2;j++){
 			printf("%d ",arr[i][j]);
 		}
 		printf("\n");
 	}
 	return 0;
 }
+*/
 
+//函数指针运用
+#include <stdio.h>
+int Add(int x,int y){
+	return x+y;
+}
 
+int Cal(int(*pf)(int,int))   //pf为函数指针
+{
+	int a=2,b=3;
+	int ret=pf(a,b);
+	printf("%d\n",ret);
+}
 
+int main()
+{
+	Cal(Add);
+	return 0;
+}
 
 
 
