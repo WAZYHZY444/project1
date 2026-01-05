@@ -212,6 +212,8 @@ int main()
 }
 */
 
+//字符串中寻找最先出现的出现次数最多的字符
+/*
 #include <stdio.h>
 #include <string.h>
 int main()
@@ -241,7 +243,20 @@ int main()
 //认识：花括号会创建一个新的作用域，在花括号里面定义的变量，除了花括号变量销毁，注意，不仅仅是函数，也可以是循环，
 //所以在循环里面使用的变量需要在循环外面声明，并初始化，否则会返回初始值
 //初始化变量
+*/
 
+#include <stdio.h>
+int main()
+{
+	int arr[2][2]={{1,2},{3,4}};
+	for(int i=0;i<=2;i++){
+		for(int j=0;j<=2;j++){
+			printf("%d ",arr[i][j]);
+		}
+		printf("\n");
+	}
+	return 0;
+}
 
 
 
