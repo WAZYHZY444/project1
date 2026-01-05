@@ -246,8 +246,9 @@ int main()
 
 */
 
-/*
+
 //越界访问数组
+/*
 #include <stdio.h>
 int main()
 {
@@ -263,6 +264,7 @@ int main()
 */
 
 //函数指针运用
+/*
 #include <stdio.h>
 int Add(int x,int y){
 	return x+y;
@@ -280,9 +282,40 @@ int main()
 	Cal(Add);
 	return 0;
 }
+*/
 
+//函数指针数组：存放函数指针的数组
+#include <stdio.h>
+int Add(int a,int b)
+{
+	return a+b;
+}
 
+int Sub(int a,int b)
+{
+	return a-b;
+}
 
+int Mul(int a,int b)
+{
+	return a*b;
+}
+
+int Div(int a,int b)
+{
+	return a/b;
+}
+
+int main()
+{
+	int(*arr[4])(int,int)={Add,Sub,Mul,Div};
+	int input;
+	scanf("%d",&input);
+	int x,y;
+	scanf("%d %d",&x,&y);
+	printf("%d\n",arr[input](x,y));   //注意该怎么调用函数
+	return 0;
+}
 
 
 
