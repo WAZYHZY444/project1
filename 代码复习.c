@@ -513,6 +513,7 @@ int main()
 */
 
 //strncpy
+/*
 #include <stdio.h>
 #include <string.h>
 int main()
@@ -531,9 +532,36 @@ int main()
 	printf("%s\n",arr1);
 	return 0;
 }
+*/
 
+//大->小 tolower strlwr
+//小->大 toupper strupr
 
+#include <stdio.h>
+#include <string.h>
+/*
+int main()
+{
+	float arr1[5]={1.0,2.4,4.3,4.6,5.7};
+	float arr2[10]={0.0};
+	memcpy(arr2,arr1,sizeof(arr1));
+	return 0;
+}
+*/
 
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+	float arr1[5]={1.0,2.4,4.3,4.6,5.7};
+	float arr2[10]={0.0};
+	memcpy(arr2,arr1+1,4*sizeof(float));
+	for(int i=0;i<4;i++){
+		printf("%.1f ",arr2[i]);
+	}
+	return 0;
+}
 
 
 
