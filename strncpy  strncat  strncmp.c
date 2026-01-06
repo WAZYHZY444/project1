@@ -13,7 +13,7 @@ int main()
 }
 */
 
-/*
+
 int main()
 {
 //strncat再追加的过程中，会覆盖目标空间字符串末尾的'\0',追加完成后会在末尾添加一个'\0'
@@ -24,8 +24,9 @@ int main()
 	printf("%s\n",arr1);
 	return 0;
 }
-*/
 
+
+/*
 int main()
 {
 	char arr1[]="abcdef";
@@ -37,3 +38,4 @@ int main()
 	else printf("<\n");
 	return 0;
 }
+*/
