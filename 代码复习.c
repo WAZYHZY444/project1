@@ -449,10 +449,11 @@ int main()
 */
 
 //my_strcpy
+/*
 #include <stdio.h>
 char* my_strcpy(char* ptr1,const char* ptr2)
 {
-	char* ret;
+	char* ret=dest;
 	while(*ptr1++=*ptr2++){
 		;
 	}
@@ -467,9 +468,46 @@ int main()
 	printf("%s\n",arr2);
 	return 0;
 }
+*/
 
-
-
+//my_strcat
+#include <stdio.h>
+#include <stdio.h>
+char* my_strcat(char* ptr1,const char* ptr2)
+{
+	char* ret=ptr1;
+	while(*ptr1!='\0'){
+		ptr1++;
+	}
+	*ptr1=' ';
+	ptr1++;
+	while(*ptr1++=*ptr2++){
+		;
+	}
+	return ret;
+}
+int main()
+{
+	char arr1[20];
+	char arr2[30];
+	fgets(arr1,sizeof(arr1),stdin);
+	for(int i=0;arr1[i]!='\0';i++){
+		if(arr1[i]=='\n'){
+			arr1[i]='\0';
+			break;
+		}
+	}
+	fgets(arr2,sizeof(arr2),stdin);
+	for(int i=0;arr2[i]!='\0';i++){
+		if(arr2[i]=='\n'){
+			arr2[i]='\0';
+			break;
+		}
+	}
+	my_strcat(arr1,arr2);
+	printf("%s\n",arr1);
+	return 0;
+}
 
 
 
