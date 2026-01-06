@@ -285,6 +285,7 @@ int main()
 */
 
 //函数指针数组：存放函数指针的数组
+/*
 #include <stdio.h>
 int Add(int a,int b)
 {
@@ -316,6 +317,140 @@ int main()
 	printf("%d\n",arr[input](x,y));   //注意该怎么调用函数
 	return 0;
 }
+*/
+
+//qsort的复习
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+typedef struct singer
+{
+	char name[20];
+	int age;
+}singer;
+
+int cmp_int(const void* e1,const void* e2)
+{
+	return (*(int*)e1-*(int*)e2);
+}
+
+int cmp_singerByname(const void* e1,const void* e2)
+{
+	return (strcmp(((singer*)e1)->name,((singer*)e2)->name));
+}
+
+int cmp_singerByage(const void* e1,const void* e2)
+{
+	return (((singer*)e1)->name-((singer*)e2)->name);
+}
+
+//相当于把冒泡排序拆成了两个函数进行，一部分调用compare函数，一部分进行交换
+void Swap(char* ptr1,char* ptr2,int width)
+{
+	for(int i=0;i<width;i++){  //一个字节一个字节的比较
+		char temp=*ptr2;
+		*ptr2=*ptr1;
+		*ptr1=temp;
+		ptr1++;
+		ptr2--;
+	}
+}
+
+//需要把数组里的元素一对一对的比较，所以my_qsort的主体是循环（冒泡排序的思想）
+//调用my_sort函数传参是可以传任意返回类型的函数地址，但进入了my_sort函数，会把不论什么类型都强制转化为char*类型，所以在my_sort函数内调用Swap函数，Swap函数的参数列表就直接是char*类型了
+int my_qsort(void* base,int sz,int width,int(*compare)(const void*,const void*))  //比较函数返回值为int类型，返回的是>0,<0,==0的数字
+{
+	for(int i=0;i<sz-1;i++){
+		int mark=1;
+		for(int j=0;j<sz-i-1;j++){
+			if(compare((char*)base+j*width,(char*)base+(j+1)*width)>0){
+				//交换
+				Swap((char*)base+j*width,(char*)base+(j+1)*width,width);
+			}	
+		}
+	}
+}
+void test1(void)
+{
+	int arr[10]={3,4,6,2,1,7,9,8,5,10};
+	int sz=sizeof(arr)/sizeof(arr[0]);
+	qsort(arr,sz,sizeof(arr[0]),cmp_int);
+	for(int i=0;i<10;i++){
+		printf("%d ",arr[i]);
+	}
+	printf("\n");
+}
+
+void test2(void)
+{
+	singer p[3]={{"Zhangyuan",40},{"Allen Su",41},{"Wangyuexing",36}};
+	int sz=sizeof(p)/sizeof(p[0]);
+	//qsort(p,sz,sizeof(p[0]),cmp_singerByname);
+	qsort(p,sz,sizeof(p[0]),cmp_singerByage);
+	for(int i=0;i<3;i++){
+		printf("%s %d\n",p[i].name,p[i].age);
+	}
+}
+void test3(void)
+{
+	int arr[10]={3,4,6,2,1,7,9,8,5,10};
+	int sz=sizeof(arr)/sizeof(arr[0]);
+	my_qsort(arr,sz,sizeof(arr[0]),cmp_int);
+	for(int i=0;i<10;i++){
+		printf("%d ",arr[i]);
+	}
+	printf("\n");
+}
+
+void test4(void)
+{
+	singer p[3]={{"Zhangyuan",40},{"Allen Su",41},{"Wangyuexing",36}};
+	int sz=sizeof(p)/sizeof(p[0]);
+	my_qsort(p,sz,sizeof(p[0]),cmp_singerByname);
+	//my_qsort(p,sz,sizeof(p[0]),cmp_singerByage);
+	for(int i=0;i<3;i++){
+		printf("%s %d\n",p[i].name,p[i].age);
+	}
+}
+
+int main()
+{
+//	test1();
+//	test2();
+	test3();
+	test4();
+	return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
