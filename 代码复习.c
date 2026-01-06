@@ -320,6 +320,7 @@ int main()
 */
 
 //qsort的复习
+/*
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -421,8 +422,51 @@ int main()
 	test4();
 	return 0;
 }
+*/
 
+//my_strlen
+/*
+#include <stdio.h>
+int my_strlen(char* ptr)
+{
+	int count=0;
+	if(ptr!=NULL){
+		while(*ptr!='\0'){
+			count++;
+			ptr++;
+		}
+	}
+	return count;
+}
+int main()
+{
+	char arr[20];
+	scanf("%[^\n]",arr);
+	int len=my_strlen(arr);
+	printf("%d\n",len);
+	return 0;
+}
+*/
 
+//my_strcpy
+#include <stdio.h>
+char* my_strcpy(char* ptr1,const char* ptr2)
+{
+	char* ret;
+	while(*ptr1++=*ptr2++){
+		;
+	}
+	return ret;
+}
+int main()
+{
+	char arr1[20];
+	char arr2[30];
+	scanf("%[^\n]",arr1);
+	my_strcpy(arr2,arr1);
+	printf("%s\n",arr2);
+	return 0;
+}
 
 
 
