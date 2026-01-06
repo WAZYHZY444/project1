@@ -19,7 +19,7 @@ int main()
 	fgets(arr,sizeof(arr),stdin);
 	for(int i=0;arr[i]!='\0';i++){
 		if(arr[i]=='\n'){
-			arr[i]=='\0';
+			arr[i]='\0';
 			break;
 		}
 	}
