@@ -32,19 +32,7 @@ int cmp_int(const void* e1,const void* e2)
 	//return (*(int*)e2-*(int*)e1);     //把数组排成降序
 }
 
-void test1()
-{
-	int arr[]={3,6,5,9,8,2,7,1,4,10};
-	int sz=sizeof(arr)/sizeof(arr[0]);
-	//bubble_sort(arr,sz);
-	
-	qsort(arr,sz,sizeof(arr[0]),cmp_int);
-	
-	for(int i=0;i<sz;i++){
-		printf("%d ",arr[i]);
-	}
-}
-
+//相当于把冒泡排序拆成了两个函数进行，一部分调用compare函数，一部分进行交换
 void Swap(char* buf1,char* buf2,int width)
 {
 	for(int i=0;i<width;i++){    //一个字节一个字节的交换
@@ -56,6 +44,8 @@ void Swap(char* buf1,char* buf2,int width)
 	}
 }
 //模拟实现qsort(冒泡排序的思想)
+//需要把数组里的元素一对一对的比较，所以my_qsort的主体是循环（冒泡排序的思想）
+//调用my_sort函数传参是可以传任意返回类型的函数地址，但进入了my_sort函数，会把不论什么类型都强制转化为char*类型，所以在my_sort函数内调用Swap函数，Swap函数的参数列表就直接是char*类型了
 void qsort_bubble_sort(void* base, int sz, int width,int (*cmp)(const void* e1,const void* e2))
 {
 	for(int i=0;i<sz-1;i++){
@@ -81,12 +71,26 @@ struct singer
 
 int cmp_singer_by_name(const void* e1,const void* e2)
 {
-	return strcmp(((struct singer*)e1)->name,((struct singer*)e2)->name);
+	return strcmp(((struct singer*)e1)->name,((struct singer*)e2)->name);   //一定要记得给(struct singer*)e1加上括号在进行成员访问，否则会出现优先级的错误
 }
 
 int cmp_singer_by_age(const void* e1,const void* e2)
 {
 	return ((struct singer*)e1)->age-((struct singer*)e2)->age;
+}
+
+
+void test1()
+{
+	int arr[]={3,6,5,9,8,2,7,1,4,10};
+	int sz=sizeof(arr)/sizeof(arr[0]);
+	//bubble_sort(arr,sz);
+	
+	qsort(arr,sz,sizeof(arr[0]),cmp_int);
+	
+	for(int i=0;i<sz;i++){
+		printf("%d ",arr[i]);
+	}
 }
 
 void test2()
