@@ -471,6 +471,7 @@ int main()
 */
 
 //my_strcat
+/*
 #include <stdio.h>
 #include <stdio.h>
 char* my_strcat(char* ptr1,const char* ptr2)
@@ -479,6 +480,7 @@ char* my_strcat(char* ptr1,const char* ptr2)
 	while(*ptr1!='\0'){
 		ptr1++;
 	}
+	//加上一个空格
 	*ptr1=' ';
 	ptr1++;
 	while(*ptr1++=*ptr2++){
@@ -508,7 +510,27 @@ int main()
 	printf("%s\n",arr1);
 	return 0;
 }
+*/
 
+//strncpy
+#include <stdio.h>
+#include <string.h>
+int main()
+{
+	char arr1[30]="xxxxxxxxxx";
+	char arr2[20];
+	fgets(arr2,sizeof(arr2),stdin);  //会复制一大堆的'\0'
+	for(int i=0;arr2[i]!='\0';i++){
+		if(arr2[i]=='\n'){
+			arr2[i]='\0';
+			break;
+		}
+	}
+	strncpy(arr1,arr2,sizeof(arr1)-1);
+	arr1[sizeof(arr1)-1]='\0';
+	printf("%s\n",arr1);
+	return 0;
+}
 
 
 
