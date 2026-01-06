@@ -1,11 +1,13 @@
 #include <stdio.h>
 #include <string.h>
+//memcpy可以复制各种类型的数据
 /*
 int main()
 {
 	float arr1[5]={1.0,2.4,4.3,4.6,5.7};
 	float arr2[10]={0.0};
 	memcpy(arr2,arr1,sizeof(arr1));
+//目标空间，源字符串，要复制的字节数(不是只能复制整个数组，可以从任意的位置复制任意字节数，但要注意复制的字节数除以数据类型要是整数)
 	return 0;
 }
 */
