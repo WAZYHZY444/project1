@@ -549,9 +549,10 @@ int main()
 }
 */
 
+//memcpy
+/*
 #include <stdio.h>
 #include <string.h>
-
 int main()
 {
 	float arr1[5]={1.0,2.4,4.3,4.6,5.7};
@@ -562,7 +563,23 @@ int main()
 	}
 	return 0;
 }
+*/
 
+#include <stdio.h>
+#include <string.h>
+int main()
+{
+//strstr函数如果字串存在，返回字串在母串所在的地址；如果字串不存在，则返回空指针
+	char arr1[]="hello world!";
+	char arr2[]="llo world";
+	char* ret=strstr(arr1,arr2);
+	if(ret==NULL){
+		printf("字串不存在\n");
+	}else{
+		printf("%s\n",ret);
+	}
+	return 0;
+}
 
 
 
