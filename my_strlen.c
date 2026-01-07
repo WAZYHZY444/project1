@@ -1,5 +1,6 @@
 #include <stdio.h>
-size_t my_strlen(const char* str)
+//方法一
+size_t my_strlen_1(const char* str)
 {
 	size_t count=0;
 	if(str!=NULL){
@@ -10,6 +11,16 @@ size_t my_strlen(const char* str)
 	}
 	return count;
 }
+
+//方法二(递归)
+size_t my_strlen_2(const char* str)
+{
+	if(*str=='\0'){
+		return 0;
+	}
+	return 1+my_strlen_2(str+1);
+}
+
 int main()
 {
 	char arr[20];
@@ -23,7 +34,9 @@ int main()
 			break;
 		}
 	}
-	size_t len=my_strlen(arr);
-	printf("%u\n",len);
+	size_t len_1=my_strlen_1(arr);
+	size_t len_2=my_strlen_2(arr);
+	printf("%u\n",len_1);
+	printf("%u\n",len_2);
 	return 0;
 }
