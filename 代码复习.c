@@ -565,6 +565,7 @@ int main()
 }
 */
 
+/*
 #include <stdio.h>
 #include <string.h>
 int main()
@@ -580,7 +581,19 @@ int main()
 	}
 	return 0;
 }
+*/
 
+#include <stdio.h>
+int main()
+{
+	char* p="abc";
+	printf("%s\n",p);   //注意此处是指针，不要解引用
+	while(*p!='\0'){
+		printf("%c",*p);
+		p++;
+	}
+	return 0;
+}
 
 
 
