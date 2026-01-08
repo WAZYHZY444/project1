@@ -583,20 +583,54 @@ int main()
 }
 */
 
+/*
+//字符指针
 #include <stdio.h>
 int main()
 {
 	char* p="abc";
 	printf("%s\n",p);   //注意此处是指针，不要解引用
+	
 	while(*p!='\0'){
 		printf("%c",*p);
 		p++;
 	}
 	return 0;
 }
+*/
 
-
-
+//猜数游戏
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+int main()
+{
+	srand(time(NULL));
+	int result=rand()%100+1;   //1~100
+	int x,count=0;
+	int low=1,high=100;
+	printf("请输入一个1~100的整数！\n");
+	while(count<8){
+		count++;
+		scanf("%d",&x);
+		if(x==result){
+			printf("猜对了！一共猜了%d次\n",count);
+			break;
+		}
+		if(x<result){
+			low=x+1;
+			printf("猜小了！请在%d到%d之间重新选择！\n",low,high);
+		}
+		if(x>result){
+			high=x-1;
+			printf("猜大了！请在%d到%d之间重新选择！\n",low,high);
+		}
+	}
+	if(count>=8&&x!=result){
+		printf("游戏失败！\n");
+	}
+	return 0;
+}
 
 
 
