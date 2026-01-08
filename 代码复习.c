@@ -600,6 +600,7 @@ int main()
 */
 
 //猜数游戏
+/*
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -631,7 +632,75 @@ int main()
 	}
 	return 0;
 }
+*/
 
+//求最大公因数
+#include <stdio.h>
+//①欧几里得算法（辗转相除法）
+//递归
+int test1(int x,int y)
+{
+	if(y==0){
+		return x;
+	}
+	return test1(y,x%y);
+}
+//迭代
+int test2(int x,int y)
+{
+	while(y!=0){
+		int temp=y;
+		y=x%y;
+		x=temp;
+	}
+	return x;
+}
+
+//②更相减损法
+//递归
+int test3(int x,int y)
+{
+	if(x>y){
+		return test3(x-y,y);
+	}
+	if(x<y){
+		return test3(x,y-x);
+	}
+	if(x==y){
+		return x;
+	}
+}
+//迭代
+int test4(int x,int y)
+{
+	while(x!=y){   //注意这里的条件与欧几里得算法不同
+		if(x>y){
+			x=x-y;
+		}
+		if(x<y){
+			y=y-x;
+		}
+	}
+	return x;
+}
+int main()
+{
+	int a,b;
+	scanf("%d %d",&a,&b);
+	
+	int acd_1=test1(a,b);
+	printf("%d\n",acd_1);
+	
+	int acd_2=test2(a,b);
+	printf("%d\n",acd_2);
+	
+	int acd_3=test3(a,b);
+	printf("%d\n",acd_3);
+	
+	int acd_4=test4(a,b);
+	printf("%d\n",acd_4);
+	return 0;
+}
 
 
 
