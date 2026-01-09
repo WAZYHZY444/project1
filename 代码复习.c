@@ -537,9 +537,9 @@ int main()
 //大->小 tolower strlwr
 //小->大 toupper strupr
 
+/*
 #include <stdio.h>
 #include <string.h>
-/*
 int main()
 {
 	float arr1[5]={1.0,2.4,4.3,4.6,5.7};
@@ -635,6 +635,7 @@ int main()
 */
 
 //求最大公因数
+/*
 #include <stdio.h>
 //①欧几里得算法（辗转相除法）
 //递归
@@ -701,7 +702,40 @@ int main()
 	printf("%d\n",acd_4);
 	return 0;
 }
+*/
+//斐波那契数列
+#include <stdio.h>
+//递归
+int Fab(int n)
+{
+	if(n<3){
+		return 1;
+	}
+	return Fab(n-1)+Fab(n-2);
+}
 
+int FAB(int n)
+{
+	int a=1,b=1,c=1;   //当n<3时，返回c=1
+	while(n>=3){
+		c=a+b;
+//		b=c;
+//		a=b;
+		a=b;   //注意这里的赋值顺序，右上-左下
+		b=c;
+		n--;
+	}
+	return c;
+}
+int main()
+{
+	int n;
+	scanf("%d",&n);
+	int ret=Fab(n);
+	int RET=FAB(n);
+	printf("%d\n%d\n",ret,RET);
+	return 0;
+}
 
 
 
