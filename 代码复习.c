@@ -703,7 +703,9 @@ int main()
 	return 0;
 }
 */
+
 //斐波那契数列
+/*
 #include <stdio.h>
 //递归
 int Fab(int n)
@@ -736,7 +738,46 @@ int main()
 	printf("%d\n%d\n",ret,RET);
 	return 0;
 }
+*/
 
+//高精度加法
+#include <stdio.h>
+#include <string.h>
+char arr1[500];
+char arr2[500];
+int a[500],b[500],c[500];  //该题的第一个关键就是把字符数组转化为整型数组
+int main()
+{
+	scanf("%s",arr1);
+	scanf("%s",arr2);
+	int l1=strlen(arr1);
+	int l2=strlen(arr2);
+	for(int i=0;i<l1;i++){
+		a[i]=arr1[l1-1-i]-'0';   //倒序
+	}
+	for(int i=0;i<l2;i++){
+		b[i]=arr2[l2-1-i]-'0';
+	}
+	
+	int l3=(l1>l2?l1:l2);
+	for(int j=0;j<l3;j++){
+		c[j]+=a[j]+b[j];
+		c[j+1]=c[j]/10;
+		c[j]=c[j]%10;
+	}
+	if(c[l3]>0){
+		l3++;
+	}
+	if(l3==0){
+		printf("0\n");
+	}
+	else{
+		for(int i=l3-1;i>=0;i--){    //记住要倒序输出
+			printf("%d",c[i]);
+		}
+	}
+	return 0;
+}
 
 
 
