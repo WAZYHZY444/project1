@@ -741,6 +741,7 @@ int main()
 */
 
 //高精度加法
+/*
 #include <stdio.h>
 #include <string.h>
 char arr1[500];
@@ -778,7 +779,32 @@ int main()
 	}
 	return 0;
 }
+*/
 
+//汉诺塔
+#include <stdio.h>
+void Print(char s1,char s2)
+{
+	printf("%c->%c  ",s1,s2);
+}
+
+void Han(int n,char pos1,char pos2,char pos3)
+{
+	if(n==1){
+		Print(pos1,pos3);
+	}else{
+		Han(n-1,pos1,pos3,pos2);
+		Print(pos1,pos3);
+		Han(n-1,pos2,pos1,pos3);
+	}
+}
+int main()
+{
+	int n;
+	scanf("%d",&n);
+	Han(n,'A','B','C');
+	return 0;
+}
 
 
 
