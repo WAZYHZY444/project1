@@ -872,6 +872,7 @@ int main()
 }
 */
 
+/*
 //在目标对象中删除子对象问题：
 //1.需要创建一个新的空间，将排除了子对象的目标对象复制在这个新的空间
 //2.当在目标对象遇到子对象的时候，需要来连续跳过，条件判断，符合条件，索引或指针连续++即可
@@ -917,7 +918,38 @@ int main()
 //还有，不要想着在函数里面释放内存，如果写在return之前，那返回的是野指针；如果写在return之后，return后面代码根本不会执行，释放空间无效（只针对于这一道题）
 	return 0;
 }
+*/
 
+#include <stdio.h>
+#include <string.h>
+void test(char arr1[],char arr2[])
+{
+	int str1=strlen(arr1);
+	int str2=strlen(arr2);
+	char brr[str2+1];
+	int k=0;
+	for(int i=0;i<str2;i++){
+		for(int j=0;j<str1;j++){
+			if(arr2[i]==arr1[j]){
+				i++;
+			}else{
+				brr[k]=arr2[i];
+				k++;
+				i++;
+			}
+		}
+	}
+	brr[k]='\0';
+	printf("%s\n",brr);
+}
+int main()
+{
+	char arr1[1000];
+	char arr2[1000];
+	scanf("%s %s",arr1,arr2);
+	test(arr1,arr2);
+	return 0;
+}
 
 
 
