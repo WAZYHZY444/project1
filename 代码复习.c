@@ -782,6 +782,7 @@ int main()
 */
 
 //汉诺塔
+/*
 #include <stdio.h>
 void Print(char s1,char s2)
 {
@@ -805,8 +806,43 @@ int main()
 	Han(n,'A','B','C');
 	return 0;
 }
+*/
 
-
+#include <stdio.h>
+int main()
+{
+	int m,n;
+	scanf("%d %d",&m,&n);
+	int arr[m][n];
+	for(int i=0;i<m-1;i++){
+		for(int j=0;j<n-1;j++){
+			scanf("%d",&arr[i][j]);
+		}
+	}
+	for(int i=0;i<m-1;i++){
+		int row=0;
+		for(int j=0;j<n-1;j++){
+			row+=arr[i][j];
+		}
+		arr[i][n-1]=row;
+	}
+	for(int i=0;i<n;i++){
+		int col=0;
+		for(int j=0;j<m-1;j++){
+			col+=arr[j][i];
+		}
+		arr[m-1][i]=col;
+	}
+	for(int i=0;i<m;i++){
+		for(int j=0;j<n;j++){
+			printf("%d ",arr[i][j]);
+		}
+		printf("\n");
+	}
+	return 0;
+}
+//易犯错误：1.累加、累乘不初始化
+//          2.数组越界访问
 
 
 
