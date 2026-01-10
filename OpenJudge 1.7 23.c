@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <string.h>
+//一：
+/*
 int main()
 {
 	char arr[201];
@@ -22,5 +24,38 @@ int main()
 	}
 	brr[j]='\0';
 	printf("%s\n",brr);
+	return 0;
+}
+*/
+
+//二：
+#include <stdio.h>
+#include <string.h>
+void test(char arr1[],char arr2[])
+{
+	int str1=strlen(arr1);
+	int str2=strlen(arr2);
+	char brr[str2+1];
+	int k=0;
+	for(int i=0;i<str2;i++){
+		for(int j=0;j<str1;j++){
+			if(arr2[i]==arr1[j]){
+				i++;
+			}else{
+				brr[k]=arr2[i];
+				k++;
+				i++;
+			}
+		}
+	}
+	brr[k]='\0';
+	printf("%s\n",brr);
+}
+int main()
+{
+	char arr1[1000];
+	char arr2[1000];
+	scanf("%s %s",arr1,arr2);
+	test(arr1,arr2);
 	return 0;
 }
