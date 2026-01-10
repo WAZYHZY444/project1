@@ -920,6 +920,7 @@ int main()
 }
 */
 
+/*
 #include <stdio.h>
 #include <string.h>
 void test(char arr1[],char arr2[])
@@ -948,6 +949,34 @@ int main()
 	char arr2[1000];
 	scanf("%s %s",arr1,arr2);
 	test(arr1,arr2);
+	return 0;
+}
+*/
+
+//experiments 4_1(简单排序)
+#include <stdio.h>
+int main()
+{
+	int n;
+	scanf("%d",&n);
+	int arr[n];
+	for(int i=0;i<n;i++){
+		scanf("%d",&arr[i]);
+	}
+	for(int i=0;i<n;i++){
+		int min_i=i;
+		for(int j=i+1;j<n;j++){
+			if(arr[j]<arr[min_i]){
+				min_i=j;   //min_i有可能一直在改变，带最后一定是最小值的索引
+			}
+		}
+		int temp=arr[i];
+		arr[i]=arr[min_i];
+		arr[min_i]=temp;
+	}
+	for(int i=0;i<n;i++){
+		printf("%d ",arr[i]);
+	}
 	return 0;
 }
 
