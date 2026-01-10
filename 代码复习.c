@@ -808,6 +808,8 @@ int main()
 }
 */
 
+//experiments2_1
+/*
 #include <stdio.h>
 int main()
 {
@@ -843,10 +845,30 @@ int main()
 }
 //易犯错误：1.累加、累乘不初始化
 //          2.数组越界访问
+*/
 
-
-
-
+//experiments2_2
+#include <stdio.h>
+int main()
+{
+	int m,n;
+	scanf("%d %d",&m,&n);
+	int arr[m][n];
+	for(int i=0;i<m;i++){
+		for(int j=0;j<n;j++){
+			scanf("%d",&arr[i][j]);
+		}
+	}
+	for(int k=0;k<m+n-1;k++){
+		for(int i=0;i<m;i++){
+			int j=k-i;
+			if(j<n&&j>=0){
+				printf("%d\n",arr[i][j]);
+			}
+		}
+	}
+	return 0;
+}
 
 
 
