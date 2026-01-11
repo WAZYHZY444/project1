@@ -25,12 +25,15 @@ int main()
             break;
         }
     }
+    //word[strcspn(word,"\n")]='\0';
+    
     for(int i=0;article[i]!='\0';i++){
         if(article[i]=='\n'){
             article[i]='\0';
             break;
         }
     }
+	//article[strcspn(article,"\n")]='\0';
 	
 	wordlen=strlen(word);
 	articlelen=strlen(article);
@@ -43,7 +46,7 @@ int main()
 		while(i<articlelen&&article[i]==' '){
 			i++;
 		}
-		if(i<articlelen&&(article[i]>='a'&&article[i]<='z')){
+		if(i<articlelen&&(article[i]>='a'&&article[i]<='z')){  //article[i]>='a'&&article[i]<='z'--->isalpha(article)
 			int start=i;
 			char temp_word[100];   //创建一个临时数组，将单词赋值给它
             int j=0;
