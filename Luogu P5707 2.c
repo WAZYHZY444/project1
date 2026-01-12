@@ -1,4 +1,5 @@
-#include<stdio.h>
+#include <stdio.h>
+#include <math.h>
 int main()
 {
 	int s;
@@ -13,7 +14,8 @@ int main()
 		t2=t1+11;
 	}
     */
-    int t2=(s+v-1)/v+10;  //向上取整
+    //int t2=(s+v-1)/v+10;  //向上取整(只有s,v均为正数时才成立)
+    int t2=ceil(s*1.0/v);
 	int T=8*60;
 	int t0=T-t2;
 	int H=t0/60;
