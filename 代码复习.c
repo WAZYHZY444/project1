@@ -1179,6 +1179,23 @@ int main()
 	return 0;
 }
 
+int digit=x%10;
+int ret=ret*10+digit;
+x/10;
 
+if(arr[i]+1==arr[i+1]){
+	cur++;
+	if(cur>max){
+		max=cur;
+	}
+}else{
+	cur=1;
+}
 
+for(int daymoney=1;i<k;daymoney++){
+	for(int i=0;i<daymoney;i++){
+		money+=daymoney;
+		day++;
+	}
+}
 
