@@ -2,7 +2,7 @@
 #include <math.h>
 #include <time.h>
 #define MAXN 10
-
+#define MAXK 1e7   //被调函数最大重复调用次数
 //clock(): 捕捉从程序开始运行到clock()被调用时所耗费的时间。时间单位是clock tick，即“时钟打点”
 //常数CLK_TCK: 机器时钟每秒所走的时钟打点数
 
@@ -31,9 +31,12 @@ void clock_test(double (*func)(int,double*,double),int n,double a[],double x)
 	clock_t start,stop;
 	double duration;
 	start=clock();   //开始计时
-	func(n,a,x);
+	//func(n,a,x);
+	for(int i=0;i<MAXK;i++){
+		func(n,a,x);
+	}
 	stop=clock();    //停止计时
-	duration=((double)(stop-start))/CLK_TCK;
+	duration=((double)(stop-start))/CLK_TCK/MAXK;
 	printf("时钟滴答数：%f\n",(double)(stop-start));
 	printf("运行时间：%6.2e\n",duration);
 }
