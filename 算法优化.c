@@ -32,3 +32,21 @@ int MaxSubseqSum2(int A[],int N)
 	}
 	return MaxSum;
 }
+
+//算法三：分而治之  T(N)=O(nlogn)
+
+//算法四：在线处理  T(N)=O(n)
+int MaxSubseqSum2(int A[],int N)
+{
+	int ThisSum,MaxSum=0;
+	for(int i=0;i<N;i++){
+		ThisSum+=A[i];
+		if(ThisSum>MaxSum){
+			MaxSum=ThisSum;
+		}
+		else if(ThisSum<0){
+			ThisSum=0;
+		}
+	}
+	return MaxSum;	
+}
