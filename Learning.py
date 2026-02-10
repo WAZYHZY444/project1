@@ -37,9 +37,40 @@ print(2**3)
 #5.C语言：&&   ||   !
  python：and  or  not
 print(not 3>9)
+
+#6.三目运算符
+c         condition ? expression1 : expression2;      a>b?a:b
+python    expression1 if condition else expression2   a if a>b else b
+
+#7.C语言  if-if else-else
+ python  if-elif-else
+ 
+ #8.Python没有C语言那样的++和--自增/自减运算符
+ 
+ #9.强制类型转换时，C语言：数据类型加括号,(int)x; python：变量名加括号,int(x).
 """
 
 #比较运算符成立返回True，不成立返回False
+"""
 a=666
 b=999
 print(a!=b)
+"""
+
+"""
+i=1
+Sum=0
+while i<=100:
+    Sum+=i
+    i+=1
+print('结果是',Sum)
+"""
+
+# 错误写法	            正确写法	                 说明
+# print('结果是'Sum)	    print('结果是', Sum)	     需要逗号分隔(中间有空格)
+# print('结果是'+Sum)	print('结果是'+str(Sum))	 sum需要转为字符串(中间没空格)
+# print('结果是Sum')	    print(f'结果是{Sum}')	 直接写sum在引号里是字符串
+Sum=666
+print('结果是',Sum)
+print('结果是'+str(Sum))
+print(f'结果是{Sum}')
