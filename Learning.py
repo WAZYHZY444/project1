@@ -70,7 +70,29 @@ print('结果是',Sum)
 # print('结果是'Sum)	    print('结果是', Sum)	     需要逗号分隔(中间有空格)
 # print('结果是'+Sum)	print('结果是'+str(Sum))	 sum需要转为字符串(中间没空格)
 # print('结果是Sum')	    print(f'结果是{Sum}')	 直接写sum在引号里是字符串
+'''
 Sum=666
 print('结果是',Sum)
 print('结果是'+str(Sum))
 print(f'结果是{Sum}')
+'''
+
+#for循环
+#for 临时变量 in 可迭代对象：
+#   循环体
+''''
+str='12345'
+for i in str:
+    print(f'i={i}')
+'''
+
+#range()，用来记录循环次数，相当于一个计数器。有三个参数(start,stop,step)
+for i in range(2,4):   #从2开始，从3结束。遵循包前不包后原则，相当于前闭后开
+    print("Hello World")
+#range()里面只写一个数，这个数就代表循环次数，默认从0开始
+#range()里面写两个数，第一个数代表开始位置，第二个数代表结束位置
+
+s=0
+for i in range(1,101):
+    s+=i
+print(f'计算结果{s}')   #注意取消此处的缩进
