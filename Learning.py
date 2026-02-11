@@ -107,3 +107,63 @@ print(f'计算结果{s}')   #注意取消此处的缩进
 #3UTF-8:更加精准,对不同的字符用不同的字符表示
 #优点：节省空间
 #缺点：字符与数字的转换速度较慢，每次都需要计算字符要用多少个字节来表示
+
+#字符串编码转换
+'''
+a='hello'
+print(a,type(a))    #str，字符串是以字符为单位进行处理
+a1=a.encode()       #编码
+print(a1,type(a1))  #bytes，以字符为单位进行处理
+a2=a1.decode()      #解码
+print(a2,type(a2))
+#注意；对于bytes，只需要直到它跟字符串类型之间的相互转换
+
+st='你好'
+st1=st.encode("utf-8")
+print(st1,type(st1))
+st2=st1.decode("utf-8")
+print(st2,type(st2))
+'''
+
+#字符串操作
+#1.'+'字符串拼接
+
+# s1='你好'
+# s2='世界'
+# print(s1+s2)
+# print(s1,s2,sep='')
+
+#2.'*'重复输出
+
+#print('hello world\n'*5) # *重复次数
+
+#3.成员运算符
+#作用：检查字符串中是否包含某个字串
+#in: 如果不包含，返回True；如果不包含，返回False
+#not in: 如果不包含，返回True；如果包含，返回False
+
+# s1='hello world'
+# s2='hello'
+# s3='hehe'
+# print(s2 in s1)
+# print(s3 in s1)
+# print(s2 not in s1)
+# print(s3 not in s1)
+
+#4.下标
+#从左往右，下标从0开始，0，1···
+#从右往左，下标从-1开始，-1，-2···
+
+# s='Chinese'
+# print(s[2])
+# print(s[-2])
+
+#5.切片：对操作的对象截取其中的一部分
+#语法：[开始位置：结束位置：步长]  (遵循包前不包后原则,开始计数从0开始)
+#步长：步长的绝对值大小决定切取的间隔，正负号决定切取方向。正数表示从左往右切取，负数表示从右往左切取
+ss='abcdefgh'
+print(ss[1:3])
+print(ss[1: ])
+print(ss[ :3])
+print(ss[-1:-5:-1])
+print(ss[1:7:2])
