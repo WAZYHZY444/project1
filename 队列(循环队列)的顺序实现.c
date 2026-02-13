@@ -61,3 +61,34 @@ bool DeQueue(SqQueue* Q,ElemType* x)
 	*x=Q->data[Q->front];
 	return true;
 }
+
+//判断队列已满/已空
+/*
+1.循环队列
+已空：Q->front==Q->rear
+已满：(Q->rear+1)%MAXSIZE==Q->front
+
+2.
+typedef struct
+{
+	ElemType data[MAXSIZE];
+	int front;
+	int rear;
+	int size;   //初始化size=0
+}SqQueue;
+插入成功size++；删除成功size--
+已空：size==0
+已满：size==MAXSIZE
+
+3.typedef struct
+{
+	ElemType data[MAXSIZE];
+	int front;
+	int rear;
+	int tag;   //初始化tag=0
+}SqQueue;
+每次删除成功，都令tag=0；每次插入成功，都令tag=1
+(只有删除操作，才可能导致队空；只有插入操作，才可能导致队满)
+已空：front==rear&&tag==1
+已满：front==rear&&tag==0
+*/
