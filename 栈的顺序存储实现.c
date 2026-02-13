@@ -36,30 +36,23 @@ bool Push(SqStack* S,ElemType x)
 }
 
 //获取栈顶元素值
-ElemType Push(SqStack* S)
+bool Push(SqStack* S,ElemType* x)
 {
 	if(S.top==MAXSIZE-1){
 		return 0;
 	}
-	int x=S.data[S.top];
-	return x;
+	*x=S.data[S.top];
+	return true;
 }
 
 //出栈
-ElemType Pop(SqStack* S) //数据还残留在内存中，只是逻辑上删除了
+bool Pop(SqStack* S,ElemType* x) //数据还残留在内存中，只是逻辑上删除了
 {
 	if(S.top==MAXSIZE-1){
 		return 0;
 	}
-	ElemType x=S.data[S.top];
+	*x=S.data[S.top];
 	S.top=S.top-1;
 	//int x=S.data[S.top--];
-	return x;
-}
-
-void teskStack()
-{
-	SqStack S;  //声明一个顺序栈(分配空间)
-	InitStack(&S);
-	
+	return true;
 }
