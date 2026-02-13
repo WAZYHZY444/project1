@@ -11,12 +11,12 @@ typedef struct
 //栈的初始化
 void InitStack(SqStack* S)
 {
-	S.top=-1;
+	S->top=-1;
 }
 
 bool StackEmpty(SqStack S)
 {
-	if(S.top==-1){
+	if(S->top==-1){
 		return true;
 	}else{
 		return false;
@@ -26,33 +26,33 @@ bool StackEmpty(SqStack S)
 //新元素压栈
 bool Push(SqStack* S,ElemType x)
 {
-	if(S.top==MAXSIZE-1){
+	if(S->top==MAXSIZE-1){
 		return false;
 	}
-	S.top=S.top+1;
-	S.data[S.top]=x;
-	//S.data[++S.top]=x;
+	S->top=S->top+1;
+	S->data[S->top]=x;
+	//S->data[++S->top]=x;
 	return true;
 }
 
 //获取栈顶元素值
 bool Push(SqStack* S,ElemType* x)
 {
-	if(S.top==MAXSIZE-1){
+	if(S->top==MAXSIZE-1){
 		return 0;
 	}
-	*x=S.data[S.top];
+	*x=S->data[S->top];
 	return true;
 }
 
 //出栈
 bool Pop(SqStack* S,ElemType* x) //数据还残留在内存中，只是逻辑上删除了
 {
-	if(S.top==MAXSIZE-1){
+	if(S->top==MAXSIZE-1){
 		return 0;
 	}
-	*x=S.data[S.top];
-	S.top=S.top-1;
-	//int x=S.data[S.top--];
+	*x=S->data[S->top];
+	S->top=S->top-1;
+	//int x=S->data[S->top--];
 	return true;
 }
