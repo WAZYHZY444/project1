@@ -92,3 +92,33 @@ typedef struct
 已空：front==rear&&tag==1
 已满：front==rear&&tag==0
 */
+
+//改变尾指针初指向(指向队尾元素)
+//队列的初始化
+void InitQueue_2(SqQueue* Q)
+{
+	Q->front=0;
+	Q->rear=MAXSIZE;
+}
+//判断队列是否为空
+bool isEmpty(SqQueue* Q)
+{
+	return (Q->rear+1)%MAXSIZE==Q->front;
+}
+
+//判断队列是否已满
+bool isFull(SqQueue* Q)
+{
+	return (Q->rear+2)%MAXSIZE==Q->front;  //同样也会牺牲一个存储单元
+}
+
+//入队
+bool EnQueue(SqQueue* Q,ElemType x)
+{
+	if(isFull(Q)){
+		return false;
+	}
+	Q.rear=(Q.rear+1)%MAXSIZE;
+	Q->data[Q->rear]=x;
+	return true;
+}
