@@ -13,20 +13,20 @@ typedef struct
 
 void InitStack(ShareStack* S)
 {
-	S.top1=-1;
-	S.top2=MAXSIZE;
+	S->top1=-1;
+	S->top2=MAXSIZE;
 }
 
 //判断栈是否已满
 bool isFull(ShareStack* S)
 {
-	return S.top1+1=S.top2;
+	return S->top1+1=S->top2;
 }
 
 //判断栈1是否为空
 bool isEmpty1(ShareStack* S)
 {
-	return tpo1=-1;
+	return top1=-1;
 }
 
 //判断栈1是否为空
@@ -41,7 +41,7 @@ bool push1(ShareStack* S,int value)
 	if(isFull(S)){
 		return false;
 	}
-	S.data[++S.top1]=value;
+	S->data[++S->top1]=value;
 	return true;
 }
 
@@ -51,7 +51,7 @@ bool push2(ShareStack* S,int value)
 	if(isFull(S)){
 		return false;
 	}
-	S.data[--S.top2]=value;
+	S->data[--S->top2]=value;
 	return true;
 }
 
@@ -61,7 +61,7 @@ bool pop1(ShareStack* S,int* value)
 	if(isEmpty1(S)){
 		return false;
 	}
-	*value=S.data[S.top1--];
+	*value=S->data[S->top1--];
 	return true;
 }
 
@@ -71,7 +71,7 @@ bool pop2(ShareStack* S,int* value)
 	if(isEmpty2(S)){
 		return false;
 	}
-	*value=S.data[S.top2++];
+	*value=S->data[S->top2++];
 	return true;
 }
 
@@ -81,7 +81,7 @@ bool GetTop1(ShareStack* S,int* value)
 	if(isEmpty1(S)){
 		return false;
 	}
-	*value=S.data[S.top1];
+	*value=S->data[S->top1];
 	return true;
 }
 
@@ -91,6 +91,6 @@ bool GetTop2(ShareStack* S,int* value)
 	if(isEmpty2(S)){
 		return false;
 	}
-	*value=S.data[S.top2];
+	*value=S->data[S->top2];
 	return true;
 }
