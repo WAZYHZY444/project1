@@ -16,7 +16,7 @@ void InitStack(SqStack* S)
 
 bool StackEmpty(SqStack S)
 {
-	if(S->top==-1){
+	if(S.top==-1){
 		return true;
 	}else{
 		return false;
@@ -48,8 +48,8 @@ bool Push(SqStack* S,ElemType* x)
 //出栈
 bool Pop(SqStack* S,ElemType* x) //数据还残留在内存中，只是逻辑上删除了
 {
-	if(S->top==MAXSIZE-1){
-		return 0;
+	if(StackEmpty(*S)){
+		return false;
 	}
 	*x=S->data[S->top];
 	S->top=S->top-1;
