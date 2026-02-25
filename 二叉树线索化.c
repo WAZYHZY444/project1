@@ -34,5 +34,16 @@ void Visit(ThreadNode* q)
 	pre=q;
 }
 
+//中序线索化二叉树T
+void CreateInThread(ThreadNode* T)
+{
+	pre=NULL;
+	if(T!=NULL){
+		InThread(T);           //中序线索化二叉树
+		if(pre->RightChild==NULL){
+			pre->rtag=1;       //处理遍历的最后一个节点
+		}
+	}
+}
 //问：ThreadNode* pre=NULL，pre不是一个结构体指针吗，又不是节点，为什么可以用成员访问运算符->
 //答：pre=q; 这行代码执行后，pre就不再是NULL，而是变成了指向实际节点的指针，所以后续的调用中就可以使用 pre-> 来访问这个节点的成员了。
