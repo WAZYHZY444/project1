@@ -78,12 +78,49 @@ void Visit(ThreadNode* q)
 	pre=q;
 }
 
-//中序线索化二叉树T
+//先序线索化二叉树T
 void CreateInThread(ThreadNode* T)
 {
 	pre=NULL;
 	if(T!=NULL){
-		PreThread(T);           //中序线索化二叉树
+		PreThread(T);           //先序线索化二叉树
+		if(pre->RightChild==NULL){
+			pre->rtag=1;       //处理遍历的最后一个节点
+		}
+	}
+}
+
+/*后序线索化*/
+
+//后序遍历二叉树(边遍历，边线索化)
+void PostThread(ThreadNode* T)
+{
+	if(T!=NULL){
+		PostThread(T->LeftChild);
+		PostThread(T->RightChild);
+		Visit(T);
+	}
+}
+
+void Visit(ThreadNode* q)
+{
+	if(q->LeftChild==NULL){
+		q->LeftChild=pre;
+		q->ltag=1;
+	}
+	if(pre!=NULL&&q->RightChild==NULL){
+		pre->RightChild=q;
+		pre->rtag=1;
+	}
+	pre=q;
+}
+
+//后序线索化二叉树T
+void CreateInThread(ThreadNode* T)
+{
+	pre=NULL;
+	if(T!=NULL){
+		PostThread(T);           //后序线索化二叉树
 		if(pre->RightChild==NULL){
 			pre->rtag=1;       //处理遍历的最后一个节点
 		}
