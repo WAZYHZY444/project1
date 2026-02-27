@@ -14,4 +14,12 @@ typedef struct
 {
 	PTNode nodes[MAX_TREE_SIZE];
 	int n;
-}
+}PTree;
+
+//2。孩子兄弟表示法
+typedef struct
+{
+	ElemType data;
+	struct CSNode *firstchild;  //指向第一个孩子
+	struct CSNode *nextsibing;  //指向右边一个兄弟
+}CSNode;
