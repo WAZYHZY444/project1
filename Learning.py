@@ -157,9 +157,33 @@ print(st2,type(st2))
 #count(子字符串，开始查找位置下标，结束查找位置下标)
 
 #7.startswith()判断是否以某个字符串开头，是返回True，否则返回False
+#endswith()判断是否以某个字符串结尾，是返回True，否则返回False
 #startswith(子字符串，开始查找位置下标，结束查找位置下标)
 
 # st="hello,world"
 # print(st.startswith('o',4,6))
 
-#8.endswith()判断是否以某个字符串结尾，是返回True，否则返回False
+#8.isupper()检测字符串中所有字符是否为大写，是则返回True
+#  islower()检测字符串中所有字符是否为小写，是则返回True
+
+# print('Yes'.isupper())
+
+#replace()替换字符字符串
+#replace(被替换内容，替换内容，替换次数) 替换次数可以省略，默认全部替换
+
+# st="gogogo出发"
+# print(st.replace('go','come'))
+
+#9.split()根据指定分隔符分割字符串，以列表的形式返回
+#如果字符串中不存在指定分隔符，则作为一个整体不分割
+
+# st="go,go,go,出发"
+# print(st.split(','))
+# print(st.split('o'))
+# print(st.split('a'))
+# print(st.split(',',1))  #可以指定分割次数
+
+#10.capitalize()将第一个字符大写
+
+st="hello"
+print(st.capitalize())
