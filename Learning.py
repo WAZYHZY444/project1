@@ -187,3 +187,6 @@ print(st2,type(st2))
 
 st="hello"
 print(st.capitalize())
+
+#11.lower()大写字母转换为小写字母
+#   upper()小写字母转换为大写字母
