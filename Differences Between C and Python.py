@@ -39,3 +39,9 @@ print(2**3)
 
 #10.
 #isupper/islower函数. C语言：处理的是单个字符，返回0或非0; python：处理的是整个字符串，返回True或False。
+
+#11.
+#使用内置函数的时候，C语言是把操作对象写在函数名后面括号里面；python把操作对象写在函数名前面，与函数名用一个点隔开
+# C                 python
+# char c='a';       c="aaa"
+# isupper(c);       c.isupper()
