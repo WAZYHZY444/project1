@@ -18,38 +18,6 @@ print(f"他的名字是{name},他今年{age}岁了")
 #r原生字符串，默认取消转义
 #print(r"Zhuang\\\yuan")
 
-#Python与C语言重要区别
-""""
-#使用算数运算符，操作数有浮点数，返回值也是浮点数
-#1.在Python中使用算数运算符/，结果一定是浮点数
-print(25/5)
-print(25//5) #返回整数(向下取整)
-print(-7//2)
-
-#2.Python中的取模运算符%，两个操作数既可以是整数(包括负数)，也可以是浮点数
-print(10.5%3)
-
-#3.幂运算，Python使用**运算符(但也可以使用pow函数)，C语言运用pow函数
-print(2**3)
-
-#4.Python中print输出末尾默认换行，C语言换行需要手动加\n
-
-#5.C语言：&&   ||   !
- python：and  or  not
-print(not 3>9)
-
-#6.三目运算符
-c         condition ? expression1 : expression2;      a>b?a:b
-python    expression1 if condition else expression2   a if a>b else b
-
-#7.C语言  if-if else-else
- python  if-elif-else
- 
- #8.Python没有C语言那样的++和--自增/自减运算符
- 
- #9.强制类型转换时，C语言：数据类型加括号,(int)x; python：变量名加括号,int(x).
-"""
-
 #比较运算符成立返回True，不成立返回False
 """
 a=666
@@ -187,3 +155,11 @@ print(st2,type(st2))
 
 #count返回某个子字符串在整个字符串中出现的次数，没有就返回0
 #count(子字符串，开始查找位置下标，结束查找位置下标)
+
+#7.startswith()判断是否以某个字符串开头，是返回True，否则返回False
+#startswith(子字符串，开始查找位置下标，结束查找位置下标)
+
+# st="hello,world"
+# print(st.startswith('o',4,6))
+
+#8.endswith()判断是否以某个字符串结尾，是返回True，否则返回False
