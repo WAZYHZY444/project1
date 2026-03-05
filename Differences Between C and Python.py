@@ -45,3 +45,7 @@ print(2**3)
 # C                 python
 # char c='a';       c="aaa"
 # isupper(c);       c.isupper()
+
+#12.
+#C       tolower/toupper  单个字符大小写转换的库函数
+#python  lower/upper      整个字符串大小写转换的内置函数
