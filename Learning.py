@@ -185,8 +185,32 @@ print(st2,type(st2))
 
 #10.capitalize()将第一个字符大写
 
-st="hello"
-print(st.capitalize())
+# st="hello"
+# print(st.capitalize())
 
 #11.lower()大写字母转换为小写字母
 #   upper()小写字母转换为大写字母
+
+
+#列表
+#列表名=[元素1，元素2，元素3···]
+#元素之间数据类型可以不相同
+#列表可以进行切片操作
+#列表是可迭代对象，可以for循环遍历取值
+
+# li=[1,2,3,'a','b','c']
+# print(li[2:5])
+# for i in li:
+#     print(i)
+
+#列表相关操作
+#1.添加元素 append() extend() insert()
+#append()、extend()、insert()都是原地修改列表,它们返回 None,而不是返回修改后的列表
+
+Li=['one','two','three']
+# Li.append('four')
+# print(Li)
+# Li.extend('four')
+# print(Li)
+# Li.insert(0,'four')
+# print(Li)
