@@ -207,10 +207,10 @@ print(st2,type(st2))
 #1.添加元素 append() extend() insert()
 #append()、extend()、insert()都是原地修改列表,它们返回 None,而不是返回修改后的列表
 
-Li=['one','two','three']
-# Li.append('four')
+# Li=['one','two','three']
+# Li.append('four')     #append是在列表所有元素后面整体添加
 # print(Li)
-# Li.extend('four')
+# Li.extend('four')     #extend分散添加，将另一个类型中得的元素注意添加，被添加元素必须是可迭代对象
 # print(Li)
-# Li.insert(0,'four')
+# Li.insert(0,'four')   #insert在指定位置插入元素(指定位置有元素，指定位置后面的原元素整体后移)
 # print(Li)
