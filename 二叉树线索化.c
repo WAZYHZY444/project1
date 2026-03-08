@@ -11,6 +11,7 @@ typedef struct ThreadNode
 //全局变量
 ThreadNode* pre=NULL;
 
+
 /*中序线索化*/
 
 //中序遍历二叉树(边遍历，边线索化)
@@ -35,6 +36,7 @@ void Visit(ThreadNode* q)
 	}
 	pre=q;
 }
+
 
 //中序线索化二叉树T
 void CreateInThread(ThreadNode* T)
@@ -126,3 +128,6 @@ void CreateInThread(ThreadNode* T)
 		}
 	}
 }
+
+//问：ThreadNode* pre=NULL，pre不是一个结构体指针吗，又不是节点，为什么可以用成员访问运算符->
+//答：pre=q; 这行代码执行后，pre就不再是NULL，而是变成了指向实际节点的指针，所以后续的调用中就可以使用 pre-> 来访问这个节点的成员了。
