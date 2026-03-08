@@ -214,3 +214,60 @@ print(st2,type(st2))
 # print(Li)
 # Li.insert(0,'four')   #insert在指定位置插入元素(指定位置有元素，指定位置后面的原元素整体后移)
 # print(Li)
+
+#2.修改元素
+#直接通过下标进行修改
+
+# li=[1,2,3]
+# li[2]='a'
+# print(li)
+
+#3.查找元素
+#in:判断指定元素是否存在列表中，如果存在就返回True，不存在就返回False
+#not in:判断指定元素是否存在列表中，如果不存在就返回True，存在就返回False
+#index: 返回指定元素所在位置下标，如果指定元素不存在则报错
+#count:统计指定元素在当前列表出现的次数
+
+# name_list=['Zhangyuan','Whangyuexing','Luhu']
+# while True:
+#     name=input("请输入名字：")
+#     if name in name_list:
+#         print(f"该名字{name}已存在，请重新输入：")
+#     else:
+#         print("添加成功！")
+#         name_list.append(name)
+#         print(name_list)
+#         break
+
+#4.删除元素
+#del
+
+# li=['a','b','c','d','b']
+# # del li    #删除列表,打印列表会报错
+# del li[2]   #根据下标删除
+# print(li)
+
+#pop:删除指定下标的元素，python3版本默认删除最后一个元素
+
+# li=['a','b','c','d','b']
+# li.pop()
+# li.pop(1)
+# print(li)
+
+#remove:根据元素的值进行删除
+
+# li=['a','b','c','d','b']
+# li.remove('d')
+# # li.remove('t')  #指定元素不存在，则会报错
+# li.remove('b')    #指定元素在列表中重复出现，默认删除最开始出现的指定元素
+# print(li)
+
+#5.排序
+#sort:将列表按从大到小的顺序排列
+#reverse:逆序，将列表顺序倒置
+
+# li=['abc','ccb','bas','cca']
+# li.reverse()
+# print(li)
+# li.sort()
+# print(li)
