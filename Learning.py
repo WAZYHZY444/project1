@@ -271,3 +271,34 @@ print(st2,type(st2))
 # print(li)
 # li.sort()
 # print(li)
+
+#6.列表推导式
+#格式一：[表达式 for 变量 in 列表]
+#注意：in后面除了可以放列表，还可以放range()、可迭代对象
+
+# li=[]
+# for i in range(1,6):
+#     li.append(i)
+# print(li)
+
+# li=[]
+# [li.append(i) for i in range(1,6)]
+# print(li)
+
+#格式二：[表达式 for 变量 in 列表 if 条件]
+
+# li=[]
+# for i in range(1,11):
+#     if i%2==1:
+#         li.append(i)
+# print(li)
+
+# li=[]
+# [li.append(i) for i in range(1,11) if i%2==1]
+# print(li)
+
+#列表嵌套
+
+# li=[1,2,3,[4,5,6]]
+# print(li[3])
+# print(li[3][1])
