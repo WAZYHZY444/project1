@@ -1,4 +1,5 @@
 //树的存储结构
+
 //1.双亲表示法
 #define MAX_TREE_SIZE 100   //树中最多节点数
 
@@ -16,7 +17,28 @@ typedef struct
 	int n;
 }PTree;
 
-//2。孩子兄弟表示法
+//2.孩子表示法
+#define MAX_TREE_SIZE 100
+struct CTNode
+{
+	int child;              //孩子节点在数组中的下标
+	struct CTNode* next;    //指向下一个孩子节点
+}
+
+typedef struct
+{
+	ElemType data;
+	struct CTNode* firstChild;  //指向第一个孩子结点的链表头
+}CTBox;
+
+typedef struct
+{
+	CTBox nodes[MAX_TREE_SIZE];
+	int n;   //总结点数
+	int r;   //根节点位置下标
+}
+
+//3.孩子兄弟表示法
 typedef struct
 {
 	ElemType data;
