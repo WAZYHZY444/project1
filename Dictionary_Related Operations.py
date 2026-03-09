@@ -53,8 +53,37 @@
 # dic.clear()
 # print(dic)
 
-dic={'name':'Zhangyuan','age':40}
+# dic={'name':'Zhangyuan','age':40}
 # #dic.pop('age')
 # # dic.pop()    #报错，没有指定键名
 # dic.popitem()  #3.7版本之前是随机删除一个键值对，3.7版本之后是默认删除最后一个键值对
 # print(dic)
+
+#5.  len()求长度,返回有多少对键值对
+# dic={'name':'Zhangyuan','age':40}
+# print(len(dic))
+
+#6.  keys()返回字典里面包含的所有键名
+
+# dic={'name':'Zhangyuan','age':40}
+# print(dic.keys())  #返回的不是列表类型
+# for i in dic:      #只取出键名
+#     print(i)
+# for i in dic.keys():
+#     print(i)
+
+#7.  values()返回字典里包含的所有值
+
+# dic={'name':'Zhangyuan','age':40}
+# print(dic.values())
+# for i in dic.values():
+#     print(i)
+
+#8.  items()返回字典里包含的所有键值对，键值对是以元组的形式
+
+# dic={'name':'Zhangyuan','age':40}
+# print(dic.items())
+# for i in dic.items():
+#     print(i,type(i))
+
+#字典的应用场景：使用键值对，存储描述一个物体的相关信息
