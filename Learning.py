@@ -241,3 +241,62 @@ print(st2,type(st2))
 # print(list((1,2,3,4,5)))
 # print(list({'name':'ZhangYuan','age':40}))  #字典转换成列表，只取键名作为列表的值
 # print(list({1,2,3,4,2,5}))                  #集合转换成列表，先去重
+
+# a=1
+# b=a
+# print(a,b)
+# a=1+1
+# print(a,b)
+# print(id(a))
+# print(id(b))
+#
+# l1=[1,2,3,4]
+# l2=l1
+# print('前',l1)
+# print('前',l2)
+# l1.append(5)
+# print('后',l1)
+# print('后',l2)
+# print(id(l1))
+# print(id(l2))
+#赋值：完全共享资源，一个值的改变会被另一个值共享
+
+#浅拷贝(数据半共享)
+#会创建新的对象，拷贝第一层数据，嵌套层会指向原来的内存地址
+# import copy
+# l1=[1,2,3,[4,5]]  #定义一个嵌套列表
+# l2=copy.copy(l1)  #浅拷贝
+# print('l1',l1)
+# print('l2',l2)
+# l1.append(6)
+# print('添加后l1',l1)
+# print('添加后l2',l2)
+# l1[3].remove(5)
+# print('删除后l1',l1)
+# print('删除后l2',l2)
+# print('l1的内存地址:',id(l1))
+# print('l2的内存地址:',id(l2))
+# print('l1[3]的内存地址:',id(l1[3]))
+# print('l2[3]的内存地址:',id(l2[3]))
+#外层的内存地址不同，但内层的内存地址相同
+
+#优点：拷贝速度快，占用空间少，拷贝效率高
+
+#浅拷贝(数据完全不共享)
+#外层的对象和内部的元素都拷贝了
+import copy
+l1=[1,2,3,[4,5]]  #定义一个嵌套列表
+l2=copy.deepcopy(l1)  #深拷贝
+print('l1',l1)
+print('l2',l2)
+l1.append(6)
+print('添加后l1',l1)
+print('添加后l2',l2)
+l1[3].remove(5)
+print('删除后l1',l1)
+print('删除后l2',l2)
+print('l1的内存地址:',id(l1))
+print('l2的内存地址:',id(l2))
+print('l1[3]的内存地址:',id(l1[3]))
+print('l2[3]的内存地址:',id(l2[3]))
+#深拷贝数据变化只影响自己本身，跟原来的对象没有关联
