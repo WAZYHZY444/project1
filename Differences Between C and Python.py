@@ -49,3 +49,13 @@ print(2**3)
 #12.
 #C       tolower/toupper  单个字符大小写转换的库函数
 #python  lower/upper      整个字符串大小写转换的内置函数
+
+#13.
+#浮点型强制转换成整型
+#python:  float(3)    打印显示3.0         创建一个新的双精度浮点数对象，显示时默认保留一位小数。
+#C:       (float)3    打印显示3.000000    将整数在内存中的表示形式重新解释为单精度浮点数格式，printf默认打印6位小数。
+
+#14.
+#C:      float是单精度浮点型，double是双精度浮点型
+#python：float是双精度浮点型，没有double类型
+#Python把C语言中的float和double合并成了一个类型，选择了更强大的double作为唯一的标准，但沿用了float这个名字。
