@@ -284,19 +284,35 @@ print(st2,type(st2))
 
 #浅拷贝(数据完全不共享)
 #外层的对象和内部的元素都拷贝了
-import copy
-l1=[1,2,3,[4,5]]  #定义一个嵌套列表
-l2=copy.deepcopy(l1)  #深拷贝
-print('l1',l1)
-print('l2',l2)
-l1.append(6)
-print('添加后l1',l1)
-print('添加后l2',l2)
-l1[3].remove(5)
-print('删除后l1',l1)
-print('删除后l2',l2)
-print('l1的内存地址:',id(l1))
-print('l2的内存地址:',id(l2))
-print('l1[3]的内存地址:',id(l1[3]))
-print('l2[3]的内存地址:',id(l2[3]))
+# import copy
+# l1=[1,2,3,[4,5]]  #定义一个嵌套列表
+# l2=copy.deepcopy(l1)  #深拷贝
+# print('l1',l1)
+# print('l2',l2)
+# l1.append(6)
+# print('添加后l1',l1)
+# print('添加后l2',l2)
+# l1[3].remove(5)
+# print('删除后l1',l1)
+# print('删除后l2',l2)
+# print('l1的内存地址:',id(l1))
+# print('l2的内存地址:',id(l2))
+# print('l1[3]的内存地址:',id(l1[3]))
+# print('l2[3]的内存地址:',id(l2[3]))
 #深拷贝数据变化只影响自己本身，跟原来的对象没有关联
+
+#可变对象：变量对应的值可以修改，但内存地址不会发生改变
+#常见可变对象：列表、字典、集合
+li=[1,2,3,4]
+print(li,id(li))
+li.append(5)
+print(li,id(li))
+
+#不可变对象：变量对应的值不可以修改，如果修改就会生成一个新的对象从而分配新的内存空间
+#常见不可变对象：数值类型int、float、bool、complex，字符串，元组
+n=10
+print(n,id(n))
+n=20
+print(n,id(n))
+
+#深浅拷贝只针对可变对象
