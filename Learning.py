@@ -190,3 +190,54 @@ print(st2,type(st2))
 
 #11.lower()大写字母转换为小写字母
 #   upper()小写字母转换为大写字母
+
+#强制类型转换
+#1.浮点数强转为整数int():截断小数点部分，只保留整数部分
+#2.字符型强转为整型int():字符串只能由纯数字组成，'+''-'只能在数字前面表示数字的正负，不能写在后面
+
+# st1='+12'
+# print(int(st1))
+
+#input默认输出的是字符串类型
+# age=int(input("输入年龄："))
+# if age>=18:
+#     print("已成年")
+
+#3.整型强转为浮点型float()添加一位小数
+#4.字符型强转为浮点型float():字符串只能由纯数字组成，'+''-'只能在数字前面表示数字的正负，不能写在后面
+# print(float(3))
+
+#5.任何类型都可以转化成字符串类型(float转换成str会取出末位为0的小数部分)
+
+# print(str(-1.30))
+# print(str(-1.3000))
+# print(str(-1.03200))
+# print(str([1,2,3]))
+
+#6.eval()可以实现list、dict、tuple和str之间的转换
+#eval()非常强大，但不够安全，容易被恶意修改数据
+
+#str->list
+# s1="[[1,2],[3,4],[5,6]]"
+# print(s1,type(s1))
+# li=eval(s1)
+# print(li,type(li))
+
+#str->dict
+# s2="{'name':'ZhangYuan','age':40}"  #注意：在str->dict情况下，字符串外层用双引号，内层字典的键与值用单引号
+# print(s2,type(s2))
+# dic=eval(s2)
+# print(dic,type(dic))
+
+#eval()用来执行一个字符串表达式，并返回表达式的值
+
+# print('10+10')
+# print(eval('10+10'))
+
+#7.list()将可迭代对象转换成列表
+#支持转换为list的类型：str、tuple、dict、set
+
+# print(list('abcdefg'))
+# print(list((1,2,3,4,5)))
+# print(list({'name':'ZhangYuan','age':40}))  #字典转换成列表，只取键名作为列表的值
+# print(list({1,2,3,4,2,5}))                  #集合转换成列表，先去重
