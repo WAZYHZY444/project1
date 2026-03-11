@@ -353,9 +353,42 @@ print(st2,type(st2))
 # print(fun('海绵宝宝','派大星','痞老板'))
 
 #4.关键字参数
-def fun(**kwargs):   #可以把args改为其他参数名，但args更符合代码的规范性
-    print(kwargs)    ##以字典的形式接收
-    print(type(kwargs))
-fun()     #返回空字典
-fun(name='ZhangYuan',age=40)  #传值时，需要采用键=值的形式，键不加引号
+# def fun(**kwargs):   #可以把args改为其他参数名，但args更符合代码的规范性
+#     print(kwargs)    ##以字典的形式接收
+#     print(type(kwargs))
+# fun()     #返回空字典
+# fun(name='ZhangYuan',age=40)  #传值时，需要采用键=值的形式，键不加引号
 #作用：扩展函数的功能
+
+#嵌套函数定义
+# def test1():
+#     print('海绵宝宝')
+#     def test2():
+#         print('派大星')
+#     test2()
+# test1()
+
+#global关键字:将变量声明为全局变量
+# def test():
+#     global a   #声明全局变量
+#     a=10
+#     print('a=',a)
+# test()
+# print('a=',a)
+
+#nonlocal关键字：用来声明外层的局部变量，只能在嵌套函数中使用，在外部函数先进行声明，内部函数进行nonlocal声明
+# a=10
+# def test1():
+#     print('test1 a=',a)
+#     def test2():
+#         a=20
+#         print('test2前 a=',a)
+#         def test3():
+#             nonlocal a
+#             a=30
+#             print('test3 a=',a)
+#         test3()
+#         print('test2后 a=',a)
+#     test2()
+# test1()
+#nonlocal只能对上一级进行修改
