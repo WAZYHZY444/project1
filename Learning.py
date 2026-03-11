@@ -303,16 +303,59 @@ print(st2,type(st2))
 
 #可变对象：变量对应的值可以修改，但内存地址不会发生改变
 #常见可变对象：列表、字典、集合
-li=[1,2,3,4]
-print(li,id(li))
-li.append(5)
-print(li,id(li))
+# li=[1,2,3,4]
+# print(li,id(li))
+# li.append(5)
+# print(li,id(li))
 
 #不可变对象：变量对应的值不可以修改，如果修改就会生成一个新的对象从而分配新的内存空间
 #常见不可变对象：数值类型int、float、bool、complex，字符串，元组
-n=10
-print(n,id(n))
-n=20
-print(n,id(n))
+# n=10
+# print(n,id(n))
+# n=20
+# print(n,id(n))
 
 #深浅拷贝只针对可变对象
+
+
+#函数
+#定义函数
+# def 函数名():
+#     函数体
+#调用函数
+# 函数名()
+
+#return返回多个值，以元组的形式返回给调用者
+#return后面没有给定返回值，则返回的是None
+
+#函数参数
+#1.必备参数(位置参数)：传递和定义参数的顺序及个数必须一致
+
+#2.默认参数：为参数提供默认值，调用函数时可以不传该默认参数的值
+#注意：所有的位置参数必须出现在默认参数前，包括函数的定义与调用
+# def Add(a=1,b=2):
+#     return a+b
+# print(Add(4))  #函数有两个形参，但函数调用的时候只传入一个值，默认该值是第一个形参的值
+
+# def Add(a,b=2):
+#     return a+b
+# print(Add(4))
+
+# def Add(a=1,b):  #报错，所有的位置参数必须出现在默认参数前
+#     return a+b
+# print(Add(4))
+#设置默认值，没有传值会根据默认值来执行代码，传值则根据传入的值来执行代码
+
+#3.可变参数：传入的值的数量可以改变，可以传多个，也可以不传
+# def fun(*args):   #可以把args改为其他参数名，但args更符合代码的规范性
+#     return args
+#     print(type(args))  #以元组的形式接收
+# print(fun('海绵宝宝','派大星','痞老板'))
+
+#4.关键字参数
+def fun(**kwargs):   #可以把args改为其他参数名，但args更符合代码的规范性
+    print(kwargs)    ##以字典的形式接收
+    print(type(kwargs))
+fun()     #返回空字典
+fun(name='ZhangYuan',age=40)  #传值时，需要采用键=值的形式，键不加引号
+#作用：扩展函数的功能
