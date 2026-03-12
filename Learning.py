@@ -353,7 +353,7 @@ print(st2,type(st2))
 # print(fun('海绵宝宝','派大星','痞老板'))
 
 #4.关键字参数
-# def fun(**kwargs):   #可以把args改为其他参数名，但args更符合代码的规范性
+# def fun(**kwargs):
 #     print(kwargs)    ##以字典的形式接收
 #     print(type(kwargs))
 # fun()     #返回空字典
@@ -392,3 +392,57 @@ print(st2,type(st2))
 #     test2()
 # test1()
 #nonlocal只能对上一级进行修改
+
+#内置函数
+#查看所有内置函数
+# import builtins
+# print(dir(builtins))
+#大写字母开头一般是内置常量名，小写字母开头一般是内置函数名
+#常见内置函数
+#  1.abs()返回绝对值
+
+#  2.sum()求和  #参数要是可迭代对象，列表、元组、集合可以，字符串、字典不可以
+# print(sum([1,2,3]))
+# print(sum({4,5,6}))
+
+#  3.min()求最小值
+#    max()求最大值
+# print(max(1,2,3))
+# #比较绝对值大小
+# print(max(-6,4,key=abs))   #注意这里只能写key
+
+#  4.zip()将可迭代对象作为参数，将对象中对应的元素打包成一个个元组
+#第一种方式：通过for循环
+# li1=[1,2,3]
+# li2=['a','b','c']
+# print(zip(li1,li2))
+# for i in zip(li1,li2):
+#     print(i)
+#     print(type(i))
+#如果元素个数不一致，则按照长度最短的返回
+
+#第二种方式：转换成列表打印
+# li1=[1,2,3]
+# li2=['a','b','c']
+# print(list(zip(li1,li2)))
+
+#  5.map()对可迭代对象中的每一个元素进行映射，分别执行
+#map(func,iter1)  func是定义的函数，iter1是要执行的可迭代对象
+
+# li1=[1,2,3]
+# func=lambda x:x+10
+# mp=map(func,li1)
+# for i in mp:
+#     print(i)
+# print(list(mp))    #打印的是空列表
+#map对象在Python中是一个迭代器
+#迭代器是一次性的：当用for循环遍历mp时，已经将迭代器中的所有元素消耗完了。当迭代器被遍历完后，它就处于"耗尽"状态，不再包含任何元素。
+
+#  6.reduce()先把对象中的两个元素取出，计算出一个值后保存着，再把这个计算值跟第三个元素进行计算
+#需要导包
+from functools import reduce
+#reduce(函数,可迭代对象)   #函数里面只能有两个参数
+li1=[1,2,3,4]
+add=lambda x,y:x+y
+result=reduce(add,li1)
+print(result)
