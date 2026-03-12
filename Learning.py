@@ -440,9 +440,76 @@ print(st2,type(st2))
 
 #  6.reduce()先把对象中的两个元素取出，计算出一个值后保存着，再把这个计算值跟第三个元素进行计算
 #需要导包
-from functools import reduce
-#reduce(函数,可迭代对象)   #函数里面只能有两个参数
-li1=[1,2,3,4]
-add=lambda x,y:x+y
-result=reduce(add,li1)
-print(result)
+# from functools import reduce
+# #reduce(函数,可迭代对象)   #函数里面只能有两个参数
+# li1=[1,2,3,4]
+# add=lambda x,y:x+y
+# result=reduce(add,li1)
+# print(result)
+
+#拆包：对于函数中的多个返回数据，去掉元组、列表或者字典，直接获取里面的数据的过程
+#第一种方法：一般在获取元组值时使用
+# tua=(1,2,3,4)
+# a,b,c,d=tua
+# print('a=',a,'b=',b,'c=',c,'d=',d)
+#要求元组内元素个数与接收的变量个数相同
+
+#第二种方法：一般在函数调用时使用
+# tua=(1,2,3,4)
+# a,*b=tua
+# print(a,b)
+# c,d,e=b
+# print(c,d,e)
+
+# def func(a,b,*args):
+#     print(a,b)
+#     print(args)
+# func(1,2,3,4,5)
+
+#抛出异常
+#1.创建一个exception('xxx')对象，xxx--是异常提示信息
+#2.raise抛出这个对象
+# raise Exception('报错啦！报错啦！')
+
+#捕获异常
+#捕获异常后代码还能继续执行，程序不会终止
+# def func(a,b):
+#     if b==0:
+#         raise Exception('除数不能为0')
+# try:
+#     print(func(5,0))
+# except Exception as e:
+#     print(e)
+# print("a,b无效，重新选择")
+
+#模块
+#一个py文件就是一个模块，及导入一个模块本质上就是执行一个py文件
+#模块的分类：
+#  1.内置模块
+#如random、time、os、logging,直接导入即可使用
+#  2.第三方模块(第三方库)
+#下载：cmd窗口输入 pip install 模块名
+#  3.自定义模块
+#自己在项目中定义的模块，命名要遵循标识符规定以及变量的命名规范，不能与内置模块起冲突
+
+#导入模块
+#  1.import 模块名
+#调用功能：模块名.功能名
+# import pytest
+# #调用模块中的变量
+# print(pytest.name)
+# #调用模块中的函数
+# pytest.func()
+
+#  2.from...import...
+#从模块中导入指定部分
+#from 模块名 import 功能1，功能2...
+#调用功能：功能名    (不需要加模块名)
+# from pytest import func2   #导入函数，只需要写函数名，不需要加小括号
+# func2()
+
+#  3.from...import *
+# from pytest import *
+# func2()
+
+#注意：不建议过多使用form...声明(方式2、3)，有时命名冲突会造成一些错误
