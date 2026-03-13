@@ -539,6 +539,31 @@ print(st2,type(st2))
 
 #import导入包时，首先执行__init__.py文件的代码
 # import pack01
+
 #__all__:本质上一个列表，列表里面的元素就代表要导入的模块
 #作用：可以控制要引入的东西
-from pack01 import *
+# from pack01 import *
+# register.reg()
+# login.log()
+
+#包的本质依然是包，包又可以包含包
+
+# def func(n):
+#    if n==1:
+#        return 1
+#    else:
+#        return n+func(n-1)
+# print(func(100))
+
+#斐波那契数列
+# def func1(n):
+#     if(n<=2):
+#         return 1
+#     else:
+#         return func1(n-1)+func1(n-2)
+# print(func1(5))
+
+#闭包
+#条件:1.函数嵌套
+#    2.内层函数使用外层函数的局部变量
+#    3.外层函数的返回值是内层函数的函数名
