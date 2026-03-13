@@ -513,3 +513,22 @@ print(st2,type(st2))
 # func2()
 
 #注意：不建议过多使用form...声明(方式2、3)，有时命名冲突会造成一些错误
+
+#as起别名
+#1.  给模块起别名
+# import 模块名 as 别名
+# import pytest as pt
+# pt.func()
+
+#2.  给功能起别名
+# from 模块名 import 功能 as 别名
+# from pytest import func as a,func2 as b
+# a()
+# b()
+
+#内置全局变量__name__
+#作用：用来控制py文件在不同应用场景执行不同的逻辑
+# 1.文件在当前程序执行(自己执行自己)：__name__ == "__main__"
+#当被当作模块导入时，__name__ == "__main__"后面的代码不会执行
+
+# 2.文件被当做模块被其他文件导入：__name__ == 模块名
