@@ -163,3 +163,28 @@ int GetDegree(ALGraph* G,int vertex)
 	}
 	return degree;
 }
+
+//深度优先遍历(DFS算法)
+//类似树的先序遍历
+void DFS(ALGraph* G,int start,bool visited[])
+{
+	visited[start]=true;  //标记当前节点已经被访问
+	printf("%d ",G->vertices[start].data);  //访问当前顶点
+	ArcNode* curr=G->vertices[start].first;
+	while(curr!=NULL){
+		if(!visited[curr->adjvex]){  //当前顶点的邻接点还没有访问
+			DFS(G,curr->adjvex,visited);
+		}
+		curr=curr->next;  //移动到下一条边
+	}
+}
+
+void DFS_Traverse(ALGraph* G)  //traverse遍历
+{
+	bool visited[MAX_VERTEX_NUM]={false};   //false表示顶点没有被访问
+	for(int i=0;i<G->vexnum;i++){
+		if(!visited[i]){   //如果遍历找到该顶点没有被访问，就从它开始DFS
+			DFS(G,i,visited);
+		}
+	}
+}
