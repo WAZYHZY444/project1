@@ -653,18 +653,38 @@ print(st2,type(st2))
 #     print("发送消息")
 # send()
 
-def outer(fn):
-    def inner(a,b):
-        fn()
-        print(a+b)
-    return inner
-#语法糖修饰器
-# @outer
-# def func():
-#     print("开始计算")
-# func(4,5)
+# def outer(fn):
+#     def inner(a,b):
+#         fn()
+#         print(a+b)
+#     return inner
+# #语法糖修饰器
+# # @outer
+# # def func():
+# #     print("开始计算")
+# # func(4,5)
+#
+# #标准版修饰器
+# def func2():
+#     print("现在开始计算")
+# outer(func2)(4,5)
 
-#标准版修饰器
-def func2():
-    print("现在开始计算")
-outer(func2)(4,5)
+#多个装饰器
+def deco1(fn):
+    def inner1():
+        return 'one+'+fn()+'+1'
+    return inner1
+def deco2(fn):
+    def inner2():
+        return 'two+'+fn()+'+2'
+    return inner2
+def deco3(fn):
+    def inner3():
+        return 'three+'+fn()+'+3'
+    return inner3
+@deco1
+@deco2
+def func():
+    return '多个装饰器'
+print(func())
+#多个装饰器装饰的过程，离函数最近的装饰器先装饰，外面的装饰器再装饰，由内到外的装饰过程
