@@ -71,15 +71,51 @@
 #         print("这是__init__()函数")
 # te=Test()
 
-class Test:
-    def __init__(self,a,b):
-        self.a=a  #实例属性
-        self.b=b
-    def add(self):
-        return self.a+self.b
-    def div(self):
-        return self.a/self.b
-#实例化对象
-pe=Test(10,5)  #在实例化的时候传值
-print(pe.add())
-print(pe.div())
+# class Test:
+#     def __init__(self,a,b):
+#         self.a=a  #实例属性
+#         self.b=b
+#     def add(self):
+#         return self.a+self.b
+#     def div(self):
+#         return self.a/self.b
+# #实例化对象
+# pe=Test(10,5)  #在实例化的时候传值
+# print(pe.add())
+# print(pe.div())
+
+#析构函数 __del__():主要表示该程序块或函数已经全部执行结束
+#删除对象的时候，解释器会默认调用__del__()
+# class Person:
+#     def __init__(self):
+#         print('Hello!')
+#     def __del__(self):
+#         print('Bye!')
+# p=Person()   #实例化对象
+# del p  #删除对象
+# #del p语句执行时，内存会立即被回收，会调用对象本身的__del__()
+# print("下次再见！")
+#正常运行时，不会调用__del__()，对象执行结束后，系统会自动调用__del__()
+
+######面向对象的三大特性：封装、继承、多态
+#封装：指的是隐藏对象中一些不希望被外部所访问到的属性或方法
+# 1.
+#隐藏属性(私有权限)：双下划线开头，如果定义在类中，无法在外部直接访问，子类不会继承，要访问只能通过间接的方式，另一个py文件中通过from xxx import *导入的时候，也无法导入
+#                一般是python中的魔术方法或属性，都是有特殊含义或者功能的，自己不要轻易定义
+# class Person:
+#     name='ZhangYuan'
+#     __age=40   #隐藏属性
+#     def func(self):
+#         print(f"{Person.name}的年龄是{Person.__age}")  #在实例方法中访问类属性和隐藏属性
+# pe=Person()
+# print(pe.name)
+#print(pe.age)  #不能用对象名来访问隐藏属性
+
+#1.隐藏属性实际上是将名字修改为：_类名__属性名 _Person__age
+# print(pe._Person__age)
+# pe.func()
+#2.在类的内部访问
+
+# 2.
+#私有属性/私有方法：单下划线开头，如果定义在类中，外部可以访问，子类不会继承，另一个py文件中通过from xxx import *导入的时候，无法导入
+#               一般是为了避免与python关键字冲突而采用的命名方法
