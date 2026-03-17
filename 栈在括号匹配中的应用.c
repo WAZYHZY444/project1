@@ -42,7 +42,7 @@ bool Pop(SqStack* S,char* c)
 	return true;
 }
 
-bool bracketCheak(char str[],int len)
+bool bracketCheck(char str[],int len)
 {
 	SqStack S;
 	InitStack(&S);
@@ -72,7 +72,7 @@ int main()
 	char str[10]={0};
 	scanf("%9s",str);
 	int len=strlen(str);
-	bool x=bracketCheak(str,len);
+	bool x=bracketCheck(str,len);
 	if(!x){
 		printf("匹配失败！\n");
 	}else{
