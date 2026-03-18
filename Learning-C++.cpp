@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 using namespace std;
 
 
@@ -84,6 +85,7 @@ int main()
 }
 */
 
+/*
 void test07(const int &val)  //常量引用，用来修饰形参，防止误操作
 {
 	a=100; //报错，不能修改参数
@@ -97,14 +99,81 @@ int main()
 	int val=10;
 	test07();
 }
+*/
 
+//函数的默认参数：用法与python差不多，注意：如果函数声明和函数的实现只能有一个地方有默认参数
+//函数占位参数：返回值类型 函数名 (数值类型) {}
+void func1(int a,int){
+	cout<<"this is func"<<endl;
+}
 
+//函数重载：可以让函数名相同，提高复用性
+//满足条件：1.同一作用域下
+//          2.函数名称相同
+//          3.函数参数类型不同或者个数不同或者顺序不同
+//注意：函数的返回值不可以作为函数重载的条件
 
+//函数重载注意事项：
+//1.引用作为重载的条件
+void func(int &a){
+	cout<<"func(int &a)函数调用"<<endl;
+}
+void func(const int &a){
+	cout<<"func(const int &a)函数调用"<<endl;
+}
 
+//2.函数重载遇到默认参数
+void func2(int a,int b=10){
+	cout<<"func(int &a)函数调用"<<endl;
+}
 
+void func2(int a){
+	cout<<"func(int &a)函数调用"<<endl;
+}
+/*
+int main()
+{
+	//func1(10,10);
+//	int a=10;
+//	func(a);
+//	func(10);
+	func2();   //函数重载遇到默认参数,容易出现二义性，需要避免
+	return 0;
+}
+*/
 
+//类中的属性和行为，统一称为成员
+//属性->成员属性、成员变量
+//行为->成员函数、成员方法
+class Peo{
+public:
+	//属性
+	string name;
+	int age;
+	//行为
+	void ShowInfo(){
+		cout<<"姓名："<<name<<"    年龄："<<age;
+	}
+	//通过行为给属性赋值
+	void SetInfo(string m_name,int m_age){
+		name=m_name;
+		age=m_age;
+	}
+};
 
+int main()
+{
+	//实例化对象(创建一个对象)
+	Peo s1;
+	//方式一：
+//	s1.name="ZhangYuan";
+//	s1.age=40;
+	//方式二:
+	s1.SetInfo("SuXing",41);
+	s1.ShowInfo();
 
+	return 0;
+}
 
 
 
