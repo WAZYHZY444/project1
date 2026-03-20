@@ -202,16 +202,17 @@ void test08(){
 class Per{
 public:
 	int age;
+	int *height;
 	//无参构造
 	Per(){
-		cout<<"构造函数"<<endl;
+		cout<<"无参构造函数"<<endl;
 	}
 	//有参构造(默认构造)
 	Per(int a){
 		age=a;
 		cout<<"有参构造函数"<<endl;
 	}
-	//析构
+	//析构函数
 	~Per(){
 		cout<<"析构函数"<<endl;
 	}
@@ -225,9 +226,9 @@ public:
 void test09()
 {
 	//1.括号法
-//	Per p1;      //默认构造函数调用
-//	Per p2(10);  //有参构造调用
-//	Per p3(p2);  //拷贝构造
+	Per p1;      //默认构造函数调用
+	Per p2(18);  //有参构造调用
+	Per p3(p2);  //拷贝构造
 	//注意事项1：调用默认构造函数时，不要加()
 	//          因为编译器会认为是一个函数的声明，不会认为在创建对象
 	
@@ -235,9 +236,9 @@ void test09()
 //	cout<<"p2的年龄:"<<p2.age<<endl;
 
 	//2.显式法
-//	Per q1;
-//	Per q2=Per(20);
-//	Per q3=Per(q2);
+	Per q1;
+	Per q2=Per(20);
+	Per q3=Per(q2);
 	//注意事项2：不要利用拷贝构造函数初始化匿名对象,编译器会认为Per(q3)-->Per q3(无参构造)，就会认为发生重定义
 	//Per(q3);
 	//Per(20) --->匿名对象(当前行执行后，系统会立即回收掉匿名对象)
@@ -248,6 +249,71 @@ void test09()
 	Per q4=10;   //相当于Per q4=Per(10)
 	Per q5=q4;
 }
+
+
+//拷贝函数调用时机：
+//1.使用一个已经创建完毕的对象来初始化一个新对象
+void test10(){
+	Per p1(10);
+	Per p2(p1);
+	cout<<"p2的年龄:"<<p2.age<<endl;
+}
+//2.值传递的方式给函数参数传值
+void doWork(Per p){
+	
+}
+void test11(){
+	Per p;
+	doWork(p);
+}
+//3.值的方式返回局部对象(dev-C++好像并没有调用拷贝函数，p1和p的地址相同)
+Per doWork2(){
+	Per p1;
+	cout<<(int*)&p1<<endl;
+	return p1;
+}
+void test12(){
+	Per p=doWork2();
+	cout<<(int*)&p<<endl;
+}
+
+//如果定义了有参构造函数，C++不再提供默认无参构造，但会提供默认拷贝构造
+//如果定义了拷贝构造函数，C++不再提供其他构造函数
+
+class Ren{
+public:
+	int age;
+	int* height;
+	
+	Ren(int m_age,int m_height){
+		age=m_age;
+		height=new int(m_height);
+	}
+	//如果属性有在堆区开辟的，要自己实现拷贝构造函数，解决浅拷贝带来的问题
+	Ren(const Ren &p){
+		age=p.age;
+		//height=p.height;  编译器默认拷贝函数实现的就是这行代码
+		height=new int(*p.height);
+	}
+	~Ren(){
+		//析构代码，将对堆区开辟的数据释放
+		if(height!=NULL){
+			delete height;
+			height=NULL;
+		}
+	}
+};
+
+void test13()
+{
+	Ren p1(40,182);
+	cout<<"p1的年龄:"<<p1.age<<"  身高:"<<*p1.height<<endl;
+	Ren p2(p1);
+	cout<<"p2的年龄:"<<p1.age<<"  身高:"<<*p1.height<<endl;
+	//Per p2(p1)如果利用编译器提供的拷贝构造函数，会做浅拷贝操作
+	//浅拷贝操作带来的问题是堆区的内存重复释放，需要利用深拷贝解决
+}
+
 int main()
 {
 	//实例化对象(创建一个对象)
@@ -264,7 +330,13 @@ int main()
 //system("pause"); 后面的代码确实不会执行，程序会暂停在这一行，只有当你按下任意键后，才会继续执行后面的代码。
 	//system("pause");
 	
-	test09();
+	//test09();
+	
+	//test10();
+	//test11();
+	//test12();
+	
+	test13();
 	return 0;
 }
 
