@@ -466,6 +466,54 @@ void test21(){
 	p2.AddAge(p1).AddAge(p1).AddAge(p1);
 	cout<<"p2 age="<<p2.age<<endl;
 }
+
+//常函数
+//this指针的本质是指针常量，指针的指向是不能修改的
+class Test08{
+public:
+	int A=0;
+	mutable int B=0;  //特殊变量，加上mutable关键字就可以修改了
+	//在成员函数后面加上const，修饰的是this指向，让指针指向的值也不可以修改了
+	void func() const {  //const Test08* const this  -->不可以修改指针指向对象的值了
+//		this->A=100;
+		this->B=200;
+		cout<<"B="<<B<<endl;
+	}
+};
+void test22()
+{
+	Test08 p;
+	p.func();
+}
+void test23()
+{
+	const Test08 p;  //常对象
+//	p.A=100;
+	p.B=300;  //B是特殊变量，在常对象下也可以修改
+	cout<<"B="<<p.B<<endl;
+	//常对象只能调用常函数
+}
+
+//全局函数做友元
+class Test09{
+	friend void Func(Test09* person);
+public:
+	string name="ZhangSan";
+private:
+	int ID=123252;
+};
+
+void Func(Test09* person)
+{
+	cout<<"正在访问名字:"<<person->name<<endl;
+	cout<<"正在访问ID:"<<person->ID<<endl;
+}
+void test24(){
+	Test09 p;
+	Func(&p);
+}
+
+//类做友元
 int main()
 {
 	//实例化对象(创建一个对象)
@@ -506,8 +554,13 @@ int main()
 	//test18();
 	//test19();
 	
-	test20();
-	test21();
+	//test20();
+	//test21();
+	
+	//test22();
+	//test23();
+	
+	test24();
 	return 0;
 }
 
