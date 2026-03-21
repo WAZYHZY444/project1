@@ -415,6 +415,57 @@ void test17()
 	Test04::func();
 }
 
+
+//成员变量和成员函数分开存储
+class Test05{
+	
+};
+class Test06{
+	int A;   //非静态成员变量，属于类的对象上
+	static int B;  //静态成员变量，不属于类的对象上
+	void func(){}  //非静态成员函数，不属于类的对象上
+	static void func2(){}  //静态成员函数，不属于类的对象上
+	
+};
+void test18()
+{
+	Test05 p;
+	//空对象所占内存空间为1
+	//C++编译器会给每个空对象分配一个字节的空间，是为了区分空对象占内存的位置
+	//每个空对象有独一无二的内存地址
+	cout<<"size of p="<<sizeof(p)<<endl;
+}
+void test19()
+{
+	Test06 p;
+	cout<<"size of p="<<sizeof(p)<<endl;
+}
+
+//this指针的用途：
+//1.在形参和成员变量同名时，用this指针区分
+//2.在类的非静态成员函数中返回对象本身，可开始用return *this
+class Test07{
+public:
+	int age;
+	Test07(int age){
+		//this指针指向被调用的成员函数所属的对象
+		this->age=age;
+	}
+	Test07& AddAge(Test07 &p){ //如果返回不加引用，返回的是值，那每次调用函数都会创建新的对象，不会对连续地对本体进行修改
+		this->age+=p.age;
+		return *this;  //this是指向对象的指针，而*this指向的就是这个对象本体
+	}
+};
+void test20(){
+	Test07 p(10);
+	cout<<"age="<<p.age<<endl;
+}
+void test21(){
+	Test07 p1(10);
+	Test07 p2(10);
+	p2.AddAge(p1).AddAge(p1).AddAge(p1);
+	cout<<"p2 age="<<p2.age<<endl;
+}
 int main()
 {
 	//实例化对象(创建一个对象)
@@ -450,7 +501,13 @@ int main()
 	//test15();
 	//test16();
 	
-	test17();
+	//test17();
+	
+	//test18();
+	//test19();
+	
+	test20();
+	test21();
 	return 0;
 }
 
