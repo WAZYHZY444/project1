@@ -314,10 +314,111 @@ void test13()
 	//浅拷贝操作带来的问题是堆区的内存重复释放，需要利用深拷贝解决
 }
 
+//初始化列表
+class Test01{
+public:
+	int A;
+	int B;
+	int C;
+	
+//	Test01():A(10),B(20),C(30){
+//
+//	}
+	Test01(int a,int b,int c):A(a),B(b),C(c){
+		
+	}
+};
+
+//类对象作为类成员
+class Phone{
+public:
+	string pname;
+	Phone(string m_pname){
+		pname=m_pname;
+	}
+};
+
+class Test02{
+public:
+	string name;
+	Phone phone;
+	
+	Test02(string m_name,string m_pname):name(m_name),phone(m_pname){ //Phone pone=m_pname(隐式转换法)
+		
+	}
+};
+//当其它类的对象作为本类，构造时先构造类对象，在构造自身；析构顺序与构造相反
+void test14()
+{
+	Test02 p("ZhangSan","huawei");
+	cout<<p.name<<"拿着"<<p.phone.pname<<endl;
+}
+
+//静态成员变量
+//1.所有对象都共享同一份数据
+//2.编译阶段就分配内存
+//3.类内声明，类外初始化操作
+class Test03{
+public:
+	static int A;
+//静态成员变量也是有权限的
+private:
+	static int B;
+};
+
+int Test03::A=100;  //类外初始化操作
+int Test03::B=200;
+
+void test15()
+{
+	Test03 p;
+	cout<<p.A<<endl;
+	
+	Test03 p2;
+	p2.A=200;
+	cout<<p.A<<endl;
+}
+
+void test16()
+{
+	//静态成员变量不属于某个对象，所有对象都共享同一份数据，因此静态成员变量有两种访问方式
+	//1.通过对象进行访问
+	Test03 p;
+	cout<<p.A<<endl;
+	//2.通过类名进行访问
+	cout<<Test03::A<<endl;
+//	cout<<Test03::A<<endl;   类外访问不到私有的静态成员变量
+}
+
+
+//静态成员函数(静态成员变量也是有权限的)
+//1.所有对象共享同一个函数
+//2.静态成员函数只能访问静态成员变量
+class Test04{
+public:
+	static int A;
+	int B;
+	static void func(){
+		A=100;  //静态成员函数可以访问静态成员变量
+//		b=200;  静态成员函数不可以访问非静态成员变量
+		cout<<"static void func调用"<<endl;
+	}
+};
+int Test04::A=0;
+void test17()
+{
+	//静态成员函数调用有两种方式
+	//1.通过对象访问
+	Test04 p;
+	p.func();
+	//2.通过类名访问
+	Test04::func();
+}
+
 int main()
 {
 	//实例化对象(创建一个对象)
-	Peo s1;
+	//Peo s1;
 	//方式一：
 //	s1.name="ZhangYuan";
 //	s1.age=40;
@@ -336,7 +437,20 @@ int main()
 	//test11();
 	//test12();
 	
-	test13();
+	//test13();
+	
+	//Test01 t1;
+//	Test01 t1(30,20,10);
+//	cout<<"A="<<t1.A<<endl;
+//	cout<<"B="<<t1.B<<endl;
+//	cout<<"C="<<t1.C<<endl;
+
+	//test14();
+	
+	//test15();
+	//test16();
+	
+	test17();
 	return 0;
 }
 
