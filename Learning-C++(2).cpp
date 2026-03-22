@@ -105,7 +105,6 @@ ostream& operator<<(ostream& cout,const Test03& T)
 	return cout;
 }
 
-
 void test03()
 {
 	Test03 t;
@@ -116,8 +115,91 @@ void test03()
 	cout<<"--t="<<--t<<"   t="<<t<<endl;
 }
 
+
+class Test04{
+public:
+	int* age;
+	
+	Test04(int m_age){
+		age=new int(m_age);
+	}
+	~Test04(){
+		if(age!=NULL){
+			delete age;
+			age=NULL;
+		}
+	}
+	//赋值运算符重载
+	Test04& operator=(Test04 &p){
+		//应该先判断是否有属性在堆区，如果有释放干净，再深拷贝
+		if(age!=NULL){
+			delete age;
+			age=NULL;
+		}
+		age=new int(*p.age);
+		//返回对象本身(链式调用)
+		return *this;
+	}	
+};
+
+void test04()
+{
+	Test04 p1(10);
+	Test04 p2(20);
+	Test04 p3(30);
+	
+	p1=p2=p3;
+	cout<<"p1.age="<<*p1.age<<endl;
+	cout<<"p2.age="<<*p2.age<<endl;
+	cout<<"p3.age="<<*p3.age<<endl;
+}
+
+//关系运算符重载
+class Test05{
+public:
+	string name;
+	int age;
+	
+	Test05(string m_name,int m_age){
+		name=m_name;
+		age=m_age;
+	}
+	bool operator==(Test05 &p){
+		if(this->name==p.name&&this->age==p.age){
+			return true;
+		}else{
+			return false;
+		}
+	}
+};
+
+void test05(){
+	Test05 p1("ZhangYuan",40);
+	Test05 p2("SuXing",41);
+	if(p1==p2){
+		cout<<"p1==p2"<<endl;
+	}else{
+		cout<<"p1!=p2"<<endl;
+	}
+}
+
+//函数调用运算符重载(仿函数)
+class Test06{
+public:
+	int operator()(int num1,int num2){
+		return num1+num2;
+	}
+};
+
+void test06(){
+	Test06 add;
+	int ret=add(100,200);
+	cout<<"ret="<<ret<<endl;
+	//匿名函数对象(匿名对象调用)
+	cout<<Test06()(10,20)<<endl;
+}
 int main()
 {
-	test03();
+	test06();
 	return 0;
 }

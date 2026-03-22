@@ -568,6 +568,10 @@ public:
 	
 	void visit();  //不可以访问Iden中的私有成员
 	void Visit();  //可以访问Iden中的私有成员
+	
+	Test11(const Test11 &p){
+		iden=new Iden(*p.iden);
+	}
 };
 
 class Iden{
@@ -575,6 +579,7 @@ class Iden{
 public:
 	string name;
 	Iden();
+	//添加拷贝构造函数
 private:
 	int ID;
 };
