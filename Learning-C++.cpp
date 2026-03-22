@@ -494,6 +494,7 @@ void test23()
 	//常对象只能调用常函数
 }
 
+//友元的目的：让一个函数或者类访问另一个类中的私有成员
 //全局函数做友元
 class Test09{
 	friend void Func(Test09* person);
@@ -514,6 +515,93 @@ void test24(){
 }
 
 //类做友元
+class Identity{
+	friend class Test10;
+public:
+	string name;
+	Identity();
+private:
+	int ID;
+};
+
+class Test10{
+public:
+	Test10();
+	~Test10();
+	Identity* identity; //有一个指针类型的成员变量
+	
+	void visit();  //访问函数
+};
+
+//类外写成员函数
+Identity::Identity(){
+	name="ZhangSan";
+	ID=1342;
+}
+//给Test10里面的identity指针开辟一块空间，大小正好存放一个Identity类型的对象
+Test10::Test10(){
+	identity=new Identity;
+}
+Test10::~Test10(){
+	delete identity;
+}
+void Test10::visit(){
+	cout<<"正在访问名字:"<<identity->name<<endl;
+	cout<<"正在访问ID:"<<identity->ID<<endl;
+}
+
+void test25()
+{
+	Test10 p;
+	p.visit();
+}
+
+//成员函数做友元
+//前向声明
+class Iden;
+
+class Test11{
+public:
+	Test11();
+	~Test11();
+	Iden* iden; //有一个指针类型的成员变量
+	
+	void visit();  //不可以访问Iden中的私有成员
+	void Visit();  //可以访问Iden中的私有成员
+};
+
+class Iden{
+	friend void Test11::Visit();
+public:
+	string name;
+	Iden();
+private:
+	int ID;
+};
+
+Iden::Iden(){
+	name="ZhangSan";
+	ID=78565;
+}
+Test11::Test11(){
+	iden=new Iden;
+}
+Test11::~Test11(){
+	delete iden;
+}
+void Test11::visit(){
+	cout<<"正在访问名字:"<<iden->name<<endl;
+}
+void Test11::Visit(){
+	cout<<"正在访问ID:"<<iden->ID<<endl;
+}
+
+void test26()
+{
+	Test11 i;
+	i.visit();
+	i.Visit();
+}
 int main()
 {
 	//实例化对象(创建一个对象)
@@ -560,7 +648,9 @@ int main()
 	//test22();
 	//test23();
 	
-	test24();
+	//test24();
+	//test25();
+	test26();
 	return 0;
 }
 
