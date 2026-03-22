@@ -45,7 +45,79 @@ void test01(){
 	cout<<"t3.B="<<t3.B<<endl;
 }
 
+
+class Test02{
+public:
+	int A;
+	int B;
+};
+
+//只能利用全局函数重载左移运算符
+ostream& operator<<(ostream &cout,Test02 &T)  //返回类型是引用相当于返回的是地址不是值(链式调用)
+{
+	cout<<"A="<<T.A<<"   B="<<T.B;
+	return cout;
+}
+void test02()
+{
+	Test02 t;
+	t.A=10;
+	t.B=20;
+	cout<<t<<endl;
+}
+
+class Test03{
+public:
+	int num=10;	
+	
+	//重载前置++运算符
+	Test03& operator++()
+	{
+		num++;
+		return *this;
+	}
+	//重载后置++运算符
+	Test03 operator++(int) //int是占位参数，可以区分前置和后置递增
+	{
+		Test03 temp=*this;
+		num++;
+		return temp;
+	}
+	//前置递减
+	Test03& operator--()
+	{
+		num--;
+		return *this;
+	}
+	//后置递减
+	Test03 operator--(int)
+	{
+		Test03 temp=*this;
+		num--;
+		return temp;
+	}
+};
+
+//ostream& operator<<(ostream& cout,Test03 T)   //传值，会拷贝一份对象
+ostream& operator<<(ostream& cout,const Test03& T)
+{
+	cout<<T.num;
+	return cout;
+}
+
+
+void test03()
+{
+	Test03 t;
+	cout<<"t++="<<t++<<"   t="<<t<<endl;
+	cout<<"++t="<<++t<<"   t="<<t<<endl;
+	
+	cout<<"t--="<<t--<<"   t="<<t<<endl;
+	cout<<"--t="<<--t<<"   t="<<t<<endl;
+}
+
 int main()
 {
-	test01();
+	test03();
+	return 0;
 }
