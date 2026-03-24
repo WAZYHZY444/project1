@@ -260,8 +260,106 @@ void Son3_test(){
 //	s.B=200;  //不能被访问
 }
 
+//继承中的对象模型
+class Base2{
+public:
+	int A;
+protected:
+	int B;
+private:
+	int C;
+};
+
+class Son2_1:public Base2{
+public:
+	int p;
+};
+
+void Son2_1_test(){
+	cout<<"size of Son2_1="<<sizeof(Son2_1)<<endl;  //16
+}
+//父类中所有的非静态成员属性都会被子类继承下去
+//父类中私有成员属性是被编译器隐藏了，因此是访问不到的，但还是被继承了
+
+//继承中构造和析构的顺序
+//先构造父类，在构造子类，析构的顺序相反
+class Base3{
+public:
+	Base3(){
+		cout<<"Base3的构造函数"<<endl;
+	}
+	~Base3(){
+		cout<<"Base3的析构函数"<<endl;
+	}
+};
+
+class Son3_1:public Base3{
+public:
+	Son3_1(){
+		cout<<"Son3_1的构造函数"<<endl;
+	}
+	~Son3_1(){
+		cout<<"Son3_1的析构函数"<<endl;
+	}
+};
+
+void Son3_1_test(){
+	Son3_1 p;
+}
+
+//继承中同名成员处理
+class Base4{
+public:
+	int A;
+	Base4(){
+		A=100;
+	}
+	void func(){
+		cout<<"Base同名函数"<<endl;
+	}
+	void func(int a){
+		cout<<"Base(int a)同名函数"<<endl;
+	}
+	static int B;
+};
+int Base4::B=200;
+
+class Son4_1:public Base4{
+public:
+	int A;
+	Son4_1(){
+		A=200;
+	}
+	void func(){
+		cout<<"Son同名函数"<<endl;
+	}
+	static int B;
+};
+int Son4_1::B=100;
+
+void Son4_1_test(){
+	Son4_1 p;
+	cout<<"Son A="<<p.A<<endl;
+	//如果通过子类对象访问父类中的同名成员，需要加作用域
+	cout<<"Base A="<<p.Base4::A<<endl;
+	
+	p.func();  //直接调用，调用的是子类中的同名成员
+	p.Base4::func();
+	//要访问父类中被隐藏的同名成员函数，需要加作用域
+	p.Base4::func(10);
+	//同名静态成员属性
+	//通过类名访问
+	cout<<"Son B="<<Son4_1::B<<endl;
+	//第一个::代表通过类名方式访问，第二个::代表访问父类作用于下的同名静态属性
+	cout<<"Base B="<<Son4_1::Base4::B<<endl;
+}
+
+//多继承语法
+//语法：class 子类 : 继承方式 父类1, 继承方式 父类2
+//当两个父类出现了同名成员，访问时需要加作用域
 int main()
 {
-	test06();
+	//test06();
+	Son4_1_test();
 	return 0;
 }
