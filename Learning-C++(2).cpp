@@ -357,9 +357,82 @@ void Son4_1_test(){
 //多继承语法
 //语法：class 子类 : 继承方式 父类1, 继承方式 父类2
 //当两个父类出现了同名成员，访问时需要加作用域
+
+//菱形继承
+class Animals{
+public:
+	int age;
+};
+//继承之前加上关键词virtual变为虚继承，Animals称为虚基类
+class Sheep:virtual public Animals{};
+class Tuo:virtual public Animals{};
+class Sheeptuo:public Sheep,public Tuo{
+	
+};
+
+void A_Test(){
+	Sheeptuo st;
+	st.Sheep::age=18;
+	st.Tuo::age=28;
+	//当菱形继承，两个父类拥有相同数据，需要加以作用域区分
+	//菱形继承有两份数据，造成资源浪费
+	cout<<"st.Sheep::age="<<st.Sheep::age<<endl;
+	cout<<"st.Tuo::age="<<st.Tuo::age<<endl;
+	cout<<"st.age="<<st.age<<endl;  //虚继承之后，这行代码也可以实现
+}
+
+//多态
+//静态多态：函数重载和运算符重载属于静态多态
+//动态多态：派生类和虚函数实现运行时多态
+
+//动态多态满足条件：
+//1.有继承关系
+//2.子类重写父类的虚函数(返回类型、函数名、参数列表完全一样)
+
+//动态多态的使用：父类的指针或引用指向子类对象
+class Test07{
+public:
+	//虚函数:实现地址晚绑定
+	virtual void func(){
+		cout<<"我是基类"<<endl;
+	}
+};
+class Son_Test07:public Test07{
+public:
+	void func(){
+		cout<<"我是派生类"<<endl;
+	}
+};
+//地址早绑定，在编译阶段就确定了函数地址
+//如果想要执行子类的func函数，就要让函数地址不能提前绑定，需要在运行阶段进行绑定(地址晚绑定)
+void Func(Test07 &t){   //父类的指针或引用指向子类对象
+	t.func();
+}
+void test07(){
+	Son_Test07 son;
+	Func(son);
+}
+void test7(){
+	cout<<"size of Test07="<<sizeof(Test07)<<endl;
+}
+//创建虚函数，类内部结构发生那个变化，多了一个虚函数指针，指针指向虚函数表，当在子类重写了虚函数后，子类的虚函数表内部会替换成子类的虚函数地址
+
+//利用多态开发的好处：
+//1.结构组织清晰
+//2.可读性更强
+//3.利于前期和后期的扩展以及维护
+
+//纯虚函数：virtual 返回值类型 函数名 (参数列表)=0;
+//当类有了纯虚函数，这个类称为抽象类
+//抽象类的特点：1.无法实例化对象
+//              2.子类必须重写抽象类中的纯虚函数，否则也属于抽象类
 int main()
 {
-	//test06();
-	Son4_1_test();
+	test07();
+	test7();
+	//Son4_1_test();
+	//A_Test();
 	return 0;
 }
+
+
