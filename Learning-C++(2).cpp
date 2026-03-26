@@ -426,10 +426,54 @@ void test7(){
 //当类有了纯虚函数，这个类称为抽象类
 //抽象类的特点：1.无法实例化对象
 //              2.子类必须重写抽象类中的纯虚函数，否则也属于抽象类
+
+class Test08{
+public:
+	virtual void speak()=0;	
+	//虚析构和纯虚析构必须要有具体的函数实现
+	//有了纯虚析构,这个类也属于抽象类，不能实例化对象(可以定义指针，但必须指向子类对象)
+	
+	//虚析构，解决父类指针释放子类对象不干净的问题
+//	virtual ~Test08(){
+//		cout<<"父类(虚)析构函数"<<endl;
+//	}
+	//纯虚析构·
+	virtual ~Test08()=0;
+};
+
+ Test08::~Test08(){
+ 	cout<<"父类(纯虚)析构函数"<<endl;
+ }
+ 
+class Num1:public Test08{
+public:
+	string *name;
+	
+	Num1(string m_name){   //构造函数
+		name=new string(m_name);
+	}
+	void speak(){
+		cout<<*name<<"说加油"<<endl;
+	}
+	~Num1(){
+		if(name!=NULL){
+			delete name;
+			name=NULL;
+		}
+		cout<<"子类析构函数"<<endl;
+	}
+	//父类指针在析构时，不会调用子类中的析构函数，导致子类如果有堆区的属性，会发生内存泄漏
+};
+void test08(){
+	Test08*p=new Num1("XiaoMing"); //p是父类指针，指向的是一个子类对象
+	p->speak();
+	delete p;
+}
+
 int main()
 {
-	test07();
-	test7();
+	test08();
+	//test7();
 	//Son4_1_test();
 	//A_Test();
 	return 0;
