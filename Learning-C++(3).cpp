@@ -43,8 +43,72 @@ void test02()
 	cout<<Swap2<int>(a,b)<<endl;  //显示指定类型
 }
 
+//1.如果普通函数模板和普通函数都可以调用，优先调用普通函数
+//2.可以通过空模板参数列表强制调用函数模板
+//3.如果函数模板可以产生更好的匹配，优先调用函数模板
+
+class Person{
+public:
+	string name;
+	int age;
+	Person(string name,int age){
+		this->name=name;
+		this->age=age;
+	}
+};
+
+template<class T>
+bool Com(T &a,T &b){
+	if(a==b){
+		return true;
+	}else{
+		return false;
+	}
+}
+
+//利用具体化Person的版本实现代码
+template<> bool Com(Person &p1,Person &p2){
+	if(p1.name==p2.name&&p1.age==p2.age){
+		return true;
+	}else{
+		return false;
+	}
+}
+
+void test03(){
+	Person p1("ZhangSan",18);
+	Person p2("LiSi",19);
+	
+	bool ret=Com(p1,p2);
+	if(ret){
+		cout<<"p1==p2"<<endl;
+	}else{
+		cout<<"p1!=p2"<<endl;
+	}
+}
+
+//C++17之前类模板没有自动类型推导使用方式，只能使用显示指定类型
+//类模板可以写默认模板参数
+template<class Typename,class Typeage=int>
+class Per{
+public:
+	Typename name;
+	Typeage age;
+	Per(Typename name,Typeage age){
+		this->name=name;
+		this->age=age;
+	}
+};
+
+void test04(){
+	Per<string>p("ZhangYuan",41);
+	cout<<"name is "<<p.name<<"  age is "<<p.age<<endl;
+}
+
+//普通类中的成员函数一开始就可以创建
+//类模板中的成员函数在调用时才创建
 int main()
 {
-	test02();
+	test04();
 	return 0;
 }
