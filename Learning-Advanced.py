@@ -16,7 +16,7 @@
 
 # class Washer:
 #     height=800
-#查看类属性：类名.属性名
+#查看类属性:类名.属性名
 # print(Washer.height)
 #新增类属性：类名.属性名=值
 # Washer.width=450
@@ -106,12 +106,12 @@
 #     name='ZhangYuan'
 #     __age=40   #隐藏属性
 #     def func(self):
-#         print(f"{Person.name}的年龄是{Person.__age}")  #在实例方法中访问类属性和隐藏属性
+#         print(f"{Person.name}的年龄是{Person.__age}")  #在实例方法中访问类属性和私有属性
 # pe=Person()
 # print(pe.name)
-#print(pe.age)  #不能用对象名来访问隐藏属性
+#print(pe.age)  #不能用对象名来访问私有属性
 
-#1.隐藏属性实际上是将名字修改为：_类名__属性名 _Person__age
+#1.私有属性实际上是将名字修改为：_类名__属性名 _Person__age
 # print(pe._Person__age)
 # pe.func()
 #2.在类的内部访问
@@ -119,10 +119,69 @@
 # 2.
 #保护属性(相当于C++的protected)：单下划线开头，如果定义在类中，外部可以访问，子类不会继承，另一个py文件中通过from xxx import *导入的时候，无法导入
 #               一般是为了避免与python关键字冲突而采用的命名方法
+# class Person:
+#     name='Suxing'
+#     _age=41
+#     __sex='男'
+# pe=Person()
+# print(pe._age)   #使用对象名._属性名调用
+# print(pe.__sex)  #不可以这么调用
+
+#继承
+#class 类名(父类名):
+#   代码块
+#1.单继承
+# class Person:
+#     def Money(self):
+#         print("钱")
+#     def House(self):
+#         print("房")
+# class Girl(Person):
+#     pass
+# girl=Girl()
+# girl.Money()
+# girl.House()
+
+#2.继承的传递(多重继承)
+# class Person:
+#     def Money(self):
+#         print("钱")
+#     def House(self):
+#         print("房")
+# class Son(Person):
+#     pass
+# class Grandson(Son):
+#     pass
+# son=Son()
+# son.Money()
+# son.House()
+# grandson=Grandson()
+# grandson.Money()
+# grandson.House()
+
+#重写：在子类中定义与父类相同名称的方法
+#1.覆盖父类方法
+# class Person:
+#     def Money(self):
+#         print("爸爸的钱")
+# class Son(Person):
+#     def Money(self):
+#         print("儿子的钱")
+# son=Son()
+# son.Money()
+#2.对父类方法进行扩展：继承父类方法，子类也可以增加自己的功能
+#父类名.方法名(self)      super().方法名()   (super在python中是一个特殊的类，super()是使用super类创建出来的对象)  super(子类名.self).方法名()
 class Person:
-    name='Suxing'
-    _age=41
-    __sex='男'
-pe=Person()
-print(pe._age)   #使用对象名._属性名调用
-print(pe.__sex)  #不可以这么调用
+    def Money(self):
+        print("爸爸的钱")
+    def House(self):
+        print("爸爸的房")
+class Son(Person):
+    def Money(self):
+        Person.Money(self)
+        print("儿子的钱")
+    def House(self):
+        super().House()
+son=Son()
+son.Money()
+son.House()

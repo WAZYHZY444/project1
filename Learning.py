@@ -674,16 +674,20 @@ def deco1(fn):
     def inner1():
         return 'one+'+fn()+'+1'
     return inner1
+
 def deco2(fn):
     def inner2():
         return 'two+'+fn()+'+2'
     return inner2
+
 def deco3(fn):
     def inner3():
         return 'three+'+fn()+'+3'
     return inner3
+
 @deco1
 @deco2
+@deco3
 def func():
     return '多个装饰器'
 print(func())
