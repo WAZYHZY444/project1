@@ -107,8 +107,65 @@ void test04(){
 
 //普通类中的成员函数一开始就可以创建
 //类模板中的成员函数在调用时才创建
+
+//类模板对象做函数参数
+template<class T1,class T2>
+class Test05{
+public:
+	T1 name;
+	T2 age;
+	Test05(T1 name,T2 age){
+		this->name=name;
+		this->age=age;
+	}
+};
+
+//类模板实例出的对象，向函数传参的方式：
+//1.指定传入类型
+void Func_1(Test05<string,int>&p){
+	cout<<"name="<<p.name<<"  age="<<p.age<<endl;
+}
+//2.参数模板化
+template<class T1,class T2>
+void Func_2(Test05<T1,T2>&p){
+	cout<<"name="<<p.name<<"  age="<<p.age<<endl;
+	cout<<"T1的类型为："<<typeid(T1).name()<<endl;
+	cout<<"T2的类型为："<<typeid(T2).name()<<endl;
+}
+//3.整个类模板化
+template<class T>
+void Func_3(T &p){
+	cout<<"name="<<p.name<<"  age="<<p.age<<endl;
+	cout<<"T的类型为："<<typeid(T).name()<<endl;
+}
+
+void test05(){
+	Test05<string,int>p("Zhangyuan",40);
+//	Func_1(p);
+//	Func_2(p);
+	Func_3(p);
+}
+
+//类模板与继承
+template<class T>
+class Base{
+public:
+	T A;
+};
+class Son:public Base<int>{
+public:
+	Son(){
+		A=10;
+	}
+};
+
+void test06(){
+	Son s1;
+	cout<<"A="<<s1.A<<endl;
+}
+
 int main()
 {
-	test04();
+	test06();
 	return 0;
 }
