@@ -101,3 +101,29 @@ void BubbleSort(int arr[],int n)
 		}
 	}
 }
+
+//快速排序    时间复杂度：O(n*递归层数)  空间复杂度:O(递归层数)
+int Partition(int arr[],int low,int high){
+	int pivot=arr[low];     //第一个元素作为枢轴
+	while(low<high){
+		while(low<high&&arr[high]>=pivot){
+			high--;   //左移high直到遇到比枢轴小的元素
+		}
+		arr[low]=arr[high];
+		
+		while(low<high&&arr[low]<=pivot){
+			low++;   //右移low直到遇到比枢轴大的元素
+		}
+		arr[high]=arr[low];
+	}
+	arr[low]=pivot;
+	return low;
+}
+
+void QuickSort(int arr[],int low,int high){
+	if(low<high){
+		int pivotpos=Partition(arr,low,high);
+		QuickSort(arr,low,pivotpos-1);       //划分左子表
+		QuickSort(arr,pivotpos+1,high);      //划分右子表
+	}
+}
