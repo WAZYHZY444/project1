@@ -159,6 +159,23 @@
 # grandson.Money()
 # grandson.House()
 
+#3.多继承
+"""
+class Father:
+    A=10
+class Mother:
+    A=30
+    B=20
+class Son(Father,Mother):
+    A=40
+son=Son()
+print(son.A)
+print(son.B)
+"""
+#有多个父类的属性和方法，如果多个父类具有同名的属性或方法，调用采用就近原则（括号内哪一个在前就调用哪个）,如果子类出现同名，则调用子类的
+#python中内置的属性__mro__可以查看方法搜索顺序
+# print(Son.__mro__)
+
 #重写：在子类中定义与父类相同名称的方法
 #1.覆盖父类方法
 # class Person:
@@ -170,18 +187,79 @@
 # son=Son()
 # son.Money()
 #2.对父类方法进行扩展：继承父类方法，子类也可以增加自己的功能
-#父类名.方法名(self)      super().方法名()   (super在python中是一个特殊的类，super()是使用super类创建出来的对象)  super(子类名.self).方法名()
-class Person:
-    def Money(self):
-        print("爸爸的钱")
-    def House(self):
-        print("爸爸的房")
-class Son(Person):
-    def Money(self):
-        Person.Money(self)
-        print("儿子的钱")
-    def House(self):
-        super().House()
-son=Son()
-son.Money()
-son.House()
+# 父类名.方法名(self)
+# super().方法名()   (super在python中是一个特殊的类，super()是使用super类创建出来的对象)
+# super(子类名.self).方法名()
+
+# class Person:
+#     def Money(self):
+#         print("爸爸的钱")
+#     def House(self):
+#         print("爸爸的房")
+# class Son(Person):
+#     def Money(self):
+#         Person.Money(self)
+#         print("儿子的钱")
+#     def House(self):
+#         super().House()
+# son=Son()
+# son.Money()
+# son.House()
+
+# class A(object):
+#     pass
+#object是一个对象，是python为所有对象提供的基类(顶级父类)，提供了一些内置的属性和方法，可以使用dir()查看
+#python3中，如果一个类没有继承任何类，则默认继承object类
+
+#多态：指同一种行为具有不同的表现形式
+#继承+重写
+#多态性：一种调用方式，有不同的执行结果
+# class Father:
+#     def name(self):
+#         print("我是爸爸")
+# class Son(Father):
+#     def name(self):
+#         print("我是儿子")
+# class Daughter(Father):
+#     def name(self):
+#         print("我是女儿")
+# #多态性：定义一个统一的接口，一个接口有多种实现
+# def test(obj):
+#     obj.name()
+#
+# father=Father()
+# test(father)
+# son=Son()
+# test(son)
+
+
+'''类中定义方法的方式'''
+'''1.实例方法'''
+#第一个参数为self，指向实例本身
+'''2.静态方法'''
+#使用@staticmethod来进行修饰，静态方法没有self、cls参数的限制
+#静态方法与类无关，可以被转换成函数使用
+# class Person:
+#     @staticmethod     #静态方法
+#     def study(name):  #没有self参数,也可以不传参
+#         print(f"{name}在学习")
+# #静态方法既可以使用对象访问，也可以使用类访问
+# Person.study("ZhangSan")
+# pe=Person()
+# pe.study("LiSi")
+#作用：取消不必要的参数传递，有利于减少不必要的内存占用和性能消耗
+
+'''3.类方法'''
+#使用装饰器@classmethod来标识为类方法，对于类方法，第一个参数必须是类对象，一般以cls作为第一个参数
+# class Person:
+#     name="ZhangSan"
+#     @classmethod
+#     def sleep(cls):
+#         print("cls:",cls)   #cls代表类对象本身，类本质上就是一个对象
+#         print("在睡觉")
+#         print(cls.name)
+# print(Person)
+# Person.sleep()
+#当方法中需要用到类对象（如访问私有类属性等）时，定义类方法
+#类方法一般是配合类属性使用
+
