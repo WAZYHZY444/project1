@@ -59,3 +59,5 @@ print(2**3)
 #C:      float是单精度浮点型，double是双精度浮点型
 #python：float是双精度浮点型，没有double类型
 #Python把C语言中的float和double合并成了一个类型，选择了更强大的double作为唯一的标准，但沿用了float这个名字。
+
+# python没有多行注释，双引号/单引号那是文档字符串，编译器不会自动忽略
