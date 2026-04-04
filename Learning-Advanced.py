@@ -233,10 +233,10 @@ print(son.B)
 # test(son)
 
 
-'''类中定义方法的方式'''
-'''1.实例方法'''
+#类中定义方法的方式
+# 1.实例方法
 #第一个参数为self，指向实例本身
-'''2.静态方法'''
+# 2.静态方法
 #使用@staticmethod来进行修饰，静态方法没有self、cls参数的限制
 #静态方法与类无关，可以被转换成函数使用
 # class Person:
@@ -250,7 +250,7 @@ print(son.B)
 #静态方法本质上就是一个普通函数，只是借用了类的命名空间，调用时需带类名前缀
 #把相关函数放在一起，提高可读性，不同类的静态方法可以重名，避免命名冲突
 
-'''3.类方法'''
+# 3.类方法
 #使用装饰器@classmethod来标识为类方法，对于类方法，第一个参数必须是类对象，一般以cls作为第一个参数
 # class Person:
 #     name="ZhangSan"
@@ -289,18 +289,39 @@ print(son.B)
 #4.通过导入模块实现
 
 # 通过重写__new__()实现
-class Singleton:
-    #记录第一个被创建的对象的引用
-    obj=None
-    def __new__(cls):
-        print('__new__()')
-        if cls.obj==None:   #相当于只对obj进行一次赋值，后面返回的obj都是同一个引用
-            cls.obj=super().__new__(cls)
-        return cls.obj
-    def __init__(self):
-        print('__init__()')
-s1=Singleton()
-print("s1:",s1)
-s2=Singleton()
-print("s2:",s2)
+# class Singleton:
+#     #记录第一个被创建的对象的引用
+#     obj=None
+#     def __new__(cls):
+#         print('__new__()')
+#         if cls.obj==None:   #相当于只对obj进行一次赋值，后面返回的obj都是同一个引用
+#             cls.obj=super().__new__(cls)
+#         return cls.obj
+#     def __init__(self):
+#         print('__init__()')
+# s1=Singleton()
+# print("s1:",s1)
+# s2=Singleton()
+# print("s2:",s2)
 
+# 通过导入模块实现
+#模块就是天然的单例模式
+# from pytest02 import te as te01
+# from pytest02 import te as te02
+# print(te01,id(te01))
+# print(te02,id(te02))
+#应用场景
+#1.回收站对象  2.音乐播放器  3.开发游戏软件  4.数据库配置
+
+#__doc__:特殊属性，可以直接访问，用于获取文档字符串
+class Person:
+    """哈哈哈"""
+    pass
+print(Person.__doc__)
+
+def person():
+    """嘻嘻嘻"""
+    pass
+print(person.__doc__)
+
+#__module__   字符串属性，记录定义这个类或函数所在的模块名称
