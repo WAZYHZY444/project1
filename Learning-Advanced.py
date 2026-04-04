@@ -263,3 +263,44 @@ print(son.B)
 # Person.sleep()
 #实例方法和类方法本质上都是自动传参的方法，只是self指向具体的那个对象，cls指向这个对象的类
 
+# __new__():object基类提供的内置的静态方法
+# 作用：1.在内存中为对象分配空间  2.返回对象的引用
+# class Test:
+#     def __init__(self):
+#         print("__init__()")
+#     def __new__(cls):    #重写了new函数，把原本new函数作用覆盖了
+#         print("__new__()")
+#         return super().__new__(cls)  #扩展
+# te=Test()
+# print("te:",te)
+#重写__new__()一定要return super().__new__(cls)，否则python解释器得不到分配空间的对象引用，就不会调用__init__()
+#1.__new__()创建对象，__init__()初始化对象
+#2.__new__()是返回对象的引用，__init__()定义实例属性
+#3.__new__()是类级别的方法，__init__()是实例级别的方法
+
+#单例模式
+#可以理解成一个特殊的类，这个类只存在一个对象，对象的内存地址都是一样的
+#优点：可以节省内存空间，减少了不必要的资源浪费
+#弊端：多线程访问时容易引发线程安全问题
+#方式
+#1.通过@classmethod
+#2.通过装饰器
+#3.通过重写__new__()实现
+#4.通过导入模块实现
+
+# 通过重写__new__()实现
+class Singleton:
+    #记录第一个被创建的对象的引用
+    obj=None
+    def __new__(cls):
+        print('__new__()')
+        if cls.obj==None:   #相当于只对obj进行一次赋值，后面返回的obj都是同一个引用
+            cls.obj=super().__new__(cls)
+        return cls.obj
+    def __init__(self):
+        print('__init__()')
+s1=Singleton()
+print("s1:",s1)
+s2=Singleton()
+print("s2:",s2)
+
