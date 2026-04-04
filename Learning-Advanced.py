@@ -314,14 +314,119 @@ print(son.B)
 #1.回收站对象  2.音乐播放器  3.开发游戏软件  4.数据库配置
 
 #__doc__:特殊属性，可以直接访问，用于获取文档字符串
-class Person:
-    """哈哈哈"""
-    pass
-print(Person.__doc__)
+# class Person:
+#     """哈哈哈"""
+#     pass
+# print(Person.__doc__)
+#
+# def person():
+#     """嘻嘻嘻"""
+#     pass
+# print(person.__doc__)
 
-def person():
-    """嘻嘻嘻"""
-    pass
-print(person.__doc__)
+#__module__   表示当前操作对象现在的模块
+#__class__    表示当前操作对象所在的类
+# import pytest02
+# b=pytest02.Test()
+# print(b)
+# print(b.__module__)  #输出所在模块
+# print(b.__class__)   #输出所在类
 
-#__module__   字符串属性，记录定义这个类或函数所在的模块名称
+# class Person:
+#     def __init__(self,name,age):
+#         self.name=name
+#         self.age=age
+# p1=Person("ZhangYuan",40)
+# print(p1)
+#VS
+# class People:
+#     def __init__(self,name,age):
+#         self.name=name
+#         self.age=age
+#     def __str__(self):
+#         return f"People(name={self.name},age={self.age})"
+# p2=People("ZhangYuna",40)
+# print(p2)
+#__str__():（魔法方法）必须要有返回值，而且一定是字符串类型
+
+#__call__():（魔法方法）使一个对象成为可调用对象
+#可调用对象：callable()判断一个对象是否是可调用对象，是返回True，不是返回False
+# class Greeting:
+#     def __call__(self,name):
+#         return f"Hello,{name}!"
+# g=Greeting()
+# print(g("ZhangYuan"))
+
+
+#文件操作
+#1.打开文件
+#2.读写文件
+#3.关闭文件
+#open():创建一个file对象，默认是以只读模式打开
+#read(n):n表示从文件中读取数据的长度，没有n值默认一次性读取文件按所有内容
+#write():将指定内容写入文件
+#close():关闭文件
+#属性
+#文件名.name:返回要打开的文件名，可以包含文件的具体路径
+#文件名.mode:返回文件的访问模式
+#文件名.closed:检测文件是否关闭，关闭就返回True
+
+# f=open(r'D:\朱艳\Documents\test.txt')  #需要在路径后面加上文件名
+# #路径前面的r是原生字符串，默认取消转义
+# print(f.name)  #文件所在的具体路径（绝对路径）
+# print(f.mode)
+# print(f.read())
+# f.close()
+# #使用open打开文件就必须要调用close
+# print(f.closed)
+
+#readline():一次读取一行内容，方法执行完，会把文件指针移到下一行，准备在次读取
+# f=open('ctype.h.txt',encoding='utf-8')
+# # print(f.readline())
+# # print(f.readline())
+# while True:
+#     text=f.readline()
+#     if not text:
+#         break
+#     print(text)
+# f.close()
+
+#readlines():按照行的方式把文件一次性读取，返回的是一个列表，每一行的数据就是列表的一个元素
+# f=open(r'D:\朱艳\Documents\test.txt',encoding='utf-8')
+# text=f.readlines()
+# print(text)
+# for i in text:
+#     print(i)
+# f.close()
+
+#访问模式
+#1.'r'只读模式（默认模式），文件必须存在
+#2.'w'只写模式，文件存在则先清空文件内容，再写入添加内容，不存在就创建新文件
+# f=open(r'D:\朱艳\Documents\test.txt','w',encoding='utf-8')
+# f.write('Bird can fly!')
+# f.close()
+
+# +:表示可以同时读写某个文件
+#使用+会影响文件的读写效率，开发过程中更多时候会以只读、只写的方式来操作文件
+# r+:可读写文件，文件不存在报错
+# w+:先写再读，文件存在则先清空文件内容，再写入添加内容，不存在就创建新文件
+
+#3.'a':追加模式，文件存在则追加内容，不存在就创建新文件
+# f=open(r'D:\朱艳\Documents\test.txt','a',encoding='utf-8')
+# f.write('\ngo go go!')
+# f.close()
+
+#文件定位操作
+#tell():显示文件内当前位置，即文件指针当前位置
+#seek(offset,whence):移动文件读取指针到指定位置
+#                    offset:偏移量，表示要移动的字节数
+#                    whence:起始位置，表示移动字节的参考位置，默认是0。0表示代表文件开头作为参考位置，1代表当前位置作为参考位置，2代表文件结尾作为参考位置
+#seek(0,0)就会把文件指针移到文件开头
+
+f=open(r'D:\朱艳\Documents\test.txt','w+',encoding='utf-8')
+f.write('Bird can fly!')
+print("当前文件指针所在位置：",f.tell())
+f.seek(0,0)
+print("移动后文件指针所在位置：",f.tell())
+print(f.read())
+f.close()
