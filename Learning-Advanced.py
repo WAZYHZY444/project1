@@ -423,10 +423,38 @@ print(son.B)
 #                    whence:起始位置，表示移动字节的参考位置，默认是0。0表示代表文件开头作为参考位置，1代表当前位置作为参考位置，2代表文件结尾作为参考位置
 #seek(0,0)就会把文件指针移到文件开头
 
-f=open(r'D:\朱艳\Documents\test.txt','w+',encoding='utf-8')
-f.write('Bird can fly!')
-print("当前文件指针所在位置：",f.tell())
-f.seek(0,0)
-print("移动后文件指针所在位置：",f.tell())
-print(f.read())
-f.close()
+# f=open(r'D:\朱艳\Documents\test.txt','w+',encoding='utf-8')
+# f.write('Bird can fly!')
+# print("当前文件指针所在位置：",f.tell())
+# f.seek(0,0)
+# print("移动后文件指针所在位置：",f.tell())
+# print(f.read())
+# f.close()
+
+#with open 代码执行完，系统会自动调用f.close()
+# with open(r'D:\朱艳\Documents\test.txt','w+',encoding='utf-8') as f:
+#     f.write("哈哈哈")
+# print(f.closed)
+
+#Windows系统字符编码默认为GBK，Linux系统默认UTF-8
+
+#读取图片
+# with open(r'D:\朱艳\Pictures\LeNet.png','rb') as f:
+#     img=f.read()
+#     print(img)
+# #将读取到内容写入到当前文件中
+# with open(r'D:\PyCharm Projects\BirdZY\LeNet.png','wb') as f:
+#     f.write(img)
+
+#目录常用操作
+#需要导包
+# import os
+#  1.文件重命名   os.rename(旧名称,新名称)
+#  2.删除文件     os.remove()
+#  3.创建文件夹   os.mkdir()
+#  4.删除文件夹   os.rmdir()
+#  5.获取当前目录 os.getcwd()
+# print(os.getcwd())
+#  6.获取目录列表 os.listdir()
+# print(os.listdir())    #获取当前目录列表
+# print(os.listdir('../')) #获取上一级目录的列表
