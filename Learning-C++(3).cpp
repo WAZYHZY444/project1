@@ -164,8 +164,40 @@ void test06(){
 	cout<<"A="<<s1.A<<endl;
 }
 
+//类模板成员函数类外实现（需要加上模板参数列表）
+
+template<class T1, class T2>
+class Test07{
+public:
+	T1 name;
+	T2 age;
+	Test07(T1 m_name,T2 m_age);
+	void Show();
+};
+
+template<class T1, class T2>
+Test07<T1,T2>::Test07(T1 m_name,T2 m_age){
+	name=m_name;
+	age=m_age;
+}
+
+template<class T1, class T2>
+void Test07<T1,T2>::Show(){
+	cout<<"name="<<this->name<<"  age="<<this->age<<endl;
+}
+
+void test07(){
+	Test07<string,int> p("ZhangYuan",40);
+	p.Show();
+}
+
+//类模板分文件编写外部无法解析，因为类模板函数创建时机是在调用阶段
+//解决方法：
+//  1.直接包含源文件  #include <xxx.cpp>
+//  2.将.h和.cpp中的内容写到一起，将文件后缀名改为.hpp文件（主流方法）
+
 int main()
 {
-	test06();
+	test07();
 	return 0;
 }
