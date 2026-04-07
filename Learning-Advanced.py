@@ -458,3 +458,36 @@ print(son.B)
 #  6.获取目录列表 os.listdir()
 # print(os.listdir())    #获取当前目录列表
 # print(os.listdir('../')) #获取上一级目录的列表
+
+#可迭代对象Iterable
+#数据类型:str、list、tuple、dict、set等
+#可迭代对象满足的条件：1.对象实现了__iter__()方法
+#                  2.__iter__()方法返回可迭代对象的迭代器
+#for循环工作原理
+#  1.先通过__iter__()获取可迭代对象的迭代器
+#  2.对获取的迭代器不断调用__next__()方法获取下一个值并将其赋值给临时变量i
+
+#isinstance():判断一个对象是否是可迭代对象或者一个已知的数据类型
+#isinstance(o,t)  o:对象 t:类型，可以是直接或者间接类名、基本类型或者元组
+# from collections.abc import Iterable  #需要导包
+# print(isinstance(123,Iterable))
+# print(isinstance('123',str))
+# print(isinstance('123',(int,str)))
+
+#迭代器Iterator：可以记住遍历位置的对象
+#iter():获取可迭代对象的迭代器
+#next():逐一取元素，取完元素会引发一个异常
+
+li=[1,2,3]
+#创建迭代器对象
+l=iter(li)   # l=li.__iter__()
+print(l)
+#获取数据
+print(next(l)) # print(l.__iter__())
+print(next(l))
+print(next(l))
+# print(next(l))   #元素取完后，在使用next()会引发StopIteration异常
+
+#iter()在调用对象的__iter__(),并把返回值结果作为自己的返回值
+#next()在调用对象的__next__()
+
