@@ -478,16 +478,73 @@ print(son.B)
 #iter():获取可迭代对象的迭代器
 #next():逐一取元素，取完元素会引发一个异常
 
-li=[1,2,3]
-#创建迭代器对象
-l=iter(li)   # l=li.__iter__()
-print(l)
-#获取数据
-print(next(l)) # print(l.__iter__())
-print(next(l))
-print(next(l))
+# li=[1,2,3]
+# #创建迭代器对象
+# l=iter(li)   # l=li.__iter__()
+# print(l)
+# #获取数据
+# print(next(l)) # print(l.__iter__())
+# print(next(l))
+# print(next(l))
 # print(next(l))   #元素取完后，在使用next()会引发StopIteration异常
 
 #iter()在调用对象的__iter__(),并把返回值结果作为自己的返回值
 #next()在调用对象的__next__()
 
+#凡是可以作用于for循环的都是属于可迭代对象
+#凡是可以作用于next()的都是属于迭代器
+# from collections.abc import Iterable,Iterator
+# name='ZhangSan'
+# print(isinstance(name,Iterable))  #True
+# print(isinstance(name,Iterator))  #False
+# #可迭代对象不一定是迭代器对象
+# name2=iter(name)
+# print(isinstance(name2,Iterable))  #True
+# print(isinstance(name2,Iterator))  #True
+#迭代器对象一定是可迭代对象
+#总结：可迭代对象可以通过iter()转换成迭代器对象
+#如果一个对象拥有__iter__()方法，是可迭代对象，如果一个对象拥有__iter()和__next__()，是迭代器对象
+
+#自定义迭代器类
+# class MyIterator:
+#     def __init__(self):
+#         self.num=0
+#     def __iter__(self):
+#         return self  #返回的是当前迭代器类的实例的对象
+#     def __next__(self):
+#         if self.num==10:
+#             raise StopIteration("终止迭代")
+#         self.num+=1
+#         return self.num
+# m=MyIterator()
+# # print(next(m))
+# for i in m:
+#     print(i)
+
+#生成器：
+#列表推导式
+# li=[i*5 for i in range(3)]
+# print(li)
+
+#生成器表达式
+# gen=(i*5 for i in range(3))
+# print(gen)
+# print(next(gen))
+# print(next(gen))
+# print(next(gen))
+# # print(next(gen))
+#生成器函数
+# 使用了yield的函数
+#1.类似return，yield像return一样返回值，但函数不会结束，而是暂停等待下次调用时继续
+#2.yield语句一次返回一个结果，在每个结果中间挂起函数，执行next()，再重新从挂起点继续往下执行
+def gen():
+    print('嘻嘻')
+    yield '嘿嘿'
+    yield '哈哈'
+g=gen()
+print(g)
+print(next(g))
+print(next(g))
+#生成器计算了一个值就返回，在计算下一个值，始终只占一个值的内存
+
+#可迭代对象>迭代器>生成器
