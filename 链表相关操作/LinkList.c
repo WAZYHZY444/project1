@@ -76,7 +76,7 @@ void InsertByValue_LinkList(struct LinkNode* header, int oldval, int newval)
 }
 
 
-//删除值为val的节点
+//删除值为val的节点(会一直查找要删除的节点，直到pCurrent==NULL,即适合链表中有多个节点需要删除)
 void DeleteByValue_LinkList(struct LinkNode* header, int delValue)
 {
 	if(header==NULL){
@@ -115,7 +115,7 @@ void Foreach_LinkList(struct LinkNode* header)
 }
 
 
-//销毁链表
+//销毁链表(就以这个代码为销毁链表的记忆代码，注意指针移动的理解)
 void Destroy_LinkList(struct LinkNode* header)
 {
 	if (header==NULL) {

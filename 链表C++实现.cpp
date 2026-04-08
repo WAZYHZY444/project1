@@ -1,4 +1,4 @@
-#include <iostream>
+ #include <iostream>
 #include <string>
 
 using namespace std;
@@ -58,7 +58,7 @@ public:
 		p->next=newnode;
 	}
 	
-	//删除节点
+	//删除节点(只能删除一个节点，即要删除的节点只有一个)
 	void Delete(int sno){
 		if(head==NULL){ //链表为空
 			return;
