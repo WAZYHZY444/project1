@@ -172,7 +172,7 @@ son=Son()
 print(son.A)
 print(son.B)
 """
-import threading
+# import threading
 #有多个父类的属性和方法，如果多个父类具有同名的属性或方法，调用采用就近原则（括号内哪一个在前就调用哪个）,如果子类出现同名，则调用子类的
 #python中内置的属性__mro__可以查看方法搜索顺序
 # print(Son.__mro__)
@@ -603,11 +603,86 @@ import threading
 
 #线程之间执行是无序的
 #线程执行是根据CPU调度决定的
-import time
-def task():
-    time.sleep(1)
-    print("当前线程是：",threading.current_thread().name)  #显示当前线程对象名
-if __name__ == "__main__":
-    for i in range(3):
-        t=threading.Thread(target=task)
-        t.start()
+# import time
+# def task():
+#     time.sleep(1)
+#     print("当前线程是：",threading.current_thread().name)  #显示当前线程对象名
+# if __name__ == "__main__":
+#     for i in range(3):
+#         t=threading.Thread(target=task)
+#         t.start()
+
+#线程之间共享资源
+# import time
+# import threading
+# li=[]
+# def wdata():
+#     for i in range(4):
+#         li.append(i)
+#         time.sleep(1)
+#     print("写入的数据：",li)
+# def rdata():
+#     print("读取的数据：",li)
+# if __name__ == "__main__":
+#     wd=threading.Thread(target=wdata)
+#     rd=threading.Thread(target=rdata)
+#     wd.start()
+#     wd.join()
+#     # time.sleep(4)
+#     rd.start()
+
+
+#资源竞争
+# import threading
+# a=0
+# b=1000000
+# def add1():
+#     for i in range(b):
+#         global a
+#         a+=1
+#     print('第一次累加:',a)
+# def add2():
+#     for i in range(b):
+#         global a
+#         a+=1
+#     print('第二次累加:',a)
+# if __name__ == "__main__":
+#     a1=threading.Thread(target=add1)
+#     a2=threading.Thread(target=add2)
+#     a1.start()
+#     a1.join()
+#     a2.start()
+
+#线程同步
+#主线程和创建的子线程之间各自执行完自己的代码直至结束
+#1.线程等待 a1.join()
+#2.互斥锁：对共享数据进行锁定，保证多个线程访问共享数据不会出现数据错误问题，保证同一时刻只有一个线程去操作
+#        上锁：锁名.acquire_lock()，释放锁：锁名.release_lock()  上锁与释放锁必须成对出现，否则易造成死锁现象（会造成应用程序停止响应，不能再处理其他任务）
+#互斥锁缺点：会影响代码的执行效率
+# import threading
+# from threading import Lock   #互斥锁需要导入Lock模块
+# # 1.创建全局互斥锁
+# lock=Lock()
+# a=0
+# b=1000000
+# def add1():
+#     #2.上锁
+#     lock.acquire_lock()
+#     for i in range(b):
+#         global a
+#         a+=1
+#     print('第一次累加:',a)
+#     #3.释放锁
+#     lock.release_lock()
+#
+# def add2():
+#     for i in range(b):
+#         global a
+#         a+=1
+#     print('第二次累加:',a)
+# if __name__ == "__main__":
+#     a1=threading.Thread(target=add1)
+#     a2=threading.Thread(target=add2)
+#     a1.start()
+#     a1.join()
+#     a2.start()
