@@ -172,6 +172,7 @@ son=Son()
 print(son.A)
 print(son.B)
 """
+import threading
 #有多个父类的属性和方法，如果多个父类具有同名的属性或方法，调用采用就近原则（括号内哪一个在前就调用哪个）,如果子类出现同名，则调用子类的
 #python中内置的属性__mro__可以查看方法搜索顺序
 # print(Son.__mro__)
@@ -537,14 +538,76 @@ print(son.B)
 # 使用了yield的函数
 #1.类似return，yield像return一样返回值，但函数不会结束，而是暂停等待下次调用时继续
 #2.yield语句一次返回一个结果，在每个结果中间挂起函数，执行next()，再重新从挂起点继续往下执行
-def gen():
-    print('嘻嘻')
-    yield '嘿嘿'
-    yield '哈哈'
-g=gen()
-print(g)
-print(next(g))
-print(next(g))
+# def gen():
+#     print('嘻嘻')
+#     yield '嘿嘿'
+#     yield '哈哈'
+# g=gen()
+# print(g)
+# print(next(g))
+# print(next(g))
 #生成器计算了一个值就返回，在计算下一个值，始终只占一个值的内存
 
 #可迭代对象>迭代器>生成器
+
+#多线程
+#线程和进程
+#进程：是操作系统进行资源分配的基本单位，每打开一个程序至少就会有一个进程
+#线程：是CPU调度的基本单位，每个进程至少有一个线程
+#一个进程默认有一个线程，进程里面可以创建多个线程，线程依附在进程里面
+
+#需要导入线程模块
+# import threading
+#Thread线程类参数
+#target：执行任务名
+#args:以元组的形式给任务传参
+#kwargs:以字典的形式给任务传参
+
+# import threading
+# import time #导入时间模块
+# def sleep(name1):
+#     print(f"{name1}睡觉了")
+#     time.sleep(2)
+#     print("睡醒了")
+# def eat(name2):
+#     print(f"{name2}吃饭了")
+#     time.sleep(2)
+#     print("吃饱了")
+#
+# #主程序入口
+# if __name__ == "__main__":
+#     #1.创建主线程
+#     t1=threading.Thread(target=sleep,args=('xiaozhu',))
+#     # print(t1)
+#     t2=threading.Thread(target=eat,args=('xiaozhu',))
+#     #3.守护线程，[必须放在start()前面]:主线程执行结束，子线程跟着也结束
+#     # t1.setDaemon(True)  #已被弃用
+#     # t2.setDaemon(True)
+#     t1.daemon=True
+#     t2.daemon=True
+#     #2.开启子线程
+#     t1.start()
+#     t2.start()
+#     #阻塞主线程join()[必须放在start()后面]:等子线程执行结束后，主线程才继续执行
+#     t1.join()
+#     t2.join()
+#     #获取线程名字
+#     print(t1.name)
+#     print(t2.name)
+#     #更改线程名
+#     t1.name="线程1"
+#     t2.name="线程2"
+#     print(t1.name)
+#     print(t2.name)
+#     print("吃饱喝足，睡觉!")
+
+#线程之间执行是无序的
+#线程执行是根据CPU调度决定的
+import time
+def task():
+    time.sleep(1)
+    print("当前线程是：",threading.current_thread().name)  #显示当前线程对象名
+if __name__ == "__main__":
+    for i in range(3):
+        t=threading.Thread(target=task)
+        t.start()
