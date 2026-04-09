@@ -686,3 +686,52 @@ print(son.B)
 #     a1.start()
 #     a1.join()
 #     a2.start()
+
+#进程：是操作系统进行资源分配和调度的基本单位，是操作系统结构的基础
+#一个正在运行的程序或软件就是一个进程
+#进程里面可以创建多个线程
+#进程的状态
+#  1.就绪状态：运行的条件都已满足，正在等待CPU执行
+#  2.执行状态：CPU正在执行其功能
+#  3.等待(阻塞)状态：等待某些条件满足（如一个程序sleep了）
+
+#进程语法结构
+# multiprocessing模块提供了进程要执行的任务
+# from multiprocessing import Process
+#Process进程类参数
+#target：执行任务名
+#args:以元组的形式给任务传参
+#kwargs:以字典的形式给任务传参
+#方法：
+#  1.start():开启子进程
+#  2.is_alive():判断子进程是否还活着,存活返回True，死亡返回False
+#  3.join():主进程等待子进程执行结束
+#常见属性：
+#  1.name:当前进程的别名，默认Process—N
+#  2.pid:当前进程的进程编号
+from multiprocessing import Process
+import os
+def sleep():
+    # os.getpid()  #获取当前进程的编号
+    os.getppid()   #获取当前父进程的编号(父进程的id就是py文件主进程的id)
+    print(f'sleep子进程编号:{os.getpid()},父进程编号:{os.getppid()}')
+    print('睡觉了!')
+def eat():
+    print(f'eat子进程编号:{os.getpid()},父进程编号:{os.getppid()}')
+    print('吃饭了!')
+if __name__ == "__main__":
+    #创建子进程
+    p1=Process(target=sleep,name='子进程1') #修改子进程名方式一
+    p2=Process(target=eat,name='子进程2')
+    #开启子进程
+    p1.start()
+    p2.start()
+    # 修改子进程名方式二
+    p1.name='number one'
+    p2.name='number two'
+    #访问name属性
+    print("p1:",p1.name)
+    print("p2:",p2.name)
+    #查看子进程的进程编号
+    print("p1.pid:",p1.pid)
+    print("p2.pid:",p2.pid)
