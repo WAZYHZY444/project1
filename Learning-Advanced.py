@@ -709,29 +709,98 @@ print(son.B)
 #常见属性：
 #  1.name:当前进程的别名，默认Process—N
 #  2.pid:当前进程的进程编号
-from multiprocessing import Process
-import os
-def sleep():
-    # os.getpid()  #获取当前进程的编号
-    os.getppid()   #获取当前父进程的编号(父进程的id就是py文件主进程的id)
-    print(f'sleep子进程编号:{os.getpid()},父进程编号:{os.getppid()}')
-    print('睡觉了!')
-def eat():
-    print(f'eat子进程编号:{os.getpid()},父进程编号:{os.getppid()}')
-    print('吃饭了!')
-if __name__ == "__main__":
-    #创建子进程
-    p1=Process(target=sleep,name='子进程1') #修改子进程名方式一
-    p2=Process(target=eat,name='子进程2')
-    #开启子进程
-    p1.start()
-    p2.start()
-    # 修改子进程名方式二
-    p1.name='number one'
-    p2.name='number two'
-    #访问name属性
-    print("p1:",p1.name)
-    print("p2:",p2.name)
-    #查看子进程的进程编号
-    print("p1.pid:",p1.pid)
-    print("p2.pid:",p2.pid)
+# from multiprocessing import Process
+# import os
+# def sleep():
+#     # os.getpid()  #获取当前进程的编号
+#     os.getppid()   #获取当前父进程的编号(父进程的pid就是py文件主进程的pid)
+#     print(f'sleep子进程编号:{os.getpid()},父进程编号:{os.getppid()}')
+#     print('睡觉了!')
+# def eat():
+#     print(f'eat子进程编号:{os.getpid()},父进程编号:{os.getppid()}')
+#     print('吃饭了!')
+# if __name__ == "__main__":
+#     #创建子进程
+#     p1=Process(target=sleep,name='子进程1') #修改子进程名方式一
+#     p2=Process(target=eat,name='子进程2')
+#     #开启子进程
+#     p1.start()
+#     p1.join()   #主进程堵在这里，等p1彻底跑完、退出了，才继续往下走,所以检测时p1是死的
+#     p2.start()
+#     # 修改子进程名方式二
+#     p1.name='number one'
+#     p2.name='number two'
+#     #访问name属性
+#     print("p1:",p1.name)
+#     print("p2:",p2.name)
+#     #查看子进程的进程编号
+#     print("p1.pid:",p1.pid)
+#     print("p2.pid:",p2.pid)
+#
+#     print(f"主进程pid:{os.getpid()},主进程的父进程pid:{os.getppid()}")
+#     #cmd命令提示符窗口输入tasklist(可以查看电脑里面进程的命令)
+#     #pycharm软件进程编号就是主进程的父进程编号
+#
+#     print("p1的存活状态：",p1.is_alive())
+#     print("p2的存活状态：",p2.is_alive())
+
+# 进程间不共享全局变量
+# import time
+# from multiprocessing import Process
+# li=[]
+# def wdata():
+#     for i in range(4):
+#         li.append(i)
+#         time.sleep(1)
+#     print("写入的数据：",li)
+# def rdata():
+#     print("读取的数据：",li)
+# if __name__ == "__main__":
+#     p1=Process(target=wdata)
+#     p2=Process(target=rdata)
+#     p1.start()
+#     p1.join()
+#     p2.start()
+    #读取一直为空，进程间不共享全局变量
+
+#进程间的通信
+# Queue(队列)
+#需要导入模块
+# from queue import Queue
+# #初始化一个队列对象
+# q=Queue(3)  #最多可以接受三条消息，没写或者负值代表没有上限，知道内存尽头
+# q.put("花有重开日")
+# q.put("人可再少年")
+# q.put("Bird can fly!")
+# print(q.qsize())
+# print(q.full())
+# print(q.get())  #获取队列一条消息，然后将其从队列中移除
+# print(q.get())
+# print(q.get())
+# print(q.empty())
+# print(q.qsize())
+
+# from multiprocessing import Process,Queue
+# import time
+# li=['ZhangYuan','SuXing','WhangYuexing']
+# def wdata(q1):
+#     for i in range(4):
+#         q1.put(i)
+#         print(f"{i}已经被放入")
+#         time.sleep(0.2)
+#     print("写入的数据：",li)
+# def rdata(q2):
+#     while True:
+#         if q2.empty():
+#             break
+#         else:
+#             print("取出数据：",q2.get())
+#     print("读取的数据：",li)
+# if __name__ == "__main__":
+#     #创建队列对象
+#     q=Queue()
+#     p1=Process(target=wdata,args=(q,))
+#     p2=Process(target=rdata,args=(q,))
+#     p1.start()
+#     p1.join()
+#     p2.start()
