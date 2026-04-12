@@ -130,17 +130,51 @@ print(res1.group())
 # print(res8.group())
 
 #3.  \d 匹配数字0-9
-res=re.match(r'\d\d','214')
-print(res.group())
+# res=re.match(r'\d\d','214')
+# print(res.group())
 
 #4.  \D 匹配非数字
-res=re.match(r'\D\D','<sa214')
-print(res.group())
+# res=re.match(r'\D\D','<sa214')
+# print(res.group())
 
 #5.  \s 匹配空白，即空格、tab键
-res=re.match(r'\s...','   <sa214')
-print(res.group())
+# res=re.match(r'\s...','   <sa214')
+# print(res.group())
 
 #6.  \S 匹配非空白
 #7.  \w 匹配单词字符，即a-z,A-Z,0-9，汉字
 #8.  \W 匹配非单词字符
+
+#匹配多个字符
+#1.  *   匹配前一个字符出现0次或者无限次，即可有可无
+#2.  +   匹配前一个字符出现1次或者无限次，即至少1次
+#3.  ?   匹配前一个字符出现1次或者0次
+#4. {m}  匹配前一个字符出现m次
+#5.{m,n} 匹配前一个字符出现从m次到n次(m<n)
+# import re
+# res=re.match(r'\w*','ZhangYuan')
+# print(res.group())
+# res=re.match(r'\d*','ZhangYuan')
+# print(res.group())   #输出为空
+# # res=re.match(r'\d+','ZhangYuan')
+# # print(res.group())   #报错
+# res=re.match(r'\w?','ZhangYuan')
+# print(res.group())
+# res=re.match(r'\w{3}','ZhangYuan')
+# print(res.group())
+# res=re.match(r'\w{2,4}','Zha///////')
+# print(res.group())    #最少匹配2个，最多匹配4个，至少要有2个能匹配
+
+#匹配字符串开头和结尾
+#1.  ^ 表示以……开头，表示对……取反
+# import re
+# res=re.match('^Zh','ZhangYuan')
+# print(res.group())
+# res=re.match('[^py]','ZhangYuan') #[^py]表示匹配除了p、y
+# print(res.group())
+#
+# #2.  $ 匹配字符串结尾
+# res=re.match('.*n$','ZhangYuan')
+# print(res.group())
+# res=re.match('.{8}n$','ZhangYuan')
+# print(res.group())
