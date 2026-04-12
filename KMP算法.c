@@ -1,28 +1,57 @@
 #include <stdio.h>
-#define MAXLEN 255
-
-typedef struct
+#include <string.h>
+void getNext(int next[],char* pattern)
 {
-	char ch[MAXLEN];
-	int length;
-}String;
-
-int Match(String S,String T)
-{
-	int i=1,j=1;    //跳过下标为0
-	while(i<=S.length&&j<=T.length){
-		if(j==0||S.ch[i]==T.ch[j]){
-			i++;
+	int l=strlen(pattern);
+	int i=1,j=0;
+	next[0]=0;
+	while(i<l){
+		if(pattern[i]==pattern[j]){
 			j++;
-		}else{
-			j=next[j];  //i指针不用回溯
+			next[i]=j;
+			i++;
 		}
-	}
-	if(j>T.length){
-		return i-T.length;
-	}else{     //模式串与母串完全不匹配
-		return 0;
+		else{
+			if(j!=0)
+				j=next[j-1];
+			else
+				next[i++]=0;
+		}	
 	}
 }
-//最坏时间复杂度：O(m+n)
-//next数组时间复杂度O(m),模式匹配过程最坏时间复杂度O(n)
+
+int KMP_Match(char* text,char* pattern)
+{
+	int len1=strlen(text);
+	int len2=strlen(pattern);
+	int next[len2];
+	getNext(next,pattern);
+	
+	if(len2==0) return 0;
+	
+	int i=0,j=0;
+	while(i<len1){
+		if(text[i]==pattern[j]){
+			i++;
+			j++;
+		}
+		if(j==len2){
+			return i-len2;
+		}
+		else if(i<len1&&text[i]!=pattern[j]){
+			if(j!=0)
+				j=next[j-1];
+			else
+				i++;
+		}	
+	}
+	return -1;  //匹配失败
+}
+
+int main()
+{
+	char* text="abbcabcacbcaa";
+	char* pattern="abca";
+	int result=KMP_Match(text,pattern);
+	printf("%d\n",result+1);
+}
