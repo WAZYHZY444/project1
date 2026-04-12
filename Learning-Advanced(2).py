@@ -99,8 +99,48 @@ import re
 #  pattern 匹配的正则表达式
 #  string  要匹配的字符串
 
-import re
-res=re.match("Zhang","ZhangYuan")
-print(res)
-print(res.group())
+# import re
+# res=re.match("Zhang","ZhangYuan")
+# print(res)
+# print(res.group())
 #注意：match是从开头位置匹配,且匹配的是整体
+
+# 匹配单个字符
+#1.  . 匹配任意一个字符，除\n以外
+import re
+res1=re.match('..','hello')
+print(res1.group())
+
+#2.  [] 匹配[]中列举的字符
+# res2=re.match('[he]','hello')
+# print(res2.group())
+# res3=re.match('[he][ll]','ello')
+# print(res3.group())
+# #匹配0-9(1)
+# res4=re.match('[123456789]','56854')
+# print(res4.group())
+# #匹配0-9(2)
+# res5=re.match('[1-9]','56854')
+# print(res5.group())
+# res6=re.match('[1-45-9]','56854')
+# print(res6.group())
+# res7=re.match('[1-68-9]','56854')  #不包含7
+# print(res7.group())
+# res8=re.match('[a-zA-Z]','Hello')
+# print(res8.group())
+
+#3.  \d 匹配数字0-9
+res=re.match(r'\d\d','214')
+print(res.group())
+
+#4.  \D 匹配非数字
+res=re.match(r'\D\D','<sa214')
+print(res.group())
+
+#5.  \s 匹配空白，即空格、tab键
+res=re.match(r'\s...','   <sa214')
+print(res.group())
+
+#6.  \S 匹配非空白
+#7.  \w 匹配单词字符，即a-z,A-Z,0-9，汉字
+#8.  \W 匹配非单词字符
