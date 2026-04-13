@@ -178,3 +178,37 @@ print(res1.group())
 # print(res.group())
 # res=re.match('.{8}n$','ZhangYuan')
 # print(res.group())
+
+#匹配分组
+#1.  | 匹配左右任意一个表达式
+import re
+res=re.match("abc|def",'abc')
+print(res.group())
+res=re.match(r"\d|\s",'1abc')  #优先匹配左边
+print(res.group())
+
+#2.  (ab) 将括号中的字符作为一个分组
+res=re.match(r'\w*@(163|qq|126).com','123@163.com')  #163|qq|126 三选一
+print(res.group())
+
+#3.  \num 匹配分组num匹配到的字符串
+res=re.match(r'<(\w*)>\w*</\1>','<html>login</html>')
+print(res.group())
+res=re.match(r'<(\w*)><(\w*)>\w*</\2></\1>','<html><body>login</body></html>')  #从外到内排序，编号从1开始
+print(res.group())
+
+#4.  (?P<name>) 分组起别名
+#5.  (?P=name)  引用别名为name分组匹配到的字符串
+res=re.match(r'<(?P<L1>\w*)><(?P<L2>\w*)>\w*</(?P=L2)></(?P=L1)>','<html><body>login</body></html>')
+print(res.group())
+
+#匹配网址 前缀一般是www. 后缀：.com、.cn、.org
+li=['www.baidu.com','www.python.org','http.jd.cn','www.py.en','www.adc.cn']
+# res=re.match(r'www(\.)\w*\1(com|cn|org)','www.baidu.com')
+# print(res.group())
+for i in li:
+    res=re.match(r'www(\.)\w*\1(com|cn|org)',i)
+    if res:
+        print(res.group())
+    else:
+        print(f'{i}这个网址有错误')
