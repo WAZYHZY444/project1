@@ -40,7 +40,7 @@ void EnQueue(LinkQueue* Q,int e)
 }
 
 //出队
-void DeQueue(LinkQueue* Q,int* e)
+bool DeQueue(LinkQueue* Q,int* e)
 {
 	if(isEmpty(*Q)){
 		return false;

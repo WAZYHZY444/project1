@@ -60,7 +60,7 @@ void InitQueue(LinkQueue* Q)
 //判断队列是否为空
 bool isEmpty(LinkQueue Q)
 {
-	return Q->front==Q->rear;
+	return Q.front==Q.rear;
 }
 
 //入队
