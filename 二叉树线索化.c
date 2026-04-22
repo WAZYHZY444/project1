@@ -73,7 +73,7 @@ void Visit(ThreadNode* q)
 		q->LeftChild=pre;
 		q->ltag=1;
 	}
-	if(pre!=NULL&&q->RightChild==NULL){
+	if(pre!=NULL&&pre->RightChild==NULL){
 		pre->RightChild=q;
 		pre->rtag=1;
 	}
