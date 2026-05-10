@@ -2,6 +2,10 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
+//Kruskal算法主要操作：
+//  1.提取所有边的信息，将边根据权重排序
+//  2.判断权值较小的变得两个端点是否与当前集合连通（避免生成环），不连通则加入集合
+
 #define V 5  //顶点数量
 
 //边的结构体（用于存储从邻接矩阵中提取到的边）
@@ -77,6 +81,7 @@ void kruskalMST(int graph[V][V])
 		parent[i]=i;  //初始化所有顶点都是根
 		rank[i]=0;    //每棵树初始深度为0
 	}
+	
 	int resultCount=0;  //已选中的边数
 	int i=0;
 	while(resultCount<V-1&&i<edgeCount){
@@ -91,6 +96,7 @@ void kruskalMST(int graph[V][V])
 			unionSet(parent,rank,rootSrc,rootDest);  //合并两个集合
 		}
 	}
+	
 	//输出MST
 	printf("边\t权值\n");
 	int totalWeight=0;
@@ -116,3 +122,7 @@ int main()
 	kruskalMST(graph);
 	return 0;
 }
+
+//为什么需要rank数组来记录树的深度？
+//  因为这里的parent数组在初始化时parent[i]=i，就确定了根节点parent数组记录的是自己本身，
+//  不能记录集合的定点数量，所以需要额外一个数组来专门记录树的高度，方面unionSet操作
