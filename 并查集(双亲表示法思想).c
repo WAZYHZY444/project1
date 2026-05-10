@@ -48,7 +48,7 @@ void Union(int S[],int Root1,int Root2)
 //Union函数时间复杂度始终为O(1)
 
 //“查”操作优化，先找到根节点，再进行“压缩路径”
-int Find(int [],int x)
+int Find(int S[],int x)
 {
 	int root=x;
 	while(root>=0) root=S[root];   //循环找到根节点
@@ -61,3 +61,10 @@ int Find(int [],int x)
 }
 
 //“查”操作优化后，可使根的高度不超过O(α(n)).α(n)是一个增长缓慢的函数，对于常见的n值，通常α(n)<=4,因此Find优化后并查集的find、Union操作时间开销都很低
+
+//递归实现
+int Find(int S[],int x)
+{
+	if(S[x]<0) return x;
+	return S[x]=Find(S,S[x]);
+}
