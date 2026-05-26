@@ -10,6 +10,7 @@ typedef struct BSTNode
 //在树中插入值key(递归实现)
 BSTNode* InsertNode(BSTNode* root,int key)
 {
+	//第一次插入，排序树为空，数组的第一个元素作为二叉排序树的根节点
 	if(root==NULL){
 		root=(BSTNode*)malloc(sizeof(BSTNode));
 		root->data=key;
@@ -96,6 +97,7 @@ BSTNode* DeleteNode(BSTNode* root,int key)
 		else{
 			BSTNode* parent=root;  //父节点指针
 			BSTNode* successor=root->rchild; //后继结点指针
+			//寻找删除节点右子树的最左下方的节点，即寻找直接后继节点
 			while(successor->lchild!=NULL){
 				parent=successor;
 				successor=successor->lchild;
@@ -106,27 +108,27 @@ BSTNode* DeleteNode(BSTNode* root,int key)
 			if(parent->lchild==successor){  //后继是左孩子
 				parent->lchild=successor->rchild;  //相当于赋值的是NULL
 			}else{    //后继是右孩子(后继没有左孩子)
-				parent->rchild=successor->rchild;  //后继如果有有孩子，赋值的是后继的右孩子，如果没有右孩子，赋值的是NULL
+				parent->rchild=successor->rchild;  //后继如果有右孩子，赋值的是后继的右孩子，如果没有右孩子，赋值的是NULL
 			}
 			free(successor);
 		}
 		
 		//方法二：找节点的直接前继(最大值节点)
-		else{
-			BSTNode* predecessor=root->lchild;
-			BSTNode* predecessorParent=root;
-			while(predecessor->rchild!=NULL){
-				predecessorParent=predecessor;
-				predecessor=predecessor->rchild;
-			}
-			root->data=predecessor->data;
-			if(predecessorParent->rchild==predecessor){
-				predecessorParent->rchild=predecessor->lchild;
-			}else{
-				predecessorParent->lchild=predecessor->lchild;
-			}
-			free(predecessor);
-		}
+//		else{
+//			BSTNode* predecessor=root->lchild;
+//			BSTNode* predecessorParent=root;
+//			while(predecessor->rchild!=NULL){
+//				predecessorParent=predecessor;
+//				predecessor=predecessor->rchild;
+//			}
+//			root->data=predecessor->data;
+//			if(predecessorParent->rchild==predecessor){
+//				predecessorParent->rchild=predecessor->lchild;
+//			}else{
+//				predecessorParent->lchild=predecessor->lchild;
+//			}
+//			free(predecessor);
+//		}
 		
 	}
 	return root;
@@ -140,4 +142,31 @@ void DestroyTree(BSTNode* root)
 		DestroyTree(root->rchild);
 		free(root);
 	}
+}
+
+//二叉排序树中序遍历序列是递增序列i
+void inOrder(BSTNode* root)
+{
+	if(root==NULL) return;
+	inOrder(root->lchild);
+	printf("%d ",root->data);
+	inOrder(root->rchild);
+}
+
+int main()
+{
+	int n;
+	scanf("%d",&n);
+	int a[n];
+	for(int i=0;i<n;i++){
+		scanf("%d",&a[i]);
+	}
+	BSTNode* root=CreateBST(a,n);
+	inOrder(root);
+	printf("\n");
+	DeleteNode(root,a[3]);
+	inOrder(root);
+	
+	DestroyTree(root);
+	return 0;
 }
