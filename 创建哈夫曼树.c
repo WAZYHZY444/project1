@@ -25,18 +25,24 @@ HuffmanNode* InitHuffmanTree(int n,int weights[])
 }
 
 //选择最小的树
-void selectMin(int k,int* t,HuffmanNode nodes[])
+void selectMin(int k,int exclude,int* t,HuffmanNode nodes[])
 {
 	//先找第一个可用节点
+	int found=0;
 	for(int i=0;i<k;i++){
-		if(nodes[i].parent==-1){   //非根节点（相当于没有访问过的节点）
+		if(nodes[i].parent==-1&&i!=exclude){   //非根节点（相当于没有访问过的节点）
 			*t=i;
+			found=1;
 			break;
 		}
 	}
+	if(!found){
+		*t=-1;
+		return;
+	}
 	//遍历找更小的
 	for(int i=0;i<k;i++){
-		if(nodes[i].parent==-1&&nodes[i].weight<nodes[*t].weight){
+		if(nodes[i].parent==-1&&i!=exclude&&nodes[i].weight<nodes[*t].weight){
 			*t=i;
 		}
 	}
@@ -45,10 +51,9 @@ void selectMin(int k,int* t,HuffmanNode nodes[])
 //选择两棵最小树
 void select(int k,int* t1,int* t2,HuffmanNode nodes[])
 {
-	selectMin(k,t1,nodes);
+	selectMin(k,-1,t1,nodes);
 	//当确定第一棵最小树后，将该树标识为父节点，查找第二小的树时就不在考虑这棵树
-	nodes[*t1].parent=0;
-	selectMin(k,t2,nodes);
+	selectMin(k,*t1,t2,nodes);
 }
 
 //构建哈夫曼树
@@ -83,5 +88,7 @@ int main()
 	HuffmanNode* nodes=InitHuffmanTree(n,weights);
 	CreateHuffmanTree(n,nodes);
 	PrintHuffmanTree(n,nodes);
+	
+	free(nodes);
 	return 0;
 }
