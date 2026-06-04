@@ -62,6 +62,7 @@ void CreateHuffmanTree(int n,HuffmanNode nodes[])
 	//理解点：创建哈夫曼树的逻辑是初始森林中找到两个根节点权值最小的树构成新树，然后删除选定的两棵树，并加入新得到的树，所以要在2*n-1中寻找权值最小的树
 	for(int i=n;i<2*n-1;i++){
 		int t1,t2;
+		//理解为什么这里传参要传i:根据回调函数，i是两两原子树(0-n)相连的根节点，并且在寻找权重最小的子树是在0-i之间寻找
 		select(i,&t1,&t2,nodes);
 		//标记找到的这两棵最小树的父节点
 		nodes[t1].parent=i;
