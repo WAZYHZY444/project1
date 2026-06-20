@@ -76,7 +76,7 @@ void kruskalMST(int graph[V][V])
 	
 	//初始化并查集
 	int parent[V]; //父节点数组
-	int rank[V];   //记录树的深度
+	int rank[V];   //记录以i为根的树的深度
 	for(int i=0;i<V;i++){
 		parent[i]=i;  //初始化所有顶点都是根
 		rank[i]=0;    //每棵树初始深度为0
