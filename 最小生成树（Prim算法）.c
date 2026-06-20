@@ -6,7 +6,7 @@
 
 int minKey(int key[],bool mstSet[])
 {
-	int min_index;
+	int min_index=-1;
 	int min=INT_MAX;
 	for(int v=0;v<V;v++){
 		if(mstSet[v]==false&&key[v]<min){  //只访问还未被访问的，且与新加入的节点连接
@@ -59,6 +59,13 @@ void primMST(int graph[V][V])
 		}
 	}
 	printMST(parent,graph);
+	
+	//输出最小生成树的权值和
+	int sum=0;
+	for(int i=0;i<V;i++){
+		sum+=key[i];
+	}
+	printf("%d\n",sum);
 }
 
 int main()
