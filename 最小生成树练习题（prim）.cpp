@@ -89,9 +89,8 @@ int main()
 	
 	//不同组（n）就需要全新的邻接矩阵
 	while(cin>>n&&n!=0){
-		int graph[MAXN][MAXN];
-		//初始化邻接矩阵为0
-		memset(graph,0,sizeof(graph));
+		int graph[MAXN][MAXN]={0};
+//		memset(graph,0,sizeof(graph));
 		
 		//读取n-1行
 		for(int i=0;i<n-1;i++){
