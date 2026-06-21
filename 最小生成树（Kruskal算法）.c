@@ -39,10 +39,8 @@ int find(int parent[],int i)
 	return parent[i];
 }
 
-void unionSet(int parent[],int rank[],int x,int y)
+void unionSet(int parent[],int rank[],int rootX,int rootY)
 {
-	int rootX=find(parent,x);  //找到x的根节点
-	int rootY=find(parent,y);  //找到y的根节点
 	//把较浅的树合并到较深的树上，避免树退化成链表
 	if(rank[rootX]<rank[rootY]){
 		parent[rootX]=rootY;
@@ -93,7 +91,8 @@ void kruskalMST(int graph[V][V])
 		//两个顶点不在同一个集合，可以加入
 		if(rootSrc!=rootDest){
 			result[resultCount++]=currentEdge;  //将边加入MST
-			unionSet(parent,rank,rootSrc,rootDest);  //合并两个集合
+			//合并两个集合
+			unionSet(parent,rank,rootSrc,rootDest);  //传入的是边源点和目标点的根顶点
 		}
 	}
 	
