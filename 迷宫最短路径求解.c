@@ -74,6 +74,7 @@ int bfs(int maze[MAX][MAX],int n,int m,Point start,Point end,Point path[],int* p
 			int x=end.x;
 			int y=end.y;
 			//循环回溯，直到回到起点
+			//根据前驱然后不断更新path,然后得到最短路径
 			while(x!=-1&&y!=-1){
 				//记录当前点
 				path[count].x=x;
@@ -128,7 +129,7 @@ int main()
 	}
 	Point start,end;
 	scanf("%d %d",&start.x,&start.y);  //起点的坐标
-	scanf("%d %d",&end.x,&end.y);  //钟点的坐标
+	scanf("%d %d",&end.x,&end.y);  //终点的坐标
 	
 	if(maze[start.x][start.y]==1||maze[end.x][end.y]==1){
 		printf("起点或终点是障碍物，无法求解\n");
@@ -136,7 +137,7 @@ int main()
 	}
 	
 	Point path[MAX*MAX];  //存储路径的数组
-	int pathLen=0;        //路径长度
+	int pathLen=0;        //路径上的节点树=步长+1
 	int steps=bfs(maze,n,m,start,end,path,&pathLen);
 	
 	if(steps!=-1){
@@ -151,3 +152,15 @@ int main()
 	}
 	return 0;
 }
+
+/*
+理解：
+首先队列中只有start，start出队为cur，此时cur不是终点，所以没有找到，根据上下左右的顺序，
+看当前顶点cur哪个方向走的通，走得通的话就往哪个方向走，然后把走得通的这个节点next1加入队列，
+同时记录next1的前驱是当前的点。然后又进行最外层的while循环，next1出队，又不是终点，
+又根据上下左右的顺序找走得通的点，找到后把next2入队，并记录前驱。循环往复，直到当nextn入队后，
+再进行最外层的while循环，nextn出队，记录前驱,此时nextn就是终点，那就开始回溯，通过回溯找到起点从而确定最短路径。
+找到终点后，当前的点cur就是终点，把cur的坐标记录到path中，然后根据前面记录的前驱顶点不断更新当前顶点，直到最后找到起点。
+最后就得到了由终点到起点的路径线，最后反转即可。
+其实最短路径不一定唯一，如果在方向数组那里改成左右上下，这样最短路径可能就不一样了
+*/
