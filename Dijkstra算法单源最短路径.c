@@ -61,7 +61,7 @@ void dijkstra(int graph[MAX_VERTICES][MAX_VERTICES],int start,int vertices)
 	dist[start]=0;
 	
 	for(int count=0;count<vertices-1;count++){
-		//选择距离最小的未处理的顶点
+		//选择到起点距离最小的未处理的顶点
 		int u=findMinDistance(dist,visited,vertices);
 		if(u==-1) break;  //剩余所有顶点都不可到达
 		
