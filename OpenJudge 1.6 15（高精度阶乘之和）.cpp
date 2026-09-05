@@ -8,7 +8,7 @@ void add(vector<int> &a,vector<int> &b)
 {
 	int key=0;  //存储下一位的进位
 	int n=max(a.size(),b.size());
-	for(int i=0;i<n||key;i++){  //carry成为最后a最高位进位的关键（a的长度加1）
+	for(int i=0;i<n||key;i++){  //key成为最后a最高位进位的关键（a的长度加1）
 		if(i==a.size()){
 			a.push_back(0);  //i==a.size()-1时key非0，能继续进入循环，但仅进位需要增加一位
 		}
