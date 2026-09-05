@@ -96,8 +96,8 @@ int main()
 }
 */
 
-//int tolower(int c);    // 将大写字母转换为小写
-//int toupper(int c);    // 将小写字母转换为大写
+//char tolower(char c);    // 将大写字母转换为小写
+//char toupper(char c);    // 将小写字母转换为大写
 
 /*
 int main()
