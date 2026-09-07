@@ -112,7 +112,7 @@ int Partition(int arr[],int low,int high){
 			high--;   //左移high直到遇到比枢轴小的元素
 		}
 		arr[low]=arr[high];
-		
+
 		while(low<high&&arr[low]<=pivot){
 			low++;   //右移low直到遇到比枢轴大的元素
 		}
@@ -128,4 +128,37 @@ void QuickSort(int arr[],int low,int high){
 		QuickSort(arr,low,pivotpos-1);       //划分左子表
 		QuickSort(arr,pivotpos+1,high);      //划分右子表
 	}
+}
+
+//选择排序
+#include <stdio.h>
+int main()
+{
+	int n;
+	scanf("%d",&n);
+	int a[n];
+	for(int i=0;i<n;i++){
+		scanf("%d",&a[i]);
+	}
+	
+	for(int i=0;i<n-1;i++){  //因为后面有j=i+1，所以要注意i的取值范围
+		int min=a[i];   //每次是需要在未排序的数中寻找最小值，所以就先把未排序中的第一个当作最小值
+		int minIndex=i;
+		//在未排序数中寻找最小值
+		for(int j=i+1;j<n;j++){
+			if(a[j]<min){  //如果是a[j]>min，结果是降序排列
+				min=a[j];
+				minIndex=j;
+			}
+		}
+		if(minIndex!=i){  //最小值不是未排序中的第一个
+			int temp=a[i];
+			a[i]=a[minIndex];
+			a[minIndex]=temp;
+		}
+	}
+	for(int i=0;i<n;i++){
+		printf("%d ",a[i]);
+	}
+	return 0;
 }
