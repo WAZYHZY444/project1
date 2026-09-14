@@ -7,31 +7,33 @@ using namespace std;
 
 struct Item{
 	int W,V;
-	double radio;
+	double rate;
 };
 
 bool compare(const Item& a,const Item& b)
 {
-	return a.radio>b.radio;
+	return a.rate>b.rate;
 }
 
-int common(int k,int m,vector<int>& w,vector<int>& v,double& time)
+//k普通型的数量，c给普通型的咖啡数上限
+int common(int k,int c,vector<int>& w,vector<int>& v,double& time)
 {
-	vector<vector<int>> arr(k+1,vector<int>(m+1,0));
+	//创建一个(k+1)行(c+1)列的二维数组，所有元素初始化为0
+	vector<vector<int>> arr(k+1,vector<int>(c+1,0));
 	
 	for(int i=1;i<=k;i++){
-		for(int j=0;j<=m;j++){
+		for(int j=0;j<=c;j++){
 			if(w[i-1]<=j){
-				arr[i][j]=min(arr[i-1][j],arr[i-1][j-w[i-1]]+v[i-1]);
+				arr[i][j]=max(arr[i-1][j],arr[i-1][j-w[i-1]]+v[i-1]);
 			}else{
 				arr[i][j]=arr[i-1][j];
 			}
 		}
 	}
-	time=arr[k][m];
+	time=arr[k][c];
 	
-	//回溯求剩余容量
-	int j=m;
+	//回溯算出在预算c内，普通型预算内剩余多少
+	int j=c;
 	for(int i=k;i>=1;i--){
 		if(arr[i][j]!=arr[i-1][j]){
 			j-=w[i-1];
@@ -45,16 +47,17 @@ double flexible(vector<Item> it,int c)
 	sort(it.begin(),it.end(),compare);
 	
 	double value=0.0;
+	int remain=c;
 	for(int j=0;j<it.size();j++){
-		if(c<=0) break;
+		if(remain<=0) break;
 		//消耗a杯咖啡
-		if(it[j].W<=c){
+		if(it[j].W<=remain){
 			value+=it[j].V;
-			c-=it[j].W;
+			remain-=it[j].W;
 		}else{
 			//只消耗部分咖啡
-			value+=it[j].radio*c;
-			c=0;
+			value+=it[j].rate*remain;
+			remain=0;
 		}
 	}
 	return value;
@@ -84,8 +87,9 @@ int main()
 	//循环来判断多少的咖啡用来普通型能使全局最优
 	for(int c=0;c<=m;c++){
 		double g=0.0;   //g用来存储普通型缩短的时间
-		int rest=common(w.size(),c,w,v,g);  //返回的是普通型用完剩余的咖啡数
-		double cur=g+flexible(it,rest);     //flexible返回的是灵活型缩短的时间
+		int rest_c=common(w.size(),c,w,v,g);  //返回的是普通型用完剩余的咖啡数（c里面剩下的）
+		int totalRest=(m-c)+rest_c;
+		double cur=g+flexible(it,totalRest);     //flexible返回的是灵活型缩短的时间
 		ans=max(ans,cur);
 	}
 
