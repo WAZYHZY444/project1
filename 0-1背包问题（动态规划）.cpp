@@ -40,15 +40,15 @@ int main()
 	
 	int w[n+1],v[n+1];  //w[n]存储物品重量，v[n]存储物品价值
 	cout<<"请输入n个物品的重量和价值："<<endl;
-	for(int i=0;i<n;i++){
+	for(int i=1;i<=n;i++){
 		cin>>w[i]>>v[i];
 	}
 	
-	int x[n]={0};  //存储最优选择方法
+	int x[n+1]={0};  //存储最优选择方法
 	int res=Knapsack(n,c,w,v,x);
 	cout<<"最大价值="<<res<<endl;
 	cout<<"最优解=";
-	for(int i=0;i<n;i++){
+	for(int i=1;i<=n;i++){
 		cout<<x[i]<<" ";
 	}
 	return 0;
