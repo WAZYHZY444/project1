@@ -22,14 +22,6 @@ int main()
 		}
 		res[num][0]=dx;
 		res[num][1]=dy;
-			
-//		if(dx>n||dy>n||dx<1||dy<1){
-//			res[num][0]=x;
-//			res[num][1]=y;
-//		}else{
-//			res[num][0]=dx;
-//			res[num][1]=dy;
-//		}
 	}
 	for(int i=0;i<k;i++){
 		cout<<res[i][0]<<" "<<res[i][1]<<endl;
